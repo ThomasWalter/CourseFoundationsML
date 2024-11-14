@@ -1,2 +1,2 @@
 # CourseFoundationsML
-Course on Foundations of Machine Learning
+Course Material on Foundations of Machine Learning, in particular the .tex files for the lectures.
