@@ -35,23 +35,14 @@
 
 \begin{frame}
   \frametitle{Compromis biais-variance}
-  \begin{itemize}
-    \item On considère l'erreur $\rcal(f)$ d'un modèle prédictif $f$, et les termes d'erreur suivantes : 
-    \begin{itemize}
-    \item \red{Erreur incompressible} : $\rcal^{\ast}$ est l'erreur qui serait faite par n'importe quel modèle.
-    \item \red{Erreur d'approximation} : $\min_{h \in \fcal}\rcal(h) - \rcal^{\ast}$ 
-    \item \red{Erreur d'estimation} : $\rcal(f) - \min_{h \in \fcal}\rcal(h)$
-  \end{itemize}
-    \item On peut écrire alors : 
-    \item[] $\rcal(f) - \rcal^{\ast} = (\rcal(f) - \min_{h \in \fcal}\rcal(h)) + (\min_{h \in \fcal}\rcal(h) - \rcal^{\ast})$
-    \item L'erreur totale est donc due au manque de capacité d'approcher l'erreur incompressible, car l'espace des hypothèses est trop restraint, et par la difficulté de trouver le meilleur modèle dans l'espace des hypothèses. 
-    \item Il faut donc trouver un compromis entre le biais (erreur d'approximation) et la variance (erreur d'estimation). 
-  \end{itemize}
+  
 \end{frame}
 
 \begin{frame}
   \frametitle{1.2 Jeux d'entraînement et de test}
   \begin{itemize}
+  % \item \red{Généralisation :} capacité du modèle à \blue{faire de bonnes
+  %     prédictions sur des données dont on ne connaît pas l'étiquette}
   \item\red{Erreur de généralisation :} erreur que l'on peut attendre sur de nouvelles
     données (la définition formelle fait appel à l'espérance)
   \pause
@@ -186,21 +177,18 @@
   \end{itemize}
 \end{frame}}
 
-\begin{frame}{1.4 Évaluation d'un modèle - ROC}
-  \begin{figure}[htb]
-    \includegraphics[width=0.6\textwidth]{../figures/ROC.pdf}
-  \end{figure}
-  \begin{itemize} 
-    \item Une autre façon d'évaluer la performance d'un algorithme est la courbe $ROC$ (receiver operating characteristic). 
-    \item Pour résumer ces courbes, on utilise l'$AUC$ (area under the curve). 
-    \begin{itemize}
-      \item $AUC = \frac{1}{2}$ : un classifieur aléatoire
-      \item $AUC = 1$ : un classifieur parfait
-    \end{itemize}
-    \item L'$AUC$ est identique à l'index de concordance : la probabilité qu'une paire $(+,-)$ sera correctement ordonnée. 
+\begin{frame}
+  \frametitle{Évaluation d'un modèle (courbe ROC)}
+  \begin{itemize}
+  \item \red{Receiver-Operator Characteristic} curve
   \end{itemize}
+  \begin{center}
+    \includegraphics[width=.5\textwidth]{figures/roc_curve}  
+  \end{center}
+  \begin{itemize}
+  \item Évaluation numérique : \red{aire sous la courbe ROC} (AUC, AUROC)
+  \end{itemize} 
 \end{frame}
-
 
 \begin{frame}
   \frametitle{1.5 Évaluation d'un modèle (régression)}
@@ -251,7 +239,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.6 Sélection de modèle - jeu de validation}
+  \frametitle{Jeu de validation}
   \begin{center}
     \begin{tikzpicture}
       \draw [draw=MyDarkGrey, thick] (0.,3.5) rectangle (5.5,2.5) node[pos=.5]{\black{Entraînement}};
@@ -274,7 +262,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.6 Sélection de modèle - Validation croisée}
+  \frametitle{Validation croisée (sélection de modèle)}
   \begin{itemize}
   \item On peut aussi utiliser la \blue{validation croisée} pour la \blue{sélection de modèle}
   \item On sépare le jeu d'entraînement en K \blue{blocs} (ou folds)
@@ -291,7 +279,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.6 Sélection de modèle - Validation croisée}
+  \frametitle{Validation croisée (sélection de modèle)}
     \begin{center}
     \small
     \begin{tikzpicture}
@@ -336,7 +324,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.6 Sélection de modèle - Validation croisée}
+  \frametitle{Validation croisée imbriquée}
   \begin{itemize}
   \item Utiliser une validation croisée :
     \begin{itemize}
@@ -353,15 +341,17 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.6 Sélection de modèle - Plusieurs hyperparamètres}
+  \frametitle{Plusieurs hyperparamètres}
   \begin{itemize}
-  \item Si plusieurs hyperparamètres sont à déterminer, on doit tester des combinaisons. 
-  \item \blue{Option 1} : parcours de la grille de combinaisons (grid search)
-  \item \blue{Option 2} : optimisation successive (greedy search)
-  \item \blue{Option 3} : tirer aléatoirement des combinaisons (random search)
+  \item \blue{Recherche par grille} (\textcolor{gray!70}{grid search})
+  \item \blue{Recherche gloutonne} : optimization successive (\textcolor{gray!70}{greedy search})
+  \item \blue{Recherche aléatoire} (\textcolor{gray!70}{random search})
   \end{itemize}
+  \begin{center}
+    \includegraphics[width=.45\textwidth]{../figures/grid_search} % 
+    \includegraphics[width=.45\textwidth]{../figures/random_search}  
+  \end{center}
 \end{frame}
-
 
 \begin{frame}
   \begin{center}
@@ -383,20 +373,34 @@
     \[ \hat{f} = \argmin_{f \in \fcal} \frac1n \sum_{i=1}^n L(y_i, f(\xvec_i))
       {\color{MyOrange} \, + \, \lambda \, \Omega(f) } \hspace{1em} \lambda > 0
     \]
-  \pause
-  \item \red{Coefficient de régularisation} $\lambda > 0$ :
-    \blue{hyperparamètre} qui gouverne l'importance relative entre la
-    minimisation du risque empirique et la complexité $\Omega(f)$ du modèle.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.1 Régularisation ridge}
+  \frametitle{Coefficient de régularisation}
+    \[ \hat{f} = \argmin_{f \in \fcal} \frac1n \sum_{i=1}^n L(y_i, f(\xvec_i))
+      {\color{MyOrange} \, + \, \lambda \, \Omega(f) } \hspace{1em} \lambda > 0
+    \]
+    \begin{itemize}
+    \item \red{Coefficient de régularisation} $\lambda > 0$ :
+    \blue{hyperparamètre} qui gouverne l'importance relative entre la
+    minimisation du risque empirique et la complexité $\Omega(f)$ du modèle.
+    \end{itemize}
+
+    \begin{itemize}
+    \item $\lambda = 0$ :
+    \item $\lambda \to +\infty$ :
+    \item Déterminer $\lambda$ :
+    \end{itemize}
+  \end{frame}
+
+\begin{frame}
+  \frametitle{2.2 Régularisation ridge}
   \begin{itemize}
   \item Exemple 1 : \red{Régularisation ridge} (ou \red{$\ell_2$}, ou \red{weight decay})
     \begin{itemize}
     \item Pour un modèle paramètrique de paramètres $\theta_1, \theta_2, \dots, \theta_d$,
-    \item[] $\Omega(\thetavec) = \ltwonorm{\thetavec} = \sum_{j=1}^d \theta_j^2$ contrôle \blue{l'amplitude des paramètres} 
+    \item[] $\Omega(\thetavec) = \ltwonorm{\thetavec}^2 = \sum_{j=1}^d \theta_j^2$ contrôle \blue{l'amplitude des paramètres} 
       \pause
       \vspace{1em}
     \item \red{Régression ridge :}
@@ -412,7 +416,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Chemin de régularisation}
+  \frametitle{Chemin de régularisation (ridge)}
   \begin{center}
     \includegraphics[width=.7\textwidth]{figures/ridge_path}  
   \end{center}
@@ -421,12 +425,12 @@
 \begin{frame}
   \frametitle{Interprétation géométrique}
   \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/l2reg_geom}  
+    \includegraphics[width=.7\textwidth]{figures/l2reg}  
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.2 Lasso}
+  \frametitle{2.3 Lasso }
   \begin{itemize}
   \item Exemple 2 : \red{Régularisation $\ell_1$} 
     \begin{itemize}
@@ -454,165 +458,61 @@
 \begin{frame}
   \frametitle{Interprétation géométrique}
   \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/l1reg_geom}  
+    \includegraphics[width=.7\textwidth]{figures/l1reg}  
   \end{center}
 \end{frame}
 
-% \begin{frame}{Exemple : ridge regression}
-% \begin{figure}[htb]
-% \includegraphics[width=0.6\textwidth]{../graphics/sample_from_sin.png}
-% \end{figure}
-% \begin{itemize}
-%   \item Données : $(x_i, y_i)$ (red), we would like to build a model to predict the value $y$ for any given $x$.
-%   \item The true function is $g(x)=\sin (x)$ (displayed in blue).
-%   \item The measurements $y_i$ are noisy outputs of that function, i.e.
-%   \begin{equation}
-%   y_i = \sin (x_i) + \epsilon \; , \;\;\; \;\;\; \epsilon \sim \mathcal{N}(0,0.2)
-%   \end{equation}
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}{A simple example: polynomial curve fitting}
-% \begin{itemize}
-%   \item We use the following polynomial model:
-%   \begin{eqnarray}
-%   f(x) &=& a_0 + a_1 x + a_2 x^2 + \ldots + a_m x^m \nonumber \\
-%   &=& \param^T \featmap (x)
-%   \end{eqnarray}
-%   \item Parameter vector: $\param = (a_0, a_1, \ldots, a_m)^T$
-%   \item Here, the initial measurement $x$ is a scalar. In our model, we map $x$ to a higher dimensional space:
-%   \begin{eqnarray}
-%     \featmap : \mathbb{R}^{\nfeatures} &\rightarrow & \mathbb{R}^Q \nonumber \\
-%     x &\rightarrow & \featmap (x) = (1, x, x^2, \ldots, x^m)^T
-%   \end{eqnarray}
-%   \item The model is linear in the parameters $\theta$ and linear in $\featmap$, but for $m>1$, the model is not linear in $x$.
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}{A simple example: polynomial curve fitting}
-% \begin{itemize}
-%   \item One classical approach is to minimize the least squared error between measured and predicted values:
-%   \begin{eqnarray}
-%     \min_{\param} \loss(\param) &=& \min_{\param} \sum_{i=1}^N (y_i - f(x_i))^2 \nonumber \\
-%     &=& \min_{\param} \sum_{i=1}^N (y_i - \param^T \featmap (x_i))^2
-%   \end{eqnarray}
-%   \item This can be achieved by setting the gradient with respect to $\param$ to zero:
-%   \begin{equation}
-%     \nabla_{\param} \loss = (\frac{\partial \loss}{\partial a_0}, \frac{\partial \loss}{\partial a_1}, \ldots, \frac{\partial \loss}{\partial a_m} )^T = 0
-%   \end{equation}
-%   \item Unlike for most optimization problems in this course, this leads to an analytical solution for $\param$. This is known as \textbf{linear regression}. For more details, we refer to \cite{Hastie2009}.
-% \end{itemize}
-% \end{frame}
-
-% \begin{frame}{Overfitting and underfitting}
-% \begin{columns}
-% \begin{column}{.8\textwidth}
-% \begin{figure}[htb]
-%   \includegraphics[width=0.75\textwidth]{../graphics/polyfit_degree_1.png}
-% \end{figure}
-% \end{column}
-% \begin{column}{.2\textwidth}
-% $\| \param \|^2 = 0.67$
-% \end{column}
-% \end{columns}
-% For $m=1$, the model is linear in its inputs. The solution is not capable of modeling the measured data points; we get a poor approximation of the original function. The family of functions we have used was not complex enough to model the true data distribution. We also speak of \textbf{underfitting}.
-% %\begin{textblock}{0}(.9\textwidth,\paperheight)
-% %  Test
-% % \end{textblock}
-% \end{frame}
-
-% \begin{frame}{Overfitting and underfitting}
-% \begin{columns}
-% \begin{column}{.8\textwidth}
-% \begin{figure}[htb]
-%   \includegraphics[width=0.75\textwidth]{../graphics/polyfit_degree_3.png}
-% \end{figure}
-% \end{column}
-% \begin{column}{.2\textwidth}
-% $\| \param \|^2 = 1.72$
-% \end{column}
-% \end{columns}
-% For $m=3$, we obtain a solution that seems to be quite right: it is sufficiently complex to model the true data distribution, but not too complex to model the small variations which are due to noise.
-% \end{frame}
-
-% \begin{frame}{Overfitting and underfitting}
-% \begin{columns}
-% \begin{column}{.8\textwidth}
-% \begin{figure}[htb]
-%   \includegraphics[width=0.75\textwidth]{../graphics/polyfit_degree_11.png}
-% \end{figure}
-% \end{column}
-% \begin{column}{.2\textwidth}
-% $\| \param \|^2 \approx 10^7$
-% \end{column}
-% \end{columns}
-% For $m=11$, we obtain a solution that has zero error (the function passes through every point of the training set). But the coefficients with large absolute values that cancel each other precisely on the training points lead to a highly unstable function. We speak of \textbf{overfitting} and \textbf{poor generalization}.
-% \end{frame}
-
-% \begin{frame}{Overfitting and underfitting}
-% \begin{columns}
-% \begin{column}{.8\textwidth}
-% \begin{figure}[htb]
-%   \includegraphics[width=0.75\textwidth]{../graphics/polyfit_degree_11_N60.png}
-% \end{figure}
-% \end{column}
-% \begin{column}{.2\textwidth}
-% $\| \param \|^2 = 5647$
-% \end{column}
-% \end{columns}
-% One way of reducing overfitting is to increase the number of samples. Even if the function is complex, it cannot be “too wild”, as it has to find a compromise between many training samples. This however implies the annotation (or measurement) of more samples.
-% \end{frame}
-
-% \begin{frame}{Overfitting and underfitting}
-% \begin{columns}
-% \begin{column}{.8\textwidth}
-% \begin{figure}[htb]
-%   \includegraphics[width=0.75\textwidth]{../graphics/ridge_regression_11_10.png}
-% \end{figure}
-% \end{column}
-% \begin{column}{.2\textwidth}
-% $\| \param \|^2 = 0.41$
-% \end{column}
-% \end{columns}
-% Another way of preventing overfitting without increasing the number of samples, is to add a penalization term in the optimization procedure. This is also known as \textbf{regularization}:
-% \begin{equation}
-%   \loss = \sum_{i=1}^N (y_i - \param^T \featmap (x_i))^2 + \lambda \| \param \|^2
-% \end{equation}
-% \end{frame}
-% % \begin{frame}
-% %   \frametitle{Estimation par maximum a posteriori}
-% %   \begin{center}
-% %     \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss}  
-% %   \end{center}
-% % \end{frame}
+\begin{frame}
+  \frametitle{Elastic Net}
+  \begin{itemize}
+  \item Variables \blue{corrélées} : le Lasso sélectionne l'une d'entre elles aléatoirement
+  \item[$\Rightarrow$] \blue{instabilité}
+  \item \red{Elastic Net}
+    \[
+      \Omega(\thetavec) = \alpha \ltwonorm{\thetavec}^2 + (1-\alpha) \lonenorm{\thetavec} \hspace{1em} 0 < \alpha < 1       \]
+    \end{itemize}
+\end{frame}
 
 \begin{frame}
-  \frametitle{Lasso: avantages}
+  \frametitle{Estimation par maximum a posteriori}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss}  
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Régression polynomiale}
   \begin{itemize}
-  \item Réduction de dimensions d'entrée (pour $\beta_k=0$): 
-  \begin{itemize}
-    \item Simplification des modèles
-    \item Interprétation plus simple
-    \item Acquisition de moins de variables
-  \end{itemize}
-  \item Réduction de dimension et apprentissage au même temps. 
+  \item Comment apprendre un  modèle \blue{non-linéaire} avec ces éléments ?
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Lasso: limitations}
+  \frametitle{Références / page pub}
   \begin{itemize}
-  \item Si deux variables sont corrélées, LASSO choisira une d'entre elles. 
-  \item \blue{Conséquence} : instabilité 
-  \item Solution: \red{Elastic Net}
-  \item[] $\Omega(\thetavec) = \alpha \ltwonorm{\thetavec} + (1-\alpha) \lonenorm{\thetavec}$
-  %\item[] $\alpha \in [0, 1]$
+  \item \black{Introduction au Machine Learning}, Chloé-Agathe Azencott, Dunod InfoSup \\
+    Version électronique (PDF) sans exercices disponible gratuitement sur  \textcolor{MyBlue}{\href{https://cazencott.info/index.php/pages/Introduction-au-Machine-Learning}{http://cazencott.info [lien cliquable]}}\\
+    (nouvelle édition en préparation)
+  \item \black{Le Machine Learning avec scikit-learn}, Aurélien Géron, Dunod
+    InfoSup
+  \item Textes et vidéos sur \blue{OpenClassrooms :} \\
+    {\footnotesize Textes accessibles librement ; vidéos accessibles avec un compte gratuit.}
+    \begin{itemize} 
+    \item Thématique : Data  \textcolor{MyBlue}{\href{https://openclassrooms.com/en/courses?categories=Data}{[lien cliquable]}}
+     \item Objectif IA (grand public) \textcolor{MyBlue}{\href{https://openclassrooms.com/fr/courses/6417031-objectif-ia-initiez-vous-a-lintelligence-artificielle}{  [lien cliquable]}}
+    \end{itemize}
   \end{itemize}
-
 \end{frame}
 
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "2022-01-azencott"
-%%% End:
+\begin{frame}
+  \frametitle{Ressources complémentaires}
+  \begin{itemize}
+  \item \blue{Sources de jeux de données}
+    \begin{itemize}
+    \item Kaggle \textcolor{MyBlue}{\href{https://www.kaggle.com/}{[lien cliquable]}}
+    \item Le module \texttt{datasets} de \texttt{scikit-learn} \textcolor{MyBlue}{\href{https://scikit-learn.org/stable/datasets.html}{[lien cliquable]}}
+    \item Le UCI Machine Learning Repository \textcolor{MyBlue}{\href{https://archive.ics.uci.edu/ml/index.php}{[lien cliquable]}}
+    \end{itemize}
+  \item \blue{MOOC scikit-learn } \textcolor{MyBlue}{\href{https://inria.github.io/scikit-learn-mooc/}{[lien cliquable]}}
+  \end{itemize}
+\end{frame}
