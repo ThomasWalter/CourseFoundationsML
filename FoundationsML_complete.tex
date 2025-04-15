@@ -214,13 +214,13 @@
 
 
 \newcommand{\mytitle}{Fondamentaux du Machine Learning}
-\author[Walter]{Thomas Walter \and  Chlo\'e-Agathe~Azencott}
+\author[Walter \& Azencott]{Thomas Walter \and  Chlo\'e-Agathe~Azencott}
 \institute[CBIO]{\inst{1} Centre for Computational Biology(CBIO), Mines Paris, PSL University\and %
                       \inst{2} Institut Curie\and
-                      \inst{3} U900 - INSERM}
+                      \inst{3} U1331 - INSERM}
 
 %\author{Chlo\'e-Agathe~Azencott}
-\date{\small November 2022}
+\date{\small Avril 2025}
 
 \begin{document}
 {
@@ -229,7 +229,7 @@
   \begin{frame}[plain]
     \fontfamily{PTSansNarrow-TLF}\selectfont
     \begin{center}
-      {\ptnormal{\textit{Formation Chef de Projet IA}}}
+      {\ptnormal{\textit{Formation Dassault-Systèmes}}}
     \end{center}
 
     \vspace{70pt}
@@ -246,7 +246,7 @@
     {\footnotesize
       \centerline{Center for Computational Biology (CBIO)}
     
-      \centerline{Mines Paris -- Institut Curie -- INSERM U900}
+      \centerline{Mines Paris -- Institut Curie -- INSERM 1331}
 
       \centerline{PSL Research University \& PR[AI]RIE, Paris, France}
     }
@@ -273,32 +273,12 @@
 % \newgeometry{top=0pt, bottom=15pt,left=28pt,right=28pt}
 % \usebackgroundtemplate{}
 
-
-% \begin{frame}
-%   \frametitle{Chloé-Agathe Azencott}
-
-%     \small
-%   \begin{tabular}[h]{ll}
-%     \black{Depuis 2013} & \blue{Chargée de recherche} puis \blue{Maîtresse-assistante} au CBIO \\
-%     & \\
-%     \black{2011--2013} & \blue{Chargée de recherche post-doctorante} \\
-%     \multicolumn{2}{l}{Machine Learning for Computational Biology, MPI T\"ubingen (Allemagne).} \\
-%     & \\
-%     \black{2005--2010} & \blue{Doctorante} \\
-%     \multicolumn{2}{l}{Institute for Genomics and Bioinformatics, University of California Irvine (USA).} \\
-%     & \\
-%     \black{2002--2005} & \blue{Double dipl\^ome Ingénieur \& Master}\\    
-%     \multicolumn{2}{l}{IMT Atlantlique (à l'époque, ENST Bretagne} \\
-%     \multicolumn{2}{l}{Informatique et Mathématiques.} \\
-%   \end{tabular}
-% \end{frame}
-
 \begin{frame}
   \frametitle{Centre de Bioinformatique (CBIO)}
   \centerline{\includegraphics[width=0.75\textwidth]{figures/cbio}}
   \begin{itemize}
     \item Centre de recherche de l'\'Ecole des Mines
-    \item 20 personnes, 4 chercheurs permanents (dont 2 chaires PRAIRIE)
+    \item 20 personnes, 6 chercheurs permanents (dont 2 chaires PRAIRIE)
     \item Thématique : IA pour les sciences de la vie
   \end{itemize}
 \end{frame}
@@ -326,9 +306,9 @@
   \item \blue{Cours 1 :} Minimisation du risque empirique 
   \item \blue{Cours 2 :} Régularisation et sélection de modèle
   \item \blue{Cours 3 :} Arbres et méthodes ensemblistes
-  \item \blue{Cours 4 :} Méthodes à noyaux 
-  \item \blue{Cours 5 :} Réduction de dimension
-  \item \blue{Cours 6 :} Clustering
+  \item \blue{Cours 4 :} Apprentissage non-supervisé
+  \item \blue{Cours 5 :} Réseaux de neurones (Vincent Mallet)
+  \item \blue{Cours 6 :} Apprentissage profond (Vincent Mallet)
   \item Travaux pratiques : mise en œuvre des notions et algorithmes avec scikit-learn (Python numérique).
 \end{itemize}
 \end{frame}
@@ -364,67 +344,10 @@
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Cours 4 -- SVM et noyaux} 
+    \red{\LARGE Cours 4 -- Apprentissage non-supervisé} 
   \end{center}
 \end{frame}
-\input{kernels}
-
-\begin{frame}
-  \begin{center}
-    \red{\LARGE Cours 5 -- Réduction de dimension} 
-  \end{center}
-\end{frame}
-\input{dimred}
-
-\begin{frame}
-  \begin{center}
-    \red{\LARGE Cours 6 -- Clustering} 
-  \end{center}
-\end{frame}
-\input{clustering}
-
-\begin{frame}
-  \frametitle{Références / page pub}
-  \begin{itemize}
-  \item \black{Introduction au Machine Learning}, Chloé-Agathe Azencott, Dunod InfoSup \\
-    Version électronique (PDF) sans exercices disponible gratuitement sur  \textcolor{MyBlue}{\href{http://cazencott.info/dotclear/public/lectures/IntroML_Azencott.pdf}{http://cazencott.info [lien cliquable]}}\\
-    (nouvelle édition en préparation)
-  \item \black{Le Machine Learning avec scikit-learn}, Aurélien Géron, Dunod
-    InfoSup
-  \item Textes et vidéos sur \blue{OpenClassrooms :} \\
-    {\footnotesize Textes accessibles librement ; vidéos accessibles avec un compte gratuit.}
-    \begin{itemize} 
-    \item \textcolor{MyBlue}{\href{https://openclassrooms.com/fr/paths/148-ingenieur-machine-learning\#path-tabs}{Parcours Ingénieur Machine Learning [lien cliquable]}}
-     \item \textcolor{MyBlue}{\href{https://openclassrooms.com/fr/courses/6417031-objectif-ia-initiez-vous-a-lintelligence-artificielle}{Objectif IA (grand public)  [lien cliquable]}}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Ressources complémentaires}
-  \begin{itemize}
-  \item \blue{Sources de jeux de données}
-    \begin{itemize}
-    \item Kaggle \href{https://www.kaggle.com/}{[lien cliquable]}
-    \item Le module \texttt{datasets} de \texttt{scikit-learn} \textcolor{MyBlue}{\href{https://sklearn.org/datasets/index.html}{[lien cliquable]}}
-    \item Le UCI Machine Learning Repository \textcolor{MyBlue}{\href{https://archive.ics.uci.edu/ml/index.php}{[lien cliquable]}}
-    \end{itemize}
-  \item \blue{MOOC scikit-learn } \textcolor{MyBlue}{\href{https://inria.github.io/scikit-learn-mooc/}{[lien cliquable]}}
-  \end{itemize}
-\end{frame}
-
-
-% \begin{frame}
-%   \begin{center}
-%     \red{\LARGE Cours 5 -- Réduction de dimension} 
-%   \end{center}
-% \end{frame}
-% %\input{dimred}
-
-
-
-
-
+\input{unsupervised}
 
 \end{document}
 

@@ -31,89 +31,105 @@
     \includegraphics[width=.7\textwidth]{figures/arbre}
   \end{center}
   \begin{itemize}
-    \item En classification, les tests correspondent à des seuils, appliqués aux descripteurs. 
-    \item Chaque arbre de décision correspond à une partition de l'espace des descripteurs.
-    \item On peut assigner une classe à chaque feuille. 
+    \item Variables \blue{continues :} tests = \blue{seuillage}
+    \item Variables \blue{catégoriques :} tests = \blue{valeur}
+    \item Chaque arbre de décision correspond à une \blue{partition} de l'espace des descripteurs.
+    \item Feuille = étiquette
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Les arbres de décision - avantages}
+  \frametitle{Les arbres de décision -- avantages}
   \begin{itemize}
-    \item Classification en classes multiples
-    \item Interprétabilité
-    \item Traitement de variables catégoriques
-    \item Mélange de types de variables
+  \item Gère naturellement :
+    \begin{itemize}
+    \item Classification \blue{multi-classe}
+    \item Plusieurs \blue{types de variables} (continues, binaires, catégoriques)
+    \item Plusieurs régions de l'espace peuvent avoir la même étiquette    
+  \end{itemize}
+  \item \blue{Interprétabilité}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Construction des arbres}
   \begin{itemize}
-    \item CART: Classification and regression trees
-    \item A chaque étape, une région est divisée en deux. 
-    \item Pour ce, il faut choisir un descripteur $x_j$ et un seuil $s$. 
-    \item Ce choix est fait pour optimiser un critère, calculé sur les régions qui résultent de ce seuillage. 
+    \item \red{CART :} Classification and regression trees
+    \item A chaque étape, une région est divisée en deux, selon une \blue{variable séparatrice} $x_j$ (et un \blue{point de séparation} $s$ si $x_j$ continue):
+      \begin{equation*}
+        R_l(j, s) = \{\xvec : x_j < s\} ; \hspace{2em} R_r(j, s) = \{\xvec : x_j \geq s\}.
+      \end{equation*}
+      % \item Ce choix est fait pour optimiser un critère, calculé sur les régions qui résultent de ce seuillage. 
+    \item Approche \blue{gloutonne} : on fait ce choix pour optimiser l'\red{erreur} faite à ce moment là
+    \item  Étiquette d'une feuille = étiquette \blue{majoritaire} (classification) ou \blue{moyenne} (régression) des points du jeu d'entraînement dans cette feuille
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Critère de séparation pour la régression}
+  \begin{itemize}
+    % \item Un suppose qu'un split $(j,s)$ génère deux régions $R_1$ et $R_2$. 
+  \item Moyenne des étiquettes dans chaque région : $\overline{y_l}$ et $\overline{y_r}$
+  \item Critère à minimiser par $(j,s)$: \blue{erreur quadratique moyenne}
+    \begin{equation*}
+    (j,s)^{\ast} = \argmin_{j,s}\sum_{\xvec^i \in R_l} (y^i-\overline{y_l})^2 + \sum_{\xvec^i \in R_r}(y^i-\overline{y_r})^2
+    \end{equation*}
+    % où $\overline{y_1}, \overline{y_2}, R_1, R_2$ dépendent de $(j,s)$. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Split : critère de régression}
+  \frametitle{Critère de séparation pour la classification}
   \begin{itemize}
-    \item Un suppose qu'un split $(j,s)$ génère deux régions $R_1$ et $R_2$. 
-    \item Dans le cas d'une regression, on calcule alors les moyennes $\overline{y_1}$ et $\overline{y_2}$ dans les régions $R_1(j,s)$ et $R_2(j,s)$. 
-    \item Le critère à minimiser par $(j,s)$:
+    \item Critère d'\red{impureté de Gini} d'une région $R$ : 
     \begin{equation*}
-    (j,s)^{\ast} = \argmin_{j,s}\sum_{x_k \in R_1} (y_k-\overline{y_1})^2 + \sum_{x_k \in R_2}(y_k-\overline{y_2})^2
+    \text{Imp}(R) = \sum_{c=1}^{C}p_c(R)(1-p_c(R))
     \end{equation*}
-    où $\overline{y_1}, \overline{y_2}, R_1, R_2$ dépendent de $(j,s)$. 
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Split : critère de classification}
-  \begin{itemize}
-    \item Critère de impureté GINI ; 
+    avec $p_c(R) = \frac1{\lvert R \rvert} \sum_{i : \xvec^i \in R} \indic_{y^i=c}$ la probabilité (proportion) de la classe $c$ dans $R$.     
+    \item Critère à minimiser par $(j,s)$:
     \begin{equation*}
-    Imp(R) = \sum_{c=1}^{C}p_c(R)(1-p_c(R))
+    (j,s)^{\ast} = \argmin_{j,s}\frac{\lvert R_l \rvert}{\lvert R \rvert}\text{Imp}(R_l) + \frac{\lvert R_r \rvert}{\lvert R \rvert}\text{Imp}(R_r)
     \end{equation*}
-    avec $p_c(R)$ la probabilité (proportion) de la classe $c$ dans $R$.     
-    \item Le critère à minimiser par $(j,s)$:
-    \begin{equation*}
-    (j,s)^{\ast} = \argmin_{j,s}\frac{|R_1|}{n}Imp(R_1) + \frac{|R_2|}{n}Imp(R_2)
-    \end{equation*}
-    avec $|\cdot|$ le cardinal et $R_1, R_2$ des fonctions de $(j,s)$. 
+    % avec $|\cdot|$ le cardinal et $R_1, R_2$ des fonctions de $(j,s)$. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Critère d'arrêt}
   \begin{itemize}
-    \item Une classe par feuille : risque de sur-apprentissage
-    \item Profondeur fixe
-    \item Nombre d'observation par feuille
+  \item Une étiquette par feuille : risque de \blue{sur-apprentissage}
+  \item Critères d'\blue{arrêt} :
+    \begin{itemize}
+    \item Profondeur 
+    \item Nombre d'observations par feuille
+    \end{itemize}
+  \item \blue{Élagage} : regrouper séquentiellement des feuilles jusqu'à minimiser la \blue{complexité} de l'arbre
+      \begin{equation*}
+        C_\lambda(T) = \sum_{r=1}^{|T|} \lvert R_r \rvert \text{Imp}(R_r) + \lambda \lvert T \rvert.
+  \end{equation*}
+  \end{itemize}
+\end{frame}
+  
+
+\begin{frame}[t]
+  \frametitle{Construction d'un arbre}
+  \begin{itemize}
+  \item Exemple :
+    \begin{itemize}
+    \item 4 petites pommes jaunes, 5 grosses pommes vertes, 3 bananes, 6 mini-concombres
+    \item attributs : vert/jaune, rond/pas rond, gros/petit
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 
-% \begin{frame}[t]
-%   \frametitle{Construction d'un arbre}
-%   \begin{itemize}
-%   \item Exemple :
-%     \begin{itemize}
-%     \item 4 petites pommes jaunes, 5 grosses pommes vertes, 3 bananes, 6 mini-concombres
-%     \item attributs : vert/jaune, rond/pas rond, gros/petit
-%     \end{itemize}
-%   \end{itemize}
-% \end{frame}
-
 \begin{frame}
   \frametitle{Limitations}
   \begin{itemize}
-    \item Temps de calcul sous-optimal (en inférence)
-    \item Grand risque de sur-apprentissage
-    \item Généralement une performance limitée
+    \item \blue{Temps de calcul} potentiellement long
+    \item Grand risque de \blue{sur-apprentissage}
+    \item Généralement \blue{peu performants}, encore plus en régression
   \end{itemize}
 \end{frame}
 
@@ -138,11 +154,11 @@
 \begin{frame}
   \frametitle{Bagging}
   \begin{itemize}
-    \item On considère une partie de $\dset$ (e.g. $80\%$) par échantillonage "bootstrap" (avec remise). 
+    \item On considère seulement un \blue{sous-ensemble} de $\dset$ (e.g. $80\%$ ou par échantillonage bootstrap (avec remise)). 
     \item On entraîne un arbre de décision. 
     \item On reitère cette procédure pour obtenir un ensemble d'arbres. 
     \item Le résultat est obtenu par vote majoritaire (classification) ou en moyennant (régression).  
-    \item Faire une moyenne de modèles est effectivement une technique de regression. 
+    \item Moyenner permet d'avoir des étiquettes précises même en régression
   \end{itemize}
 \end{frame}
 
@@ -150,13 +166,13 @@
   \frametitle{Forêts aléatoires}
   \begin{itemize}
     \item En plus du bagging, on peut à chaque noeud tirer aléatoirement des variables parmi lesquels la variable optimale est trouvée. 
-    \item Le résultat : \blue{les forêts aléatoires}. 
-    \item Les arbres sont plus différents et couvrent "différent aspects" des données. 
+    \item Le résultat : \blue{forêts aléatoires}. 
+    \item Les arbres sont plus différents et couvrent «~différent aspects~» des données. 
     \item En pratique : 
     \begin{itemize}
-      \item généralement bons résultats sans "tuning"
-      \item applicable pour $P \gg N$
-      \item Régularisation par "ensembling"
+      \item généralement bons résultats
+      \item applicable pour $p \gg n$
+      \item Régularisation par «~ensembling~»
     \end{itemize}
   \end{itemize}
 
@@ -184,5 +200,5 @@
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "2022-01-azencott"
+%%% TeX-master: "FoundationsML_complete"
 %%% End:
