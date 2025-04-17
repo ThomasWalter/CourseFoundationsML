@@ -6,7 +6,7 @@
   \item Grand nombre $p$ de variables (centaines ou milliers de variables).
   \item Si $n$ est grand, on parle de \red{big data}.   
   \item Si $p$ est grand par rapport à $n$, on parle de \red{fat data}. 
-  \item Réduction de dimensions : trouver pour une matrice de données $X\in \RR^{n\times p}$ une représentation $X \in \RR^{n\times m}$, avec $p\gg m$. 
+  \item Réduction de dimensions : trouver pour une matrice de données $X\in \RR^{n\times p}$ une représentation $\tilde{X} \in \RR^{n\times m}$, avec $p\gg m$. 
   \end{itemize}
 \end{frame}
 
@@ -187,7 +187,7 @@
 	\item Objectif : représentation des données en basse dimension en respectant les relations locales
 	\item Une technique relativement récente  \emph{t-Distributed Stochastic Neighbor Embedding (t-SNE)} (2008)
 	\item $\{\xvec_i\}_{0\leq i < N}$ sont les représentations, avec $\xvec \in \RR^p$. 
-	\item On définit la probabilité que $x_j$ est voisin de $x_i$, sous condition que la probabilité peut être modélisée par une Gaussienne, centrée dans $x_i$:  
+	\item On définit la probabilité que $\_j$ est voisin de $x_i$, sous condition que la probabilité peut être modélisée par une Gaussienne, centrée dans $x_i$:  
 	\begin{equation}
 	p_{j|i} = \frac{\exp{\left(-\frac{\|\xvec_i - \xvec_j\|^2}{2 \sigma_i^2}\right)}}{\sum_{k\neq i} \exp{\left(-\frac{\|\xvec_i - \xvec_k\|^2}{2 \sigma_i^2}\right)} }
 	\end{equation}
@@ -242,11 +242,10 @@
 \frametitle{t-SNE map: exemple}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=.8\textwidth]{Vis_tsne.png}
-  \caption{patterns de localisation d'ARN dans la cellule}
+  \includegraphics[width=.8\textwidth]{music_tsne.pdf}
+  \caption{Exemple pour une visualisation de t-SNE appliquée aux descriptions vectorielles de morceaux de musique}
 \end{figure}
 \end{frame}
-
 
 \begin{frame}
 \frametitle{t-SNE map: ImageNet}
