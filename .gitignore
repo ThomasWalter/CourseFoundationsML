@@ -12,4 +12,10 @@
 *.cb
 *.cb2
 .*.lb
-
+*.nav
+*.bbl
+*.blg
+FoundationsML_complete.pdf
+*run.xml
+*.snm
+FoundationsML_complete-blx.bib
