@@ -51,21 +51,20 @@
 \begin{frame}
   \frametitle{Quelques sous-domaines de l'IA}
   \begin{itemize}
-  \item \blue{Robotique}
+  \item \blue{Planification automatique}
     \begin{itemize}
-    \item mécanique, électronique, contrôle
+    \item Trouver une séquence d'actions valides pour atteindre un objectif
+    \item Application en robotique, logistique, jeux vidéo
     \end{itemize}
   \item \blue{Systèmes experts}
     \begin{itemize}
-    \item utilisent des règles 
-    \item logique des propositions, logique des prédicats
+    \item utilisent des règles explicites pour encoder l'expertise humaine
+    \item Application en médecine, biologie, géologie 
     \end{itemize}
-  \item \blue{Traitement du langage naturel}
-  \item \blue{Vision par ordinateur}
-  \item \blue{Informatique affective} 
+  \item \blue{Constraint Satisfaction Problem (CSP)}
     \begin{itemize}
-    \item reconnaître, modéliser, exprimer les émotions humaines
-    \item sciences cognitives, psychologie
+    \item Trouver des solutions sur plusieurs variables sous contraintes
+    \item Application : résoudre de puzzles, affecter des cours ou tâches, coloration de cartes
     \end{itemize}
   \item \tikzmark{ml}{\blue{Apprentissage automatique}}
   \end{itemize}
@@ -114,12 +113,12 @@
   \item<3-> \red{Algorithme d'apprentissage :}
     \begin{center}
       \begin{tikzpicture}
-        \node[text width=2em] at (0.1, 5.5) {{Entrée}};
+        \node[text width=5em, align=center] at (0, 5.5) {{Entrées et sorties}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 5.5) -- (1.9, 5.5);
         \draw [draw=MyOrange, thick] (2, 6) rectangle (4.5, 5) node[midway,
         align=center]{\red{Algorithme} \\ \red{d'apprentissage}};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 5.5) -- (5.6, 5.5);
-        \node[text width=4em] at (6.8, 5.5) {\blue{Algorithme classique = modèle}};
+        \node[text width=5em] at (6.8, 5.5) {\blue{Algorithme classique = modèle}};
         \pause
         \node[text width=5em, align=center] at (0, 4.3) {{Ingrédients et gâteaux}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 4.3) -- (1.9, 4.3);
@@ -261,7 +260,7 @@
   \item Exemples de \blue{problèmes de classification binaire :}  $\ycal = \{0, 1\}$
     \begin{itemize}
     \item \blue{Filtrage de spam :} cet email est-il un spam ?
-    \item \blue{Reconnaissance faciale :} est-ce JM Blanquer sur cette photo ?
+    \item \blue{Contrôle de qualité :} cette pièce est-elle défectueuse ?
     \end{itemize}
   \pause
   \item Exemples de \blue{problèmes de classification multiclasse :}  

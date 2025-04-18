@@ -440,7 +440,7 @@
     \end{equation}
     \item et la \red{probabilité marginale} est la somme des probabilités jointes pour toutes les valeurs de $Y$:
     \begin{equation}
-      P(X) = \sum_Y P(X,Y) = \sum(P(X|Y)P(Y)
+      P(X) = \sum_Y P(X,Y) = \sum_Y P(X|Y)P(Y)
     \end{equation}
   \end{itemize}
   \end{itemize}
@@ -487,7 +487,7 @@
   \item La règle Bayesienne de classification simplement dit que la meilleure classe à choisir est celle avec la plus grande probabilité étant donné l'observation. 
   \item Cette probabilité peut être estimée à partir de la distribution des observations pour la classe et de la probabilité \emph{a priori}. 
   \item Cette règle est importante parce qu'elle donne le meilleur classifieur possible, si l'on connaît les distributions des observations $p(\xvec\,|\,y=k)$ et les probabilités \emph{a priori} $P(y=k)$.
-  \item Malheureusement, ce n'est pas le cas. Ces distributions doivent être estimées à partir des données d'apprentissage. 
+  \item Ces distributions n'étant pas connues, elles doivent être estimées à partir des données d'apprentissage. 
 \end{itemize}
 
 \end{frame}
@@ -525,7 +525,7 @@ p(\xvec|y=k)=\frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma_k|^{\frac{1}{2}}}e^{-\frac{1}{
 \frametitle{Analyse discriminante linéaire}
 \begin{itemize}
 \item Avec les expressions (\ref{equ:lda:normal}) et (\ref{equ:lda:condition}) et l'hypothèse supplémentaire que les matrices de covariance sont identiques pour toutes les classes, cad
-$\Sigma_1 = \Sigma_2 = \Sigma$, on obtien l'analyse discrimnante linéaire {\bf Linear Discriminant Analysis, LDA}:
+$\Sigma_1 = \Sigma_2 = \Sigma$, on obtien l'analyse discrimnante linéaire ({\bf Linear Discriminant Analysis, LDA}):
 \begin{equation*}
 K + \xvec^T\Sigma^{-1}(\mu_1-\mu_2) - \frac{1}{2}(\mu_1-\mu_2)^T\Sigma^{-1}(\mu_1+\mu_2) > 0
 \end{equation*}
