@@ -1,6 +1,6 @@
 \begin{frame}
   \begin{center}
-    \large{Arbres de décision}
+    \large{1. Arbres de décision}
   \end{center}
 \end{frame}
 
@@ -12,7 +12,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Les arbres de décision}
+  \frametitle{1.1 Arbres de décision}
   \begin{itemize}
     \item Méthode hiérarchique
     \item Série successive de tests conditionnels.
@@ -26,7 +26,7 @@
 
 
 \begin{frame}
-  \frametitle{Les arbres de décision pour la classification}
+  \frametitle{1.1 Arbres de décision}
   \begin{center}
     \includegraphics[width=.7\textwidth]{figures/arbre}
   \end{center}
@@ -40,7 +40,7 @@
 
 
 \begin{frame}
-  \frametitle{Les arbres de décision -- avantages}
+  \frametitle{1.2 Avantages}
   \begin{itemize}
   \item Gère naturellement :
     \begin{itemize}
@@ -53,7 +53,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Construction des arbres}
+  \frametitle{1.3 Construction}
   \begin{itemize}
     \item \red{CART :} Classification and regression trees
     \item A chaque étape, une région est divisée en deux, selon une \blue{variable séparatrice} $x_j$ (et un \blue{point de séparation} $s$ si $x_j$ continue):
@@ -125,7 +125,7 @@
 
 
 \begin{frame}
-  \frametitle{Limitations}
+  \frametitle{1.4 Limitations}
   \begin{itemize}
     \item \blue{Temps de calcul} potentiellement long
     \item Grand risque de \blue{sur-apprentissage}
@@ -140,7 +140,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Sagesse des foules}
+  \frametitle{2.1 Sagesse des foules}
   \begin{center}
     \includegraphics[width=.5\textwidth]{figures/crowd_diagonal}
   \end{center}
@@ -152,7 +152,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Bagging}
+  \frametitle{2.2 Bagging}
   \begin{itemize}
     \item On considère seulement un \blue{sous-ensemble} de $\dset$ (e.g. $80\%$ ou par échantillonage bootstrap (avec remise)). 
     \item On entraîne un arbre de décision. 
@@ -163,7 +163,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Forêts aléatoires}
+  \frametitle{2.3 Forêts aléatoires}
   \begin{itemize}
     \item En plus du bagging, on peut à chaque noeud tirer aléatoirement des variables parmi lesquels la variable optimale est trouvée. 
     \item Le résultat : \blue{forêts aléatoires}. 

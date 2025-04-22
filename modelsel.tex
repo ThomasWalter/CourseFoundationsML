@@ -35,7 +35,18 @@
 
 \begin{frame}
   \frametitle{Compromis biais-variance}
-  
+  \begin{itemize}
+  \item Hypothèses :
+    \begin{itemize}
+    \item $\dset = (\xvec^1, y^1), \dots, (\xvec^n, y^n)$ \blue{échantillon aléatoire} de $(X, Y)$
+    \item $Y = \Phi(X) + \varepsilon$ \hspace{2em} $\mathbb{E}[\varepsilon] = 0$ et $\text{Var}[\varepsilon] = \sigma^2$
+    \end{itemize}
+  \item \blue{Modèle} $f$ appris $\Rightarrow$ prédiction $f(\xvec)$ = estimation de
+    $\Phi(\xvec)$, réalisation d'une v.a.r. $F_n$ fonction de $\dset$
+  \item \blue{Erreur quadratique moyenne} de l'estimateur :
+    \[       \mathbb{E}[(F_n - y)^2] = \mathbb{E}[(F_n - \Phi(\xvec^i) - \varepsilon)^2] = \dots = \text{Biais}(F_n)^2 + \text{Var}(F_n) + \sigma^2 
+    \]    
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -495,12 +506,6 @@
     (nouvelle édition en préparation)
   \item \black{Le Machine Learning avec scikit-learn}, Aurélien Géron, Dunod
     InfoSup
-  \item Textes et vidéos sur \blue{OpenClassrooms :} \\
-    {\footnotesize Textes accessibles librement ; vidéos accessibles avec un compte gratuit.}
-    \begin{itemize} 
-    \item Thématique : Data  \textcolor{MyBlue}{\href{https://openclassrooms.com/en/courses?categories=Data}{[lien cliquable]}}
-     \item Objectif IA (grand public) \textcolor{MyBlue}{\href{https://openclassrooms.com/fr/courses/6417031-objectif-ia-initiez-vous-a-lintelligence-artificielle}{  [lien cliquable]}}
-    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -516,3 +521,8 @@
   \item \blue{MOOC scikit-learn } \textcolor{MyBlue}{\href{https://inria.github.io/scikit-learn-mooc/}{[lien cliquable]}}
   \end{itemize}
 \end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
