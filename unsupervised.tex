@@ -1,6 +1,28 @@
 % dimred
 
 \begin{frame}
+  \frametitle{Apprentissage non supervisé}
+  \begin{itemize}
+    \item Données sans étiquette : 
+    \item[] $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ ; $\xvec_i \in \xcal = \RR^p$
+    \item L'objectifs : 
+    \begin{itemize}
+      \item Exploration de données
+      \item Identification de tendances et de groupes
+    \end{itemize} 
+    \item Tâches de prédiction : 
+    \begin{itemize}
+        \item \red{Réduction de dimension :} $f : \RR^p \rightarrow \RR^d$ avec
+          $d \ll p$ et de telle sorte à ce que $f(\xvec)$ soit une
+          \blue{représentation informative} de $\xvec$
+        \item \red{Clustering :} partition de $\{1, 2, \dots, n\}$ en ensembles
+        d'éléments semblables, appelés \red{clusters}
+    \end{itemize}
+    \item Note : la réduction de dimensions peut être supervisée ou non supervisée. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
   \begin{center}
     \red{\LARGE Réduction de dimension}
   \end{center}
@@ -61,8 +83,8 @@
 \begin{frame}
   \frametitle{Méthode de conteneur}
   \begin{itemize}
-  	\item Méthode supervisée de sélection de variables. 
-  	\item Liée à une méthode de classification : on juge la qualité de la variable par rapport à la performance de classification.
+  	\item Méthode \red{supervisée} de sélection de variables. 
+  	\item Liée à une méthode de \red{classification} : on juge la qualité de la variable par rapport à la performance de classification.
   	\item 2 stratégies : 
   	\begin{itemize}
   		\item \red{Méthode ascendante (forward selection)}: successivement ajouter des variables
@@ -113,7 +135,7 @@
   \frametitle{Analyse en composantes principales}
   \begin{itemize}
   	\item Analyse en composantes principales (ACP) (principal component analysis, PCA)
-  	\item Méthode non-supervisée (aucune étiquette est utilisée)
+  	\item Méthode \red{non supervisée} (aucune étiquette est utilisée)
   	\item Expression de $X\in \RR^{n\times p}$ dans une base orthonormée, par une transformation linéaire orthogonale.
   	\item Maximisation de la variance.
 %  	\item Premier axe : projection de $X$ avec la plus grande variance
@@ -138,7 +160,7 @@
  \begin{equation*}
  x^i_j = \frac{x_j^i - \overline{x}_j}{\sqrt{\frac{1}{n}\sum_{l=1}^n(x_j^l - \overline{x}_j)^2}} 
  \end{equation*}
- 	\item La matrice de covariance est donc : $\Sigma = \frac1n X^TX$ 
+ 	\item La matrice de covariance (si $X$ est centré-réduit): $\Sigma = \frac1n X^TX$ 
  	\item On cherche maintenant une direction $\wvec$, pour laquelle la projection de $X$ sur cette direction a une variance maximale. 
  	\item On peut montrer que cette variance maximale est la plus grande valeur propre de $\Sigma$, et que la direction est le vecteur propre correspondant. 
   \end{itemize}
@@ -147,7 +169,7 @@
 \begin{frame}
 \frametitle{ACP: Méthode 2/3}
   \begin{itemize}
-  	\item Si on ordonne les valeurs propres de $\Sigma$ selon leurs tailles, on obtient les composantes principales $cp_2, cp_3, \ldots$ qui remplissent les critères suivants : 
+  	\item Si on ordonne les valeurs propres de $\Sigma$, on obtient les composantes principales $cp_2, cp_3, \ldots$ qui remplissent les critères suivants : 
   	\begin{itemize}
   		\item Chaque $cp_i$ est orthogonal à toutes les autres composantes.
   		\item La variance de la projection de $X$ sur $cp_i$ est identique à la valeur propre $i$. 
@@ -163,9 +185,12 @@
 \begin{frame}
 \frametitle{ACP: Méthode 3/3}
   \begin{itemize}
-  	\item L'ACP nous donne donc une transformation avec : des variables décorrélées, et ordonnées selon l'importance. 
-  	\item Typiquement, on choisit un nombre $m$ de composantes principales. Le critère pour $m$ est la variance "expliquée" par le modèle. 
-  	\item On peut aussi choisir $m=2$ ou $m=3$ pour la visualisation par exemple.   
+  	\item L'ACP nous donne donc une transformation avec : des variables décorrélées, et ordonnées selon leur variance, celle-ci étant supposée refléter le contenu en information. 
+  	\item Typiquement, on choisit un nombre $m$ de composantes principales. Le critère pour $m$ est la variance "expliquée" par le modèle: 
+    \begin{equation}
+      \frac{\sum_{j=1}^{m}var(X\wvec_j)}{\sum_{j=1}^pvar(X\wvec_j)}
+    \end{equation}
+  	\item Alternativement, on peut choisir $m=2$ ou $m=3$ pour la visualisation par exemple.   
   \end{itemize}
 \end{frame}
 
@@ -239,19 +264,19 @@
   	\item Inconvénients : 
   	\begin{itemize}
   		\item pas de transformation : la minimisation est faite pour une ensemble de données et ne peut s'appliquer à de nouvelles données. 
-  		\item Distorsion dans les longues distances. 
+  		\item Distorsion des longues distances. 
   	\end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{t-SNE map: exemple}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=.8\textwidth]{Vis_tsne.png}
-  \caption{patterns de localisation d'ARN dans la cellule}
-\end{figure}
-\end{frame}
+% \begin{frame}
+% \frametitle{t-SNE map: exemple}
+% \begin{figure}[htb]
+%   \centering
+%   \includegraphics[width=.8\textwidth]{Vis_tsne.png}
+%   \caption{patterns de localisation d'ARN dans la cellule}
+% \end{figure}
+% \end{frame}
 
 
 \begin{frame}
@@ -331,96 +356,196 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Critères géométriques}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figures/homogeneity}%
   \end{center}
-  \begin{minipage}[t]{0.5\linewidth}
-    \begin{itemize}
-    \item \red{Homogénéité} \textcolor{gray!70}{(tightness)}
-      \begin{itemize}
-      \item Pour le cluster $k$ :
-        \begin{equation*}
-          T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
-        \end{equation*}
-      \end{itemize}
-    \end{itemize}
-  \end{minipage}%
-  \begin{minipage}[t]{0.5\linewidth}
-    \begin{itemize}
-    \item \red{Centroïde} du cluster $\cset$:
-      \[ \muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec\]
-    \item \red{Médoïde} : l'élément de $\cset$ le plus proche de $\muvec_{\cset}$
-    \end{itemize}  
-  \end{minipage}
-  \begin{itemize}
-  \item[]  
-    \begin{itemize}
-    \item Pour le clustering complet :  $T = \frac1K\sum_{k=1}^{K}T_k$
-    \end{itemize}
-  \end{itemize}
+\begin{itemize}  
+  \item Définition centroïde du cluster $\cset$: $\muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec$
+  \item Définition médoïde du cluster $\cset$: $\mvec_{\cset} = \argmin_{\xvec \in \cset}d(\xvec, \muvec_{\cset})$
+  \item \red{Homogénéité} d'un cluster $k$ : $T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)$
+  % \begin{equation*}
+  % T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
+  % \end{equation*}
+  \item Homogénéité d'un clustering : 
+  \begin{equation*}
+  T = \frac1K\sum_{k=1}^{K}T_k
+  \end{equation*}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Critères géométriques}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figures/separability}%
   \end{center}
-  \begin{itemize}
-  \item \red{Séparabilité}
-    \begin{itemize}
-    \item Pour les clusters $k$ et $l$ : 
-      \begin{equation*}
-        s_{kl} = d(\muvec_k, \muvec_l)
-      \end{equation*}
-    \item Pour le clustering :
-      \begin{equation*}
-	S = \frac{2}{K(K-1)}\sum_{k=1}^{K-1}\sum_{l=k+1}^{K}s_{kl}
-      \end{equation*}
-    \end{itemize}
-  \end{itemize}
+\begin{itemize}
+  \item Séparabilité des clusters $k$ et $l$ : 
+  \begin{equation*}
+  s_{kl} = d(\muvec_k, \muvec_l)
+  \end{equation*}
+  \item Séparabilité d'un clustering : 
+  \begin{equation*}
+  S = \frac{2}{K(K-1)}\sum_{k=1}^{K-1}\sum_{l=k+1}^{K}s_{kl}
+  \end{equation*}
+\end{itemize}
+\end{frame}
+
+% \begin{frame}
+% \frametitle{Critère de qualité 3/5}
+% \begin{itemize}
+%   \item Critère de Davis-Bouldin (homogénéité et séparabilité ensemble): 
+%   \begin{equation*}
+%   D_k = \max_{l\neq k} \frac{T_k + T_l}{S_{kl}}
+%   \end{equation*}
+%   \item Critère de Davis-Bouldin pour un clustering entier : 
+%   \begin{equation*}
+%   D = \frac1K \sum_{k=1}^{K}D_k
+%   \end{equation*}
+% \end{itemize}
+% \end{frame}
+
+\begin{frame}
+\frametitle{1.1 Critères géométriques}
+\begin{itemize}
+  \item  \textbf{Coefficient de silhouette.} On note d'abord $a(\xvec)$ la moyenne des distances entre $\xvec$ et les autres points du cluster $k(\xvec)$ auquel $\xvec$ est assigné :
+  %\item Coefficient de silhouette. On note d'abord $a(\xvec)$ comme la moyenne des distances de $\xvec$ et des autres points dans le cluster $k(\xvec)$ auquel $\xvec$ est assigné.   
+  \begin{equation*}
+  a(\xvec) = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}}d(\xvec, \uvec)
+  \end{equation*}
+  \item La quantité $b(\xvec)$ est définie comme la plus petite valeur moyenne des distances entre $\xvec$ et tous les points d’un autre cluster $l \neq k(\xvec)$ :
+%  \item La valeur $b(\xvec)$ correspond à la même expression, mais calculée pour le cluster autre que $k(\xvec)$, pour lequel la valeur est minimale:   
+  \begin{equation*}
+  b(\xvec) = \min_{l\neq k(\xvec)}\frac{1}{|\cset_l|} \sum_{u \in \cset_l}d(\uvec, \xvec)
+  \end{equation*}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.1 Critères géométriques}
-  \begin{itemize}
-  \item \red{Coefficient de silhouette}
-    \begin{itemize}
-    \item Pour un point $\xvec$ :
-      {\footnotesize
-      \begin{align*}
-	a(\xvec) & = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}}d(\xvec, \uvec) \\
-	b(\xvec) & = \min_{l\neq k(\xvec)}\frac{1}{|\cset_l|} \sum_{u \in \cset_l}d(\uvec, \xvec) \\
-        s(\xvec) & = \frac{b(\xvec) - a(\xvec)}{\max(a(\xvec), b(\xvec))}
-      \end{align*}}
+\frametitle{1.1 Critères géométriques}
+\begin{itemize}
+  \item Avec $a$ et $b$ définis ainsi, nous pouvons définir le coefficient de silhouette pour le point $\xvec$ : 
+  \begin{equation*}
+  s(\xvec) = \frac{b(\xvec)-a(\xvec) }{\max{(b(\xvec), a(\xvec))}  }
+  \end{equation*}
+  \item Finalement, le \red{coefficient de silhouette} pour le clustering est :
+  \begin{equation*}
+  s = \frac1n \sum_{i=1}^{n}s(\xvec^i)
+  \end{equation*}
 
-  \item Pour le clustering :
-      \begin{equation*}
-        s = \frac1n \sum_{i=1}^n s(\xvec^i).
-      \end{equation*}
-    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{1.1 Critères géométriques}
+%   \begin{center}
+%     \includegraphics[width=0.5\textwidth]{figures/homogeneity}%
+%   \end{center}
+%   \begin{minipage}[t]{0.5\linewidth}
+%     \begin{itemize}
+%     \item \red{Homogénéité} \textcolor{gray!70}{(tightness)}
+%       \begin{itemize}
+%       \item Pour le cluster $k$ :
+%         \begin{equation*}
+%           T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
+%         \end{equation*}
+%       \end{itemize}
+%     \end{itemize}
+%   \end{minipage}%
+%   \begin{minipage}[t]{0.5\linewidth}
+%     \begin{itemize}
+%     \item \red{Centroïde} du cluster $\cset$:
+%       \[ \muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec\]
+%     \item \red{Médoïde} : l'élément de $\cset$ le plus proche de $\muvec_{\cset}$
+%     \end{itemize}  
+%   \end{minipage}
+%   \begin{itemize}
+%   \item[]  
+%     \begin{itemize}
+%     \item Pour le clustering complet :  $T = \frac1K\sum_{k=1}^{K}T_k$
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{1.1 Critères géométriques}
+%   \begin{center}
+%     \includegraphics[width=0.5\textwidth]{figures/separability}%
+%   \end{center}
+%   \begin{itemize}
+%   \item \red{Séparabilité}
+%     \begin{itemize}
+%     \item Pour les clusters $k$ et $l$ : 
+%       \begin{equation*}
+%         s_{kl} = d(\muvec_k, \muvec_l)
+%       \end{equation*}
+%     \item Pour le clustering :
+%       \begin{equation*}
+% 	S = \frac{2}{K(K-1)}\sum_{k=1}^{K-1}\sum_{l=k+1}^{K}s_{kl}
+%       \end{equation*}
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{1.1 Critères géométriques}
+%   \begin{itemize}
+%   \item \red{Coefficient de silhouette}
+%     \begin{itemize}
+%     \item Pour un point $\xvec$ :
+%       {\footnotesize
+%       \begin{align*}
+% 	a(\xvec) & = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}}d(\xvec, \uvec) \\
+% 	b(\xvec) & = \min_{l\neq k(\xvec)}\frac{1}{|\cset_l|} \sum_{u \in \cset_l}d(\uvec, \xvec) \\
+%         s(\xvec) & = \frac{b(\xvec) - a(\xvec)}{\max(a(\xvec), b(\xvec))}
+%       \end{align*}}
+
+%   \item Pour le clustering :
+%       \begin{equation*}
+%         s = \frac1n \sum_{i=1}^n s(\xvec^i).
+%       \end{equation*}
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{1.2 Comparaison à des étiquettes connues}
+  \begin{itemize}
+  \item Difficulté : les clusters sont numérotés arbitrairement. 
+  \item \red{Indice de Rand} : pourcentage de paires de points qui sont soit dans le même cluster dans les deux partitions, soit dans des clusters différents dans les deux partitions : 
+    \begin{equation*}
+      \text{RI} = \frac2{n (n-1)} \sum_{i=1}^n \sum_{l=i+1}^n 
+      \indic_{k(\xvec^i) = k(\xvec^l)} \, \indic_{y^i = y^l} + 
+      \indic_{k(\xvec^i) \neq k(\xvec^l)} \, \indic_{y^i \neq y^l}.
+    \end{equation*}
+
+  \item Problème du RI : deux partitions aléatoires peuvent avoir un RI élevé par hasard. 
+  \item Solution : ARI (adjusted Rand index) est le RI corrigé. 
+
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}
-  \frametitle{1.2 Stabilité des clusters}
+  \frametitle{1.3 Stabilité des clusters}
     \begin{center}
       \includegraphics[width=0.7\textwidth]{figures/three_clusters}%
     \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.3 Comparaison à des étiquettes connues}
+  \frametitle{1.3 Stabilité des clusters}
   \begin{itemize}
-  \item Difficulté : les clusters sont numérotés arbitrairement
-  \item \red{Indice de Rand}
-        \begin{equation*}
-      \text{RI} = \frac2{n (n-1)} \sum_{i=1}^n \sum_{l=i+1}^n 
-      \indic_{k(\xvec^i) = k(\xvec^l)} \, \indic_{y^i = y^l} + 
-      \indic_{k(\xvec^i) \neq k(\xvec^l)} \, \indic_{y^i \neq y^l}.
-    \end{equation*}
+    \item Génération de plusieurs partitions avec le même algorithme de clustering en variant : 
+    \begin{itemize}
+      \item les conditions initiales de l'algorithme
+      \item des sous-échantillonages dans $\dset$
+      \item des sous-ensembles de descripteurs (éventuellement)
+    \end{itemize}
   \end{itemize}
 \end{frame}
+
 
 \begin{frame}
   \begin{center}
@@ -535,8 +660,8 @@
     \begin{itemize}
     \item Nécessité de fixer $K$ 
     \item Approche \blue{gloutonne} : pas de garantie de minimum global
-    \item \blue{Stochasticité} : dépend de l'initialisation \pause $\rightarrow$ k-means++ 
-    \item Clusters nécessairement \blue{convexes} \pause $\rightarrow$ kernel k-means
+    \item \blue{Stochasticité} : dépend de l'initialisation 
+    \item Clusters nécessairement \blue{convexes} 
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -562,11 +687,56 @@
 \end{frame}
 
 
+% \begin{frame}
+%   \frametitle{DBSCAN}
+%   \begin{itemize}
+%   \item Idée : itérer \blue{de proche en proche} par des \blue{voisinages} (boules) de rayon $\varepsilon$
+%   \item On définit deux paramètres : (1) un rayon $\varepsilon$ et (2) un number minimal de points $n_{min}$. On définit alors : 
+%   \begin{itemize}
+%     \item Point cœur (core point) : un point ayant au moins $n_{min}$ voisins dans un rayon $\varepsilon$.
+%     \item Point frontière (border point) : moins de $n_{min}$ dans son voisinage, mais il est proche d’un point coeur.
+%     \item Point bruit (noise / outlier) : les points isolés, considérés comme du bruit .
+%   \end{itemize}
+%   \item Etapes de l'algorithmes : 
+%   \begin{itemize}
+%     \item On trouve d'abord les points coeurs. 
+%     \item Ensuite, on construit les composantes connexes en reliant entre eux les points coeurs voisins : chaque composante constitue un cluster. 
+%     \item Ensuite on assigne chaque point frontière à une composante connexe. 
+%     \item On n'assigne pas les points bruit. 
+%   \end{itemize}
+%   % \begin{center}
+%   %   \includegraphics[width=.6\textwidth]{figures/dbscan}
+%   % \end{center}
+% \end{frame}
+
 \begin{frame}
   \frametitle{DBSCAN}
   \begin{itemize}
-  \item Idée : itérer \blue{de proche en proche} par des \blue{voisinages} (boules) de rayon $\epsilon$
-  \item Les points \blue{isolés} (min $n_{\min}$ points par cluster) sont du bruit 
+  \item Idée : itérer \blue{de proche en proche} par des \blue{voisinages} (boules) de rayon $\varepsilon$
+  \item On définit deux paramètres : 
+  \begin{enumerate}
+    \item un rayon $\varepsilon$ 
+    \item un number minimal de points $n_{min}$. 
+  \end{enumerate}
+  \item On définit alors : 
+  \begin{itemize}
+    \item Point cœur (core point) : un point ayant au moins $n_{min}$ voisins dans un rayon $\varepsilon$.
+    \item Point frontière (border point) : moins de $n_{min}$ dans son voisinage, mais il est proche d’un point coeur.
+    \item Point bruit (noise / outlier) : les points isolés, considérés comme du bruit .
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{DBSCAN}
+  \begin{itemize}
+  \item Etapes de l'algorithmes : 
+  \begin{itemize}
+    \item On trouve d'abord les points coeurs. 
+    \item Ensuite, on construit les composantes connexes en reliant entre eux les points coeurs voisins : chaque composante constitue un cluster. 
+    \item Ensuite on assigne chaque point frontière à une composante connexe. 
+    \item On n'assigne pas les points bruit. 
+  \end{itemize}
   \end{itemize}
   \begin{center}
     \includegraphics[width=.6\textwidth]{figures/dbscan}
