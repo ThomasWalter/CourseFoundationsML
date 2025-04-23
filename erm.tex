@@ -1,4 +1,10 @@
 \begin{frame}
+  \begin{center}
+    \large{1. Minimisation du risque empirique}
+  \end{center}
+\end{frame}
+
+\begin{frame}
   \frametitle{Minimisation du risque empirique}
   \begin{itemize}
   \item Principe sur lequel de nombreux algorithmes \blue{d'apprentissage
@@ -13,14 +19,6 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
-
-
-\begin{frame}
-  \begin{center}
-    \large{1. Minimisation du risque empirique}
-  \end{center}
-\end{frame}
-
 
 \begin{frame}
   \frametitle{1.1 Espace des hypothèses}
@@ -389,10 +387,10 @@
 \begin{frame}
   \frametitle{2.3 Régression logistique - Entropie croisée et maximisation de vraisemblance}
   \begin{itemize}
-    \item On écrit $P(y_i\,|\,\xvec_i; \theta)$ la probabilité de prédire la classe $y_i$ (donc de prédire la classe correcte). 
+    \item On écrit $P(y_i\,|\,\xvec_i; \betavec)$ la probabilité de prédire la classe $y_i$ (donc de prédire la classe correcte). 
   \item Probabilité que toutes les prédictions sont bonnes est la probabilité jointe de $N$ bonnes prédictions :  
   \begin{equation*}
-    \prod_{i=1}^NP(y_i | \xvec_i; \theta)
+    \prod_{i=1}^NP(y_i | \xvec_i; \betavec)
   \end{equation*}
   \end{itemize}
 \end{frame}
@@ -402,9 +400,9 @@
   \begin{itemize}
     \item Approche de maximisation de la vraisemblance : 
     \begin{eqnarray*}
-    \theta^{\ast} &=& \argmax_{\theta} \prod_{i=1}^NP(y_i | \xvec_i; \theta) \\
-                  &=& \argmax _{\theta} \sum_{i=1}^N\log P(y_i | \xvec_i; \theta)\\
-                  &=& \argmin_{\theta} - \sum_{i=1}^N\log P(y_i | \xvec_i; \theta)
+    \betavec^{\ast} &=& \argmax_{\betavec} \prod_{i=1}^NP(y_i | \xvec_i; \betavec) \\
+                  &=& \argmax _{\betavec} \sum_{i=1}^N\log P(y_i | \xvec_i; \betavec)\\
+                  &=& \argmin_{\betavec} - \sum_{i=1}^N\log P(y_i | \xvec_i; \betavec)
     \end{eqnarray*}    
   \end{itemize}
 \end{frame}
@@ -414,11 +412,11 @@
   \begin{itemize}
     \item Si on suppose qu'on prédit la probabilité a posteriori, on peut écrire : 
     \begin{equation*}
-    \log P(y_i|(\xvec_i; \theta) = y_i \log (f(\xvec_i; \theta)) + (1-y_i)\log (1-f(\xvec_i; \theta))
+    \log P(y_i|(\xvec_i; \betavec) = y_i \log (f(\xvec_i; \betavec)) + (1-y_i)\log (1-f(\xvec_i; \betavec))
     \end{equation*}
     et on obtient : 
     \begin{equation*}
-    \theta^{\ast} = \argmin_{\theta} - \sum_{i=1}^N [y_i \log (f(\xvec_i; \theta)) + (1-y_i)\log (1-f(\xvec_i; \theta))]
+    \betavec^{\ast} = \argmin_{\betavec} - \sum_{i=1}^N [y_i \log (f(\xvec_i; \betavec)) + (1-y_i)\log (1-f(\xvec_i; \betavec))]
     \end{equation*}
     \item Nous voyons que minimiser l'entropie croisée est équivalent à maximiser la vraisemblance.
   \end{itemize}
