@@ -14,12 +14,11 @@
 \begin{frame}
   \frametitle{1.1 Arbres de décision}
   \begin{itemize}
-    \item Méthode hiérarchique
-    \item Série successive de tests conditionnels.
-    \item Souvent utilisé en dehors de la classification automatique : 
+  \item Méthode \blue{hiérarchique} : série successive de tests conditionnels
+  \item Utilisés en dehors du ML : 
     \begin{itemize}
-      \item aide à la décision
-      \item formalisation d'un raisonnement
+    \item aide à la décision
+    \item formalisation d'un raisonnement
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -28,13 +27,13 @@
 \begin{frame}
   \frametitle{1.1 Arbres de décision}
   \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/arbre}
+    \includegraphics[width=.8\textwidth]{figures/arbre}
   \end{center}
   \begin{itemize}
     \item Variables \blue{continues :} tests = \blue{seuillage}
     \item Variables \blue{catégoriques :} tests = \blue{valeur}
+    \item Feuille = \blue{étiquette}
     \item Chaque arbre de décision correspond à une \blue{partition} de l'espace des descripteurs.
-    \item Feuille = étiquette
   \end{itemize}
 \end{frame}
 
@@ -55,7 +54,7 @@
 \begin{frame}
   \frametitle{1.3 Construction}
   \begin{itemize}
-    \item \red{CART :} Classification and regression trees
+    \item \red{CART :} Classification And Regression Trees
     \item A chaque étape, une région est divisée en deux, selon une \blue{variable séparatrice} $x_j$ (et un \blue{point de séparation} $s$ si $x_j$ continue):
       \begin{equation*}
         R_l(j, s) = \{\xvec : x_j < s\} ; \hspace{2em} R_r(j, s) = \{\xvec : x_j \geq s\}.
@@ -64,6 +63,38 @@
     \item Approche \blue{gloutonne} : on fait ce choix pour optimiser l'\red{erreur} faite à ce moment là
     \item  Étiquette d'une feuille = étiquette \blue{majoritaire} (classification) ou \blue{moyenne} (régression) des points du jeu d'entraînement dans cette feuille
     \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Exemple}
+  % \begin{itemize}
+  % \item 4 petites pommes jaunes, 5 grosses pommes vertes, 3 bananes, 6 mini-concombres
+  % \item attributs : vert/jaune, rond/pas rond, gros/petit
+  % \end{itemize}
+  \begin{minipage}[h]{0.5\linewidth}
+    \begin{itemize}
+      \setlength{\itemsep}{0pt}
+      \setlength{\parskip}{0pt}
+      \setlength{\parsep}{0pt}
+      \footnotesize
+    \item 4 petites pommes jaunes
+    \item 5 grosses pommes vertes
+    \item 3 bananes
+    \item 6 mini-concombres
+    \end{itemize}    
+  \end{minipage}%
+  \begin{minipage}[h]{0.5\linewidth}
+    \begin{itemize}
+      \setlength{\itemsep}{0pt}
+      \setlength{\parskip}{0pt}
+      \setlength{\parsep}{0pt}
+      \footnotesize
+    \item[] \blue{Variables :} 
+    \item vert/jaune
+    \item rond/pas rond
+    \item gros/petit
+    \end{itemize}    
+  \end{minipage}%
 \end{frame}
 
 \begin{frame}
@@ -112,23 +143,17 @@
 \end{frame}
   
 
-\begin{frame}[t]
-  \frametitle{Construction d'un arbre}
-  \begin{itemize}
-  \item Exemple :
-    \begin{itemize}
-    \item 4 petites pommes jaunes, 5 grosses pommes vertes, 3 bananes, 6 mini-concombres
-    \item attributs : vert/jaune, rond/pas rond, gros/petit
-    \end{itemize}
-  \end{itemize}
-\end{frame}
 
 
 \begin{frame}
   \frametitle{1.4 Limitations}
   \begin{itemize}
-    \item \blue{Temps de calcul} potentiellement long
-    \item Grand risque de \blue{sur-apprentissage}
+  \item \blue{Temps de calcul} potentiellement long:
+    \begin{itemize}
+    \item À chaque nœud : évaluer \blue{toutes les variables} et \blue{tous les seuils}
+    \item Pour une variable réelle, autant de seuils possibles que de nombres de valeurs différentes prises par cette variable (-1)
+    \end{itemize}
+    \item Optimisation \blue{heuristique}
     \item Généralement \blue{peu performants}, encore plus en régression
   \end{itemize}
 \end{frame}
@@ -154,26 +179,31 @@
 \begin{frame}
   \frametitle{2.2 Bagging}
   \begin{itemize}
-    \item On considère seulement un \blue{sous-ensemble} de $\dset$ (e.g. $80\%$ ou par échantillonage bootstrap (avec remise)). 
-    \item On entraîne un arbre de décision. 
-    \item On reitère cette procédure pour obtenir un ensemble d'arbres. 
-    \item Le résultat est obtenu par vote majoritaire (classification) ou en moyennant (régression).  
-    \item Moyenner permet d'avoir des étiquettes précises même en régression
+    \item Construire plusieurs arbres entraînés sur des \blue{données différentes :} échantillonage \blue{bootstrap} de $\dset$ 
+    \item Prédiction finale :
+      \begin{itemize}
+      \item Classification : \blue{vote majoritaire} 
+      \item Régression : \blue{moyenne} 
+      \end{itemize}   
+    \item Méthode \blue{parallèle}   
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{2.3 Forêts aléatoires}
   \begin{itemize}
-    \item En plus du bagging, on peut à chaque noeud tirer aléatoirement des variables parmi lesquels la variable optimale est trouvée. 
-    \item Le résultat : \blue{forêts aléatoires}. 
-    \item Les arbres sont plus différents et couvrent «~différent aspects~» des données. 
-    \item En pratique : 
+  \item Construire plusieurs arbres entraînés :
     \begin{itemize}
-      \item généralement bons résultats
-      \item applicable pour $p \gg n$
-      \item Régularisation par «~ensembling~»
+    \item sur des \blue{données différentes :} échantillonage \blue{bootstrap} de $\dset$ 
+    \item sur des \blue{variables différentes :} à chaque nœud, tirer aléatoirement $q < p$ variables
     \end{itemize}
+    \item But : décorréler les arbres
+    % \item En pratique : 
+    % \begin{itemize}
+    %   \item généralement bons résultats
+    %   \item applicable pour $p \gg n$
+    %   \item Régularisation par «~ensembling~»
+    % \end{itemize}
   \end{itemize}
 
 \end{frame}
@@ -181,6 +211,7 @@
 \begin{frame}
   \frametitle{2.4 Boosting}
   \begin{itemize}
+  \item Méthode \blue{séquentielle}    
   \item À l'itération $m$
     \begin{itemize}
     \item Apprendre le modèle $f_m$ qui minimise l'erreur empirique de
@@ -190,9 +221,9 @@
     \item L'erreur pour $(\xvec_i, y_i)$ est pondérée de sorte à donner plus
       d'importances aux exemples pour lesquels $F_{m-1}$ se trompe.
     \end{itemize}
-  \item \blue{AdaBoost} (Schapire \& Freund 1997) : erreur exponentielle, $f_m$ est un
-    arbre de décision de profondeur 1 (decision stump)
-  \item \blue{Gradient Boosting} (Friedman 2001) : forme générale
+  \item \red{AdaBoost} (Schapire \& Freund 1997) : erreur exponentielle, $f_m$ est un
+    arbre de décision de profondeur 1 (\red{decision stump})
+  \item \red{Gradient Boosting} (Friedman 2001) : forme générale
   \end{itemize}
 \end{frame}
 
