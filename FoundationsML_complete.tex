@@ -80,7 +80,7 @@
 \usepackage{epstopdf}
 \usepackage{fancyhdr}
 \usepackage{fancybox}
-\usepackage[all]{xy}
+%\usepackage[all]{xy}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage[normalem]{ulem}
@@ -213,14 +213,14 @@
 
 
 
-\newcommand{\mytitle}{Fondamentaux du Machine Learning}
-\author[Walter \& Azencott]{Thomas Walter \and  Chlo\'e-Agathe~Azencott}
+\newcommand{\mytitle}{Foundations of Machine Learning}
+\author[Walter \& Azencott]{Thomas Walter \and  Chlo\'e-Agathe~Azencott \and Vincent Mallet}
 \institute[CBIO]{\inst{1} Centre for Computational Biology(CBIO), Mines Paris, PSL University\and %
                       \inst{2} Institut Curie\and
                       \inst{3} U1331 - INSERM}
 
 %\author{Chlo\'e-Agathe~Azencott}
-\date{\small Avril 2025}
+\date{\small November 2025}
 
 \begin{document}
 {
@@ -229,7 +229,7 @@
   \begin{frame}[plain]
     \fontfamily{PTSansNarrow-TLF}\selectfont
     \begin{center}
-      {\ptnormal{\textit{Formation Dassault-Systèmes}}}
+      {\ptnormal{\textit{Dassault-Systèmes Training}}}
     \end{center}
 
     \vspace{70pt}
@@ -248,7 +248,7 @@
     
       \centerline{Mines Paris -- Institut Curie -- INSERM 1331}
 
-      \centerline{PSL Research University \& PR[AI]RIE, Paris, France}
+      \centerline{PSL Research University \& PRAIRIE-PSAI, Paris, France}
     }
 
     \centerline {\insertdate}
@@ -274,25 +274,24 @@
 % \usebackgroundtemplate{}
 
 \begin{frame}
-  \frametitle{Centre de Bioinformatique (CBIO)}
+  \frametitle{Centre for Bioinformatics (CBIO)}
   \centerline{\includegraphics[width=0.75\textwidth]{figures/cbio}}
   \begin{itemize}
-    \item Centre de recherche de l'\'Ecole des Mines
-    \item 20 personnes, 6 chercheurs permanents (dont 2 chaires PRAIRIE)
-    \item Thématique : IA pour les sciences de la vie
+    \item Research Center of Mines Paris PSL
+    \item 20 people, 6 permament members (incl. 3 PRAIRIE-PSAI chairs)
+    \item Common thread: AI for life sciences
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Objectifs}
+  \frametitle{Objective}
   \begin{itemize}
-  \item Présenter les concepts et outils fondamentaux pour développer et
-    analyser des algorithmes d'apprentissage automatique :
+  \item Introduce the fundamental concepts and tools to develop and analyze machine learning algorithms:
     \begin{itemize}
-    \item Fondements théoriques
-    \item Panorama d'algorithmes
-    \item Choisir et évaluer un algorithme / un modèle d'apprentissage
+    \item Theoretical foundation
+    \item Overview of many algorithms
+    \item Choose and evaluate a machine learning algorithm/model
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -302,49 +301,49 @@
   \frametitle{Programme}
 
   \begin{itemize}
-  \item Introduction à l'apprentissage automatique
-  \item \blue{Cours 1 :} Minimisation du risque empirique 
-  \item \blue{Cours 2 :} Régularisation et sélection de modèle
-  \item \blue{Cours 3 :} Apprentissage non-supervisé
-  \item \blue{Cours 4 :} Arbres et méthodes ensemblistes
-  \item \blue{Cours 5 :} Réseaux de neurones (Vincent Mallet)
-  \item \blue{Cours 6 :} Apprentissage profond (Vincent Mallet)
-  \item Travaux pratiques : mise en œuvre des notions et algorithmes avec scikit-learn (Python numérique).
+  \item Introduction to machine learning
+  \item \blue{Class 1 :} Empirical risk minimization (Thomas Walter)
+  \item \blue{Class 2 :} Regularization and model selection (Chloé Azencott)
+  \item \blue{Class 3 :} Unsupervised learning (Thomas Walter) 
+  \item \blue{Class 4 :} Trees and ensemble methods (Chloé Azencott)
+  \item \blue{Class 5 :} Neural networks (Vincent Mallet)
+  \item \blue{Class 6 :} Deep learning (Vincent Mallet)
+  \item Tutorials: applications with scikit-learn (Python)
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Introduction à l'apprentissage} 
+    \red{\LARGE Introduction to machine learning} 
   \end{center}
 \end{frame}
 \input{intro}
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Cours 1 -- Minimisation du risque empirique et modèles linéaires}
+    \red{\LARGE Class 1 -- Empirical risk minimization and linear models}
   \end{center}
 \end{frame}
 \input{erm}
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Cours 2 -- Régularisation et sélection de modèle} 
+    \red{\LARGE Class 2 -- Regularization and model selection} 
   \end{center}
 \end{frame}
 \input{modelsel}
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Cours 3 -- Apprentissage non-supervisé} 
+    \red{\LARGE Class 3 -- Unsupervised learning} 
   \end{center}
 \end{frame}
 \input{unsupervised}
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Cours 4 -- Arbres et méthodes ensemblistes} 
+    \red{\LARGE Class 4 -- Trees and ensemble methods} 
   \end{center}
 \end{frame}
 \input{trees}
