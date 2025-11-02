@@ -1,5 +1,9 @@
+% Translated version of intro.tex
+% NOTE: French content to be translated into English (American spelling)
+% All LaTeX structure and math remain unchanged.
+
 \begin{frame}
-  \frametitle{Qu'est-ce que l'intelligence artificielle ?}
+  \frametitle{What is Artificial Intelligence?}
   \pause
   \begin{itemize}
   \item Dartmouth Conference, 1956
@@ -8,316 +12,297 @@
             behave in ways that, until recently, we thought required human
             intelligence.}}} 
     \end{itemize}
-  \item Reproduire \blue{artificiellement} les comportements du vivant
-    \blue{perçus comme intelligents} \pause
-  \item \blue{Effet IA: } "Intelligent est tout ce qui n'est pas encore fait par un ordinateur."\pause
+  \item \blue{Artificially} reproducing the behavior of living beings
+    \blue{perceived as intelligent} \pause
+  \item \blue{AI Effect: } "Intelligent is everything that is not yet done by a computer."\pause
 
   \centerline{\includegraphics[width=0.75\textwidth]{intelligence}}
-
-  % \item \black{Motivations :}
-  % \begin{itemize}
-  % \item \blue{Comprendre} l'intelligence naturelle ; 
-  % \item Créer des \blue{outils} qui nous aident.
-  % \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Intelligence Artificielle (IA) - Motivations}
-  %\centerline{\includegraphics[width=0.6\textwidth]{mythology}}
+  \frametitle{Artificial Intelligence (AI) – Motivations}
    \begin{figure}
      \includegraphics[width=0.5\textwidth]{mythology}
-     \caption{Talos: un automate en bronze, gardien de Crète}
+     \caption{Talos: a bronze automaton, guardian of Crete}
    \end{figure}
 
   \begin{itemize}
-
-  \item Fascination scientifique
-  \item Comprendre l'intelligence naturelle
-  \item Outils de support dans nos tâches quotidiennes
+  \item Scientific fascination
+  \item Understanding natural intelligence
+  \item Tools to assist us in daily tasks
   \begin{itemize}
-    \item Automatisation
-    \item Faire ce qui est infaisable pour un humain
+    \item Automation
+    \item Doing what is impossible for a human
   \end{itemize}
-  % \item \black{Motivations :}
-  % \begin{itemize}
-  % \item \blue{Comprendre} l'intelligence naturelle ; 
-  % \item Créer des \blue{outils} qui nous aident.
-  % \end{itemize}
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{Quelques sous-domaines de l'IA}
+  \frametitle{Some Subfields of AI}
   \begin{itemize}
-  \item \blue{Planification automatique}
+  \item \blue{Automated Planning}
     \begin{itemize}
-    \item Trouver une séquence d'actions valides pour atteindre un objectif
-    \item Application en robotique, logistique, jeux vidéo
+    \item Finding a valid sequence of actions to achieve a goal
+    \item Applications in robotics, logistics, and video games
     \end{itemize}
-  \item \blue{Systèmes experts}
+  \item \blue{Expert Systems}
     \begin{itemize}
-    \item utilisent des règles explicites pour encoder l'expertise humaine
-    \item Application en médecine, biologie, géologie 
+    \item Use explicit rules to encode human expertise
+    \item Applications in medicine, biology, and geology
     \end{itemize}
-  \item \blue{Constraint Satisfaction Problem (CSP)}
+  \item \blue{Constraint Satisfaction Problems (CSP)}
     \begin{itemize}
-    \item Trouver des solutions sur plusieurs variables sous contraintes
-    \item Application : résoudre de puzzles, affecter des cours ou tâches, coloration de cartes
+    \item Finding solutions across multiple variables under constraints
+    \item Applications: solving puzzles, assigning courses or tasks, map coloring
     \end{itemize}
-  \item \tikzmark{ml}{\blue{Apprentissage automatique}}
+  \item \tikzmark{ml}{\blue{Machine Learning}}
   \end{itemize}
   \pause \tikz[overlay,remember picture]{\draw[draw=MyOrange,thick]
     ($(ml)+(-0.6,0.5)$) rectangle ($(ml)+(10,-0.3)$);}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Apprentissage automatique}
+  \frametitle{Machine Learning}
   \begin{itemize}
-  \item \red{Apprendre :}
+  \item \red{To learn:}
     \pause
-    acquérir une \blue{compétence} par l'\blue{expérience}, la pratique.
-  \item Pour une  machine :
+    to acquire a \blue{skill} through \blue{experience} and practice.
+  \item For a machine:
     \begin{itemize}
-    \item \blue{compétence} = algorithme
-    \item \blue{expérience,} pratique = exemples, données
+    \item \blue{Skill} = algorithm
+    \item \blue{Experience, practice} = examples, data
     \end{itemize}
     \pause
-  \item Autres noms : apprentissage statistique ; machine learning.
+  \item Other names: statistical learning; machine learning.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Algorithme d'apprentissage}
+  \frametitle{Learning Algorithm}
   \begin{itemize}
-  \item<1-> \red{Algorithme classique :}
+  \item<1-> \red{Classical Algorithm:}
     \begin{center}
       \begin{tikzpicture}
-        \node[text width=2em] at (0.1, 5.5) {{Entrée}};
+        \node[text width=2em] at (0.1, 5.5) {{Input}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 5.5) -- (1.9, 5.5);
         \draw [draw=MyBlue, thick] (2, 6) rectangle (4.5, 5) node[midway,
-        align=center]{\blue{Algorithme} \\ \blue{classique}};
+        align=center]{\blue{Classical} \\ \blue{Algorithm}};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 5.5) -- (5.6, 5.5);
-        \node[text width=5em] at (6.8, 5.5) {{Sortie}};
+        \node[text width=5em] at (6.8, 5.5) {{Output}};
         \pause
-        \node[text width=2em] at (-.6, 4.3) {{Ingrédients}};
+        \node[text width=2em] at (-.6, 4.3) {{Ingredients}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 4.3) -- (1.9, 4.3);
         \draw [draw=MyBlue, thick] (2, 4.8) rectangle (4.5, 3.8) node[midway,
-        align=center]{\blue{Recette}};
+        align=center]{\blue{Recipe}};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 4.3) -- (5.6, 4.3);
-        \node[text width=2em] at (6.3, 4.3) {{Gâteau}};
+        \node[text width=2em] at (6.3, 4.3) {{Cake}};
       \end{tikzpicture}
     \end{center}
 
-  \item<3-> \red{Algorithme d'apprentissage :}
+  \item<3-> \red{Learning Algorithm:}
     \begin{center}
       \begin{tikzpicture}
-        \node[text width=5em, align=center] at (0, 5.5) {{Entrées et sorties}};
+        \node[text width=5em, align=center] at (0, 5.5) {{Inputs and Outputs}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 5.5) -- (1.9, 5.5);
         \draw [draw=MyOrange, thick] (2, 6) rectangle (4.5, 5) node[midway,
-        align=center]{\red{Algorithme} \\ \red{d'apprentissage}};
+        align=center]{\red{Learning} \\ \red{Algorithm}};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 5.5) -- (5.6, 5.5);
-        \node[text width=5em] at (6.8, 5.5) {\blue{Algorithme classique = modèle}};
+        \node[text width=5em] at (6.8, 5.5) {\blue{Classical Algorithm = Model}};
         \pause
-        \node[text width=5em, align=center] at (0, 4.3) {{Ingrédients et gâteaux}};
+        \node[text width=5em, align=center] at (0, 4.3) {{Ingredients and Cakes}};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 4.3) -- (1.9, 4.3);
         \draw [draw=MyOrange, thick] (2, 4.8) rectangle (4.5, 3.8) node[midway,
-        align=center]{\red{Algorithme} \\ \red{d'apprentissage}};
+        align=center]{\red{Learning} \\ \red{Algorithm}};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 4.3) -- (5.6, 4.3);
-        \node[text width=2em] at (6.3, 4.3) {\blue{Recette}};
+        \node[text width=2em] at (6.3, 4.3) {\blue{Recipe}};
       \end{tikzpicture}
     \end{center}
   \end{itemize}  
 \end{frame}
 
 \begin{frame}
-  \frametitle{Deep learning, ML et IA}
+  \frametitle{Deep Learning, ML, and AI}
   \begin{itemize}
-  \item La plupart des succès récents de l'« intelligence artificielle » sont
-    en fait des progrès en \red{apprentissage automatique.}
-  \item[] Il s'agit d'utiliser (beaucoup) d'exemples d'une tâche pour apprendre à faire cette
-    tâche
-  \item La plupart de ces progrès sont des progrès en \red{apprentissage
-      profond} (deep learning) : un des domaines de l'apprentissage automatique
-    qui utilise des \blue{réseaux de neurones à plusieurs couches.}
+  \item Most of the recent successes of “artificial intelligence” are actually
+    advances in \red{machine learning.}
+  \item[] It consists in using (many) examples of a task to learn how to perform that task.
+  \item Most of these advances are in \red{deep learning}, a subfield of machine learning
+    that uses \blue{multi-layer neural networks.}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Deep learning}
+  \frametitle{Deep Learning}
   \begin{itemize}
-  \item \black{Exemples}
+  \item \black{Examples}
     \begin{itemize}
       \setlength{\itemsep}{5pt}
-    \item \blue{Traitement automatique d'images :} reconnaître si une photo
-      contient un chat / est celle d'une personne spécifique / est un
-      échantillon histopathologique d'une tumeur
-    \item \blue{Traitement automatique du langage :} traduction automatique,
+    \item \blue{Image processing:} recognizing whether a photo
+      contains a cat / shows a specific person / is a histopathological sample of a tumor
+    \item \blue{Natural language processing:} machine translation,
       chatbots
-    \item \blue{Génération automatique} de texte, d'images, de son, de vidéos
-      réalistes (en particulier deepfakes)
+    \item \blue{Automatic generation} of text, images, audio, and realistic videos
+      (notably deepfakes)
     \end{itemize}
-  \item \black{Ingrédients du succès :}
+  \item \black{Ingredients of success:}
     \begin{itemize}
       \setlength{\itemsep}{5pt}
-    \item Énormes \blue{quantités de données}
-    \item \blue{Puissance de calcul}
-    \item Compréhension des données et problèmes \\$\Rightarrow$ modélisation (=
-      \blue{formulation} du problème) et architecture appropriées.
+    \item Huge \blue{amounts of data}
+    \item \blue{Computational power}
+    \item Understanding of data and problems \\$\Rightarrow$ modeling (=
+      \blue{formulation} of the problem) and appropriate architectures.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Autres exemples d'application du ML}
+  \frametitle{Other Examples of ML Applications}
   \begin{itemize}
-  \item Détection de fraude 
-  \item Segmentation de marché
-  \item Contrôle qualité
-  \item Maintenance prédictive 
-  \item Systèmes de recommendation 
-  \item Trading algorithmique
-  \item Assistance au diagnostic
-  \item Médecine prédictive 
-  \item Et beaucoup, beaucoup d'autres.
+  \item Fraud detection
+  \item Market segmentation
+  \item Quality control
+  \item Predictive maintenance
+  \item Recommendation systems
+  \item Algorithmic trading
+  \item Diagnostic assistance
+  \item Predictive medicine
+  \item And many, many more.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Défis actuels du ML}
+  \frametitle{Current Challenges in ML}
   \begin{itemize}
-  \item Apprendre à partir de \blue{peu d'exemples}
+  \item Learning from \blue{few examples}
     \begin{itemize}
-    \item[] Un enfant ou un animal n'a pas besoins de milliers/millions
-      d'exemples pour apprendre
+    \item[] A child or an animal does not need thousands or millions
+      of examples to learn.
     \end{itemize}
-  \item Résoudre des problèmes \blue{que l'humain ne sait pas résoudre}
+  \item Solving problems \blue{that humans cannot solve}
     \begin{itemize}
-    \item[] Utilisation dans la recherche scientifique (biologie, santé,
-      chimie, science des matériaux, astrophysique, etc.)
+    \item[] Used in scientific research (biology, healthcare,
+      chemistry, materials science, astrophysics, etc.)
     \end{itemize}
-  \item \blue{Confiance}
+  \item \blue{Trust}
     \begin{itemize}
-    \item[] validation formelle, explicabilité, robustesse aux attaques
-  \end{itemize}
-  \item \blue{Questions éthiques}
+    \item[] formal validation, explainability, robustness to attacks
+    \end{itemize}
+  \item \blue{Ethical questions}
     \begin{itemize}
-    \item[] biais algorithmiques ; coûts environementaux ; équité et moralité
+    \item[] algorithmic bias; environmental costs; fairness and morality
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \begin{center}
-    \large{1. Types de problèmes d'apprentissage automatique}
+    \large{1. Types of Machine Learning Problems}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.1 Apprentissage supervisé}
+  \frametitle{1.1 Supervised Learning}
   \begin{center}
     \begin{tikzpicture}
       \tikzstyle{every node}=[font=\small]
-      \node[text width=5em] at (0.1, 5.5) {Observations étiquetées};
+      \node[text width=5em] at (0.1, 5.5) {Labeled observations};
       \draw[->, draw=MyDarkGrey, thick] (0.9, 5.5) -- (1.9, 5.5);
       \draw [draw=MyDarkGrey, thick] (2, 6) rectangle (4.5, 5)
-      node[midway, text width=5em, align=center]{Algorithme d'apprentissage};
+      node[midway, text width=5em, align=center]{Learning algorithm};
       \draw[->, draw=MyDarkGrey, thick] (4.6, 5.5) -- (5.6, 5.5);
-      \node[text width=5em] at (7, 5.5) {Modèle prédictif};
+      \node[text width=5em] at (7, 5.5) {Predictive model};
     \end{tikzpicture}
   \end{center}
 
   \begin{itemize}
-  \item \black{But :} \red{apprendre} un modèle \blue{prédictif}
+  \item \black{Goal:} \red{learn} a \blue{predictive model}
   \pause
-  \item \black{Formalisation :}
+  \item \black{Formalization:}
     \begin{itemize}
-    \item[] \blue{Données :} 
-    \item $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ ; $\xvec_i \in \xcal$ \only<2->{$= \RR^p$}
-    \item $n$ étiquettes $\{y_1, y_2, \dots, y_n\}$ ; $y_i \in \ycal$ 
+    \item[] \blue{Data:} 
+    \item $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$; $\xvec_i \in \xcal$ \only<2->{$= \RR^p$}
+    \item $n$ labels $\{y_1, y_2, \dots, y_n\}$; $y_i \in \ycal$
       \begin{itemize}
-      \item<3-> \red{Régression} : $\ycal = \RR$ 
-      \item<4-> \red{Classification} : $\ycal = \{0, 1, \dots, C-1\}$ 
-      \item<5-> \red{Classification binaire} : $\ycal = \{0, 1\}$ 
+      \item<3-> \red{Regression:} $\ycal = \RR$
+      \item<4-> \red{Classification:} $\ycal = \{0, 1, \dots, C-1\}$
+      \item<5-> \red{Binary classification:} $\ycal = \{0, 1\}$
       \end{itemize}
-    \item[] \blue{Sortie :}
-    \item \blue{modèle} $f: \xcal \rightarrow \ycal$ tel que $f(\xvec_i) \approx y_i$.  
+    \item[] \blue{Output:}
+    \item \blue{Model} $f: \xcal \rightarrow \ycal$ such that $f(\xvec_i) \approx y_i$.
     \end{itemize}
-  \item<6-> \red{Inférence} :  étant donné $\xvec \in \xcal$, prédire $\hat{y} = f(\xvec)$. 
+  \item<6-> \red{Inference:} given $\xvec \in \xcal$, predict $\hat{y} = f(\xvec)$.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Exemples}
+  \frametitle{Examples}
   \begin{itemize}
-  \item Exemples de \blue{problèmes de régression :}  $\ycal = \RR$ 
+  \item Examples of \blue{regression problems:}  $\ycal = \RR$ 
     \begin{itemize}
-    \item \blue{Prédiction de clics :} combien de personnes vont cliquer sur ce lien ?
-    \item Prédiction de la \blue{solubilité d'une molécule} dans l'éthanol en mg/mL
+    \item \blue{Click prediction:} how many people will click on this link?
+    \item Prediction of the \blue{solubility of a molecule} in ethanol in mg/mL
     \end{itemize}
   \pause
-  \item Exemples de \blue{problèmes de classification binaire :}  $\ycal = \{0, 1\}$
+  \item Examples of \blue{binary classification problems:}  $\ycal = \{0, 1\}$
     \begin{itemize}
-    \item \blue{Filtrage de spam :} cet email est-il un spam ?
-    \item \blue{Contrôle de qualité :} cette pièce est-elle défectueuse ?
+    \item \blue{Spam filtering:} is this email spam?
+    \item \blue{Quality control:} is this part defective?
     \end{itemize}
   \pause
-  \item Exemples de \blue{problèmes de classification multiclasse :}  
+  \item Examples of \blue{multiclass classification problems:}  
     \begin{itemize}
-    \item \blue{OCR}, reconnaissance de chiffres manuscrits : $\ycal = \{0, 1, 2, \dots, 9\}$
-    \item Reconnaissance de \blue{plantes} ou de \blue{chants d'oiseaux}
+    \item \blue{OCR}, handwritten digit recognition: $\ycal = \{0, 1, 2, \dots, 9\}$
+    \item Recognition of \blue{plants} or \blue{bird songs}
     \end{itemize} 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.2 Apprentissage non supervisé}
+  \frametitle{1.2 Unsupervised Learning}
   \begin{center}
       \begin{tikzpicture}
        \tikzstyle{every node}=[font=\small]
-        \node[text width=5em] at (0.1, 5.5) {Observations non étiquetées};
+        \node[text width=5em] at (0.1, 5.5) {Unlabeled observations};
         \draw[->, draw=MyDarkGrey, thick] (0.9, 5.5) -- (1.9, 5.5);
         \draw [draw=MyDarkGrey, thick] (2, 6) rectangle (4.5, 5)
-        node[midway, text width=5em, align=center]{Algorithme d'apprentissage};
+        node[midway, text width=5em, align=center]{Learning algorithm};
         \draw[->, draw=MyDarkGrey, thick] (4.6, 5.5) -- (5.6, 5.5);
-        \node[text width=5em] at (7, 5.5) {Représentation des observations};
+        \node[text width=5em] at (7, 5.5) {Representation of observations};
       \end{tikzpicture}
   \end{center}
   \begin{itemize}
-  \item \black{But :} \red{explorer} les données ; apprendre une nouvelle représentation
+  \item \black{Goal:} \red{explore} the data; learn a new representation
   \pause
-  \item \black{Formalisation :}
+  \item \black{Formalization:}
     \begin{itemize}
-    \item[] \blue{Données :} 
-    \item[] $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ ; $\xvec_i \in \xcal = \RR^p$
+    \item[] \blue{Data:} 
+    \item[] $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$; $\xvec_i \in \xcal = \RR^p$
       \vspace{.5em}
-    \item[] \blue{Sortie :}
+    \item[] \blue{Output:}
     \pause
-      \item \red{Réduction de dimension :} $f : \RR^p \rightarrow \RR^d$ avec
-        $d \ll p$ et de telle sorte à ce que $f(\xvec)$ soit une
-        \blue{représentation informative} de $\xvec$
+      \item \red{Dimensionality reduction:} $f : \RR^p \rightarrow \RR^d$ with
+        $d \ll p$, such that $f(\xvec)$ is an \blue{informative representation} of $\xvec$
       \pause
-      \item \red{Clustering :} partition de $\{1, 2, \dots, n\}$ en ensembles
-        d'éléments semblables, appelés \red{clusters}
+      \item \red{Clustering:} partition of $\{1, 2, \dots, n\}$ into sets
+        of similar elements, called \red{clusters}
       \pause
-      \item \red{Estimation de densité :} la loi de probabilité de $X$ dont
-        $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ est supposé être un échantillon.
+      \item \red{Density estimation:} the probability law of $X$ for which
+        $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ is assumed to be a sample.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Réduction de dimension}
+  \frametitle{Dimensionality Reduction}
   \begin{itemize}
-  \item[] Apprendre $f : \RR^p \rightarrow \RR^d$ avec $d \ll p$ et de telle
-    sorte à ce que $f(\xvec)$ soit une \blue{représentation informative} de
-    $\xvec$
-  \item \black{Utilisation :}
+  \item[] Learn $f : \RR^p \rightarrow \RR^d$ with $d \ll p$ such that
+    $f(\xvec)$ is an \blue{informative representation} of $\xvec$
+  \item \black{Use cases:}
     \begin{itemize}
-    \item Visualiser les données (en particulier $d=2$)
-    \item Réduire la taille des données en mémoire
-    \item Améliorer la performance d'un algorithme supervisé
+    \item Visualizing data (especially when $d=2$)
+    \item Reducing data size in memory
+    \item Improving the performance of a supervised algorithm
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -325,128 +310,123 @@
 \begin{frame}
   \frametitle{Clustering}
   \begin{itemize}
-  \item[] Apprendre une partition de $\{1, 2, \dots, n\}$ en ensembles
-    d'éléments semblables, appelés \red{clusters}
-  \item \black{Exemples d'application :}
+  \item[] Learn a partition of $\{1, 2, \dots, n\}$ into sets
+    of similar elements, called \red{clusters}
+  \item \black{Example applications:}
     \begin{itemize}
-    \item \blue{Segmentation de marché :} regrouper des clients qui ont des
-      profils similaires
-    \item \blue{Topic modeling: } regrouper les documents d'un corpus par
-      thème ; les thèmes émergent de l'analyse et ne sont pas fournis. %(sans les fournir)
+    \item \blue{Market segmentation:} grouping customers with similar profiles
+    \item \blue{Topic modeling:} grouping documents in a corpus by
+      theme; the themes emerge from the analysis and are not provided.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-
-  \begin{frame}
-  \frametitle{1.3 Autres problèmes d'apprentissage}
+\begin{frame}
+  \frametitle{1.3 Other Types of Learning Problems}
   
   \begin{itemize}
-  \item \red{Apprentissage semi-supervisé}
+  \item \red{Semi-supervised learning}
     \begin{itemize}
-    \item[] Une partie seulement des données est étiquetée
+    \item[] Only part of the data is labeled
     \end{itemize}
-  \item \red{Apprentissage par renforcement}
+  \item \red{Reinforcement learning}
     \begin{itemize}
-    \item[] Définir une \blue{politique} permettant de maximiser sa \blue{récompense} 
+    \item[] Define a \blue{policy} that maximizes its \blue{reward} 
     \end{itemize}
-  \item \red{Régression structurée}
+  \item \red{Structured regression}
     \begin{itemize}
-    \item[] Apprentissage supervisé avec $\ycal$ un espace de vecteurs, de
-      séquences, de texte, de graphes etc.
+    \item[] Supervised learning where $\ycal$ is a space of vectors,
+      sequences, text, graphs, etc.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \begin{center}
-    \large{2. Premier exemple : les plus proches voisins}
+    \large{2. First Example: Nearest Neighbors}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.1 Algorithme du plus proche voisin}
+  \frametitle{2.1 Nearest Neighbor Algorithm}
   \begin{overlayarea}{\textwidth}{\textheight}
   \begin{itemize}
-  \item<1-> \blue{Données :} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\} $ 
+  \item<1-> \blue{Data:} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$ 
     \begin{itemize}
-    \item $n$ observations en $p$ dimensions : $\xvec_i \in \RR^p$
-    \item $n$ étiquettes : $y_i \in \ycal$
+    \item $n$ observations in $p$ dimensions: $\xvec_i \in \RR^p$
+    \item $n$ labels: $y_i \in \ycal$
     \end{itemize}
-  \item<2-> \blue{Modèle :} Associer à $\xvec \in \RR^p$ l'étiquette de l'exemple
-    dans $\dset$ dont $\xvec$ est le plus proche selon la distance euclidienne
+  \item<2-> \blue{Model:} associate to $\xvec \in \RR^p$ the label of the example
+    in $\dset$ that is closest to $\xvec$ according to the Euclidean distance
   \[ f(\xvec) = y_{\argmin_{i=1, \dots, n} \ltwonorm{\xvec - \xvec_i}} \]
     \only<3>{\centering \includegraphics[width=0.45\textwidth]{figures/nearest_neighbor}}
-    \item<4-> Régression, classification binaire, classification multiclasse.
-    \item<5-> \red{Pas de phase d'apprentissage !}
+    \item<4-> Regression, binary classification, multiclass classification.
+    \item<5-> \red{No training phase!}
     \end{itemize}
   \end{overlayarea}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.2 kNN pour la classification}
+  \frametitle{2.2 kNN for Classification}
   \begin{itemize}
-  \item L'algorithme du plus proche voisin est \blue{peu robuste} au bruit
-  \item Plutôt que d'utiliser \blue{le} plus proche voisin : utiliser les $k$
-    observations les plus proches
-  \item \red{Vote de la majorité :} on donne à $\xvec$ 
-    \blue{l'étiquette majoritaire} parmi ses $k$ plus proches voisins
+  \item The nearest neighbor algorithm is \blue{not very robust} to noise.
+  \item Instead of using \blue{the} single nearest neighbor, use the $k$
+    closest observations.
+  \item \red{Majority vote:} assign to $\xvec$
+    \blue{the majority label} among its $k$ nearest neighbors.
     \pause
       \begin{mdframed}[hidealllines=true, backgroundcolor=MyLightGrey,
                        fontcolor=MyDarkGrey, leftmargin=-5pt,
                        innerleftmargin=5pt, skipabove=5pt]
     \[ f(\xvec) = \argmax_{c \in \{0, 1, \dots, C-1\}} \sum_{i : \xvec_i \in \ncal_k(\xvec)} \delta(y_i, c) \]
       \begin{itemize}
-      \item $\ncal_k(\xvec)$ est l'ensemble des $k$ plus proches voisins de $\xvec$ dans $\dset$
-      \item $\delta(y_i, c) = 1$ si $y_i = c$ et $0$ sinon; $C$ est le nombre de classes.
+      \item $\ncal_k(\xvec)$ is the set of the $k$ nearest neighbors of $\xvec$ in $\dset$
+      \item $\delta(y_i, c) = 1$ if $y_i = c$ and $0$ otherwise; $C$ is the number of classes.
       \end{itemize}
     \end{mdframed}
   \pause
-  \item Pour la classification binaire, on utilise un nombre \blue{impair} de voisins pour ne pas avoir d'ex-aequo.
+  \item For binary classification, an \blue{odd} number of neighbors is used to avoid ties.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 kNN pour la régression}
+  \frametitle{2.3 kNN for Regression}
   \begin{itemize}
-  \item \red{Moyenne :} on donne à $\xvec$ 
-    \blue{la moyenne des étiquettes} de ses $k$ plus proches voisins
+  \item \red{Averaging:} assign to $\xvec$ 
+    \blue{the mean label value} of its $k$ nearest neighbors
     \[ f(\xvec) = \frac1k \sum_{i : \xvec_i \in \ncal_k(\xvec)} y_i \]
   \end{itemize}
   \pause
     \begin{itemize}
-    \item \black{Remarque :} Les modèles donnés par des algorithmes de plus
-      proches voisins sont des modèles \red{non-paramétriques :}
+    \item \black{Note:} Models produced by nearest neighbor algorithms are
+      \red{non-parametric models:}
       \begin{itemize}
-      \item il ne s'agit pas d'apprendre les paramètres d'une expression explicite des variables
-        $x_1, \dots, x_p$
-      \item par opposition aux \blue{modèles linéaires} et aux \blue{réseaux de neurones}
-      \item $k$ est un \red{hyperparamètre} : l'algorithme ne permet pas de l'apprendre.
+      \item they do not involve learning parameters of an explicit function of
+        the variables $x_1, \dots, x_p$
+      \item as opposed to \blue{linear models} or \blue{neural networks}
+      \item $k$ is an \red{hyperparameter:} the algorithm does not learn it automatically.
       \end{itemize}
     \end{itemize}
-  % \end{mdframed}
 \end{frame}
 
 {\setbeamercolor{background canvas}{bg=MyLightGrey}
   \begin{frame}
-    \frametitle{2.4 Variantes}
+    \frametitle{2.4 Variants}
     \begin{itemize}
-    \item \blue{Epsilon-voisins} Au lieu de considérer $k$ voisins les plus
-      proches, on considère toutes les observations contenues dans une boule de
-      rayon $\epsilon$ centrée sur $\xvec$.
-    \item \blue{Pondérations des voisins} La contribution de chaque voisin est
-      pondérée par un coefficient inversement proportionnel à sa distance à
-      $\xvec$.
-    \item \blue{Autres distances} L'algorithme s'applique aussi en considérant
-      d'autres distances / notions de similarité :
+    \item \blue{Epsilon-neighbors:} instead of considering the $k$ nearest
+      neighbors, consider all observations within a ball of radius $\epsilon$
+      centered on $\xvec$.
+    \item \blue{Weighted neighbors:} the contribution of each neighbor is
+      weighted by a coefficient inversely proportional to its distance to $\xvec$.
+    \item \blue{Other distances:} the algorithm can also be applied using
+      other distance or similarity measures:
       \begin{itemize}
-      \item Distance de Minkowski
-      \item Similarité cosinus
-      \item Distance de Hamming entre vecteurs binaires
+      \item Minkowski distance
+      \item Cosine similarity
+      \item Hamming distance between binary vectors
       \end{itemize}
     \end{itemize}
   \end{frame}}
-
 
 
 

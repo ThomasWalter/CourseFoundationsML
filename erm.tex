@@ -1,73 +1,71 @@
+
 \begin{frame}
   \begin{center}
-    \large{1. Minimisation du risque empirique}
+    \large{1. Empirical Risk Minimization}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Minimisation du risque empirique}
+  \frametitle{Empirical Risk Minimization}
   \begin{itemize}
-  \item Principe sur lequel de nombreux algorithmes \blue{d'apprentissage
-      supervisé} sont fondés.
-  \item Ingrédients :
+  \item Principle on which many \blue{supervised learning} algorithms are based.
+  \item Ingredients:
     \begin{itemize}
     \setlength{\itemsep}{5pt}
-    \item \blue{Espace des hypothèses} \textcolor{gray!70}{(hypothesis space)} \\ \hspace{1em} Quels modèles peut-on apprendre ?
-    \item \blue{Fonction de perte / coût / erreur} \textcolor{gray!70}{(loss / cost / error function)} \\ \hspace{1em} Comment quantifier l'erreur d'un modèle ?
-    \item Algorithme d'\blue{optimisation} \\ \hspace{1em} Comment trouver un
-      modèle qui fasse peu d'erreurs ?
+    \item \blue{Hypothesis space} \\ \hspace{1em} Which models can we learn?
+    \item \blue{Loss / cost / error function} \\ \hspace{1em} How can we quantify the model’s error?
+    \item \blue{Optimization algorithm} \\ \hspace{1em} How can we find a model that makes few errors?
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.1 Espace des hypothèses}
+  \frametitle{1.1 Hypothesis Space}
   \begin{itemize}
-  \item \blue{Données :} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\} $ 
+  \item \blue{Data:} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$ 
     \begin{itemize}
-    \item $n$ observations en $p$ dimensions : $\xvec_i \in  \RR^p$
-    \item $n$ étiquettes \textcolor{gray!70}{(labels)} : $y_i \in \ycal$
+    \item $n$ observations in $p$ dimensions: $\xvec_i \in  \RR^p$
+    \item $n$ labels: $y_i \in \ycal$
     \end{itemize}
     \pause
-  \item \red{Espace des hypothèses :} l'ensemble $\fcal$ des \blue{modèles} que
-    l'algorithme d'apprentissage va considérer.  \pause
-  \item \red{Modèles paramétriques :} on considère un ensemble paramétré de fonctions.
+  \item \red{Hypothesis space:} the set $\fcal$ of \blue{models} that the learning algorithm will consider.
+    \pause
+  \item \red{Parametric models:} a parameterized family of functions is considered.
     \begin{itemize}
-    \item[] \black{Exemple :} 
+    \item[] \black{Example:} 
       $\fcal = \{ \xvec \mapsto {\color{MyOrange}\alpha_1} x_1^{\beta_1} +
       {\color{MyOrange}\alpha_2} x_2^{\beta_2} + \dots + {\color{MyOrange}\alpha_p} x_p^{\beta_p} \}$ \\
-      Le but de l'apprentissage est de déterminer $\alpha_1, \dots, \alpha_p, \beta_1, \dots, \beta_p$ .
+      The goal of learning is to determine $\alpha_1, \dots, \alpha_p, \beta_1, \dots, \beta_p$.
     \end{itemize}
-  % \item \red{Modèles non-paramétriques}
+  % \item \red{Non-parametric models}
   %   \begin{itemize}
-  %   \item[] \black{Exemple :} $\fcal = \left\{\xvec \mapsto
-  %       1 \text{ si } x_j > 1, 0 \text{ sinon.} \right\}$ \\
-  %     Le but de l'apprentissage est de déterminer $j$, qui n'est pas un paramètre.    
+  %   \item[] \black{Example:} $\fcal = \left\{\xvec \mapsto
+  %       1 \text{ if } x_j > 1, 0 \text{ otherwise.} \right\}$ \\
+  %     The goal of learning is to determine $j$, which is not a parameter.    
   %   \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.2 Fonction de perte}
+  \frametitle{1.2 Loss Function}
   \begin{itemize}
-  \item \blue{Quantifier} l'erreur d'un modèle pour une observation.
-  \item \red{Fonction de perte :} une fonction
+  \item \blue{Quantify} a model’s error for a given observation.
+  \item \red{Loss function:} a function
     $L : \ycal \times \ycal \mapsto \RR$ 
-  \item[] $L(y, f(\xvec))$ est d'autant plus grande que l'erreur consistant à
-    prédire $f(\xvec)$ au lieu de $y$ est grande.
+  \item[] $L(y, f(\xvec))$ increases as the error between the predicted value $f(\xvec)$ and the true value $y$ grows.
     \pause
     \begin{itemize}
-    \item \red{Perte 0/1} \textcolor{gray!70}{(0/1 loss)} pour la classification :
+    \item \red{0/1 loss} for classification:
       \begin{eqnarray*}
         L : & \{0, 1\} \times \{0, 1\} \rightarrow \RR \\ \nonumber
             & (y, f(\xvec)) \mapsto
               \begin{cases}
-                0 & \text{ si } f(\xvec) = y \\ \nonumber
-                1 & \text{ sinon.}
+                0 & \text{if } f(\xvec) = y \\ \nonumber
+                1 & \text{otherwise.}
               \end{cases}                
       \end{eqnarray*}
       \pause
-    \item \red{Perte quadratique} \textcolor{gray!70}{(quadratic loss)} pour la régression :
+    \item \red{Quadratic loss} for regression:
       \begin{eqnarray*}
         L : & \RR \times \RR \rightarrow \RR \\ \nonumber
             & (y, f(\xvec)) \mapsto (y - f(\xvec))^2
@@ -77,237 +75,234 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.3 Risque empirique}
+  \frametitle{1.3 Empirical Risk}
   \begin{itemize}
-  \item \red{Risque :}
+  \item \red{Risk:}
     \begin{itemize}
-    \item Erreur attendue du modèle sur toutes données possibles 
+    \item Expected model error over all possible data 
       \begin{mdframed}[hidealllines=true, backgroundcolor=MyLightGrey,
                        fontcolor=MyDarkGrey, leftmargin=-5pt,
                        innerleftmargin=5pt, skipabove=5pt]
-      \item Formellement : l'espérance de la fonction de perte 
-        \[\rcal(f) = \EE [L(Y, f(X)]\]
+      \item Formally: the expectation of the loss function 
+        \[\rcal(f) = \EE [L(Y, f(X))]\]
       \item[]
         \begin{itemize}
         \item $(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)$
-          échantillon de $(X, Y)$
-        \item $X$ vecteur aléatoire réel de dimension $p$ ; $Y$ variable aléatoire
-          dans $\ycal$
+          are samples drawn from $(X, Y)$
+        \item $X$ is a real random vector of dimension $p$; $Y$ a random variable
+          in $\ycal$
         \end{itemize}
       \end{mdframed}
     \end{itemize}
-  \item \red{Risque empirique :} moyenne de la fonction de perte sur les
-    données
+  \item \red{Empirical risk:} average of the loss function over the data
     \[\rcal_{\text{emp}}(f) = \frac1n \sum_{i=1}^n L(y_i, f(\xvec_i)) \]
   \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{1.4 Minimisation du risque empirique}
+  \frametitle{1.4 Empirical Risk Minimization}
   \begin{itemize}
-  \item \blue{Apprendre un modèle} = \blue{trouver} un modèle \blue{de l'espace des
-      hypothèses} qui \blue{minimise} le \blue{risque empirique}
+  \item \blue{Learning a model} = \blue{finding} a model within the \blue{hypothesis space}
+    that \blue{minimizes} the \blue{empirical risk}
     \[ \hat{f} = \argmin_{f \in \fcal} \frac1n \sum_{i=1}^n L(y_i, f(\xvec_i)) \]
-  \item C'est donc un problème \blue{d'optimisation}
-  \item Selon l'espace des hypothèses, la fonction de perte, et la procédure
-    d'optimisation choisie :
+  \item It is therefore an \blue{optimization} problem.
+  \item Depending on the hypothesis space, the loss function, and the chosen
+    optimization procedure:
     \begin{itemize}
-    \item La solution peut être unique (mais pas nécessairement)
-    \item La solution peut être explicite (rarement)
-    \item La solution peut être atteinte avec la précision souhaitée (parfois)
-    \item La solution ne peut être déterminée que par des heuristiques 
+    \item The solution may be unique (but not necessarily)
+    \item The solution may be explicit (rarely)
+    \item The solution may be reached with the desired precision (sometimes)
+    \item The solution may only be found using heuristics 
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{1.5 Maximisation de la vraisemblance}
-%   \begin{itemize}
-%   \item Dans le cas d'un modèle de \blue{régression paramétrique :}
-%     $\fcal = \{f_{\thetavec}  : \RR^p \rightarrow \RR ; \thetavec \in \RR^d \}$
-%   \item En utilisant la \blue{perte quadratique :} $L(y, f(\xvec)) = (y - f(\xvec))^2 $
-%   \item En supposant :
-%     \begin{itemize}
-%     \item $(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)$ échantillon
-%       de $(X, Y)$
-%     \item $X$ vecteur aléatoire réel de dimension $p$ ; $Y$ variable aléatoire réelle
-%     \item Il existe $f^* : \RR^p \rightarrow \RR$ telle que $Y = f^*(X) + \epsilon$
-%     \item $\epsilon \sim \ncal(0, \sigma^2)$ (bruit gaussien)
-%     \end{itemize}
-%   \item Alors : l'estimation par maximum de vraisemblance de $\thetavec$ est
-%     \blue{équivalente} à la minimisation du risque empirique
-%   \end{itemize}
-% \end{frame}
-
+\begin{frame}
+  \frametitle{1.5 Maximum Likelihood Estimation}
+  \begin{itemize}
+  \item In the case of a \blue{parametric regression model:}
+    $\fcal = \{f_{\thetavec}  : \RR^p \rightarrow \RR ; \thetavec \in \RR^d \}$
+  \item Using the \blue{quadratic loss:} $L(y, f(\xvec)) = (y - f(\xvec))^2 $
+  \item Assuming:
+    \begin{itemize}
+    \item $(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)$ are samples
+      drawn from $(X, Y)$
+    \item $X$ is a real random vector of dimension $p$; $Y$ is a real-valued random variable
+    \item There exists $f^* : \RR^p \rightarrow \RR$ such that $Y = f^*(X) + \epsilon$
+    \item $\epsilon \sim \ncal(0, \sigma^2)$ (Gaussian noise)
+    \end{itemize}
+  \item Then: the maximum likelihood estimate of $\thetavec$ is
+    \blue{equivalent} to minimizing the empirical risk.
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \begin{center}
-    \large{2. Modèles linéaires}
+    \large{2. Linear Models}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.1 Régression linéaire univariée}
+  \frametitle{2.1 Univariate Linear Regression}
   \begin{itemize}
-  \item \blue{Données :} $\dset = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\} $ 
+  \item \blue{Data:} $\dset = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\}$ 
     \begin{itemize}
-    \item $n$ observations dans $\RR$ : $x_i \in  \RR$ ($p=1$)
-    \item $n$ étiquettes : $y_i \in \RR$
+    \item $n$ observations in $\RR$: $x_i \in  \RR$ ($p=1$)
+    \item $n$ labels: $y_i \in \RR$
     \end{itemize}
       \begin{overprint}
         \onslide<1>\centering{\includegraphics[width=0.5\textwidth]{figures/linreg_pb}}
         \onslide<2>\centering{\includegraphics[width=0.5\textwidth]{figures/linreg_sol}}
       \end{overprint}
       \pause
-  \item \blue{Espace des hypothèses :}  $\fcal = \{x \mapsto a x + b ; (a, b) \in \RR^2\}$ 
+  \item \blue{Hypothesis space:}  $\fcal = \{x \mapsto a x + b ; (a, b) \in \RR^2\}$ 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.1 Régression linéaire univariée}
+  \frametitle{2.1 Univariate Linear Regression}
   \begin{itemize}
-  \item \blue{Espace des hypothèses :}  $\fcal = \{x \mapsto a x + b ; (a, b) \in \RR^2\}$ 
+  \item \blue{Hypothesis space:}  $\fcal = \{x \mapsto a x + b ; (a, b) \in \RR^2\}$ 
     \pause
-  \item \blue{Fonction de perte :} perte quadratique $L(y, f(x)) = (y - f(x))^2$
+  \item \blue{Loss function:} quadratic loss $L(y, f(x)) = (y - f(x))^2$
     \pause
-  \item \blue{Minimisation du risque empirique :}
+  \item \blue{Empirical risk minimization:}
     \[ (\hat{a}, \hat{b}) = \argmin_{(a,b) \in \RR^2} \frac1n \sum_{i=1}^n (y_i - (a x_i + b))^2 \]
     \pause
-  \item[] \red{Méthode des moindres carrés} \textcolor{gray!70}{(ordinary least squares)} connue depuis Legendre et Gauss. 
+  \item[] \red{Ordinary least squares} — known since Legendre and Gauss. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Solution}
   \begin{itemize}
-  \item \blue{Par annulation des dérivées partielles :} système de deux équations à deux inconnues
-  \item[] Solution explicite : 
+  \item \blue{By setting the partial derivatives to zero:} a system of two equations with two unknowns.
+  \item[] Explicit solution:
     \begin{itemize}
-    \item Si $\sum_{i=1}^n x_i^2 \neq \left(\sum_{i=1}^n x_i\right)^2,$ une \blue{unique solution}
+    \item If $\sum_{i=1}^n x_i^2 \neq \left(\sum_{i=1}^n x_i\right)^2,$ there is a \blue{unique solution:}
       \[ a = \frac{\sum_{i=1}^n x_i y_i - \frac1n \sum_{i=1}^n x_i \sum_{i=1}^n y_i}{
           \sum_{i=1}^n x_i^2 - \frac1n \left(\sum_{i=1}^n x_i\right)^2}  \hspace{2em}
         b = \frac1n \sum_{i=1}^n y_i - \frac{a}{n} \sum_{i=1}^n x_i\]
       \pause
-    \item Sinon, le système est \blue{indéterminé} et on a une infinité de solutions.
+    \item Otherwise, the system is \blue{underdetermined} and there are infinitely many solutions.
     \end{itemize}
   \pause
-  \item \blue{Par algorithme du gradient}
+  \item \blue{By gradient descent algorithm}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.2 Régression linéaire multivariée}
+  \frametitle{2.2 Multivariate Linear Regression}
   \begin{itemize}
-  \item Autre nom : \blue{régression linéaire multiple}
-  \item \blue{Données :} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$
+  \item Also known as \blue{multiple linear regression}
+  \item \blue{Data:} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$
     \begin{itemize}
-    \item $n$ observations dans $\RR^p$ 
-    \item $n$ étiquettes : $y_i \in \RR$
+    \item $n$ observations in $\RR^p$
+    \item $n$ labels: $y_i \in \RR$
     \end{itemize}
-  \item \blue{Espace des hypothèses :}
+  \item \blue{Hypothesis space:}
     \[\fcal = \left\{ \xvec \mapsto \beta_0 + \sum_{j=1}^p \beta_j x_j \, ;  \betavec \in \RR^{p+1} \right\}\]
     \pause
     \vspace{-1em}
-  \item \blue{Fonction de perte :} perte quadratique $L(y, f(\xvec)) = (y - f(\xvec))^2$
+  \item \blue{Loss function:} quadratic loss $L(y, f(\xvec)) = (y - f(\xvec))^2$
     \pause
-  \item \blue{Minimisation du risque empirique :}
+  \item \blue{Empirical risk minimization:}
     \[ \hat{\betavec} = \argmin_{\betavec \in \RR^{p+1}} \frac1n \sum_{i=1}^n \left(y_i - \left(\beta_0 + \sum_{j=1}^p \beta_j x_j\right)\right)^2 \]
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Écriture matricielle}
+  \frametitle{Matrix Form}
   \small
     \[ \hat{\betavec} = \argmin_{\betavec \in \RR^{p+1}} \frac1n \sum_{i=1}^n \left(y_i - \left(\beta_0 + \sum_{j=1}^p \beta_j x_j\right)\right)^2 \]
   \begin{itemize}
-  \item La transformation 
-    $\xvec \leftarrow (1, x_1, \dots, x_p)$ permet d'écrire $f(\xvec) = \langle \betavec, \xvec \rangle$ 
-  \item En notant $X \in \RR^{n \times (p+1)}$ la matrice de données : $X_{i.} = \xvec_i$ et \\
-    $\yvec \in \RR^n$ le vecteur des étiquettes,
+  \item The transformation 
+    $\xvec \leftarrow (1, x_1, \dots, x_p)$ allows us to write $f(\xvec) = \langle \betavec, \xvec \rangle$ 
+  \item Let $X \in \RR^{n \times (p+1)}$ be the data matrix with rows $X_{i.} = \xvec_i$, and \\
+    $\yvec \in \RR^n$ the vector of labels:
     \[\sum_{i=1}^n \left(y_i - \left(\beta_0 + \sum_{j=1}^p \beta_j x_j\right)\right)^2 =
     \left(\yvec - X \betavec \right)^\top \left(\yvec - X \betavec \right)\]
-\item Le problème devient 
+  \item The problem becomes:
     \[\argmin_{\betavec \in \RR^{p+1}} \frac1n 
     \left(\yvec - X \betavec \right)^\top \left(\yvec - X \betavec \right)\]
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
   \frametitle{Solution}
     \small
   \begin{flalign*}
-    \text{Minimiser } J & : \RR^{p+1} \rightarrow \RR \\
+    \text{Minimize } J & : \RR^{p+1} \rightarrow \RR \\
     & \betavec \mapsto \left(\yvec - X \betavec \right)^\top
     \left(\yvec - X \betavec \right) 
   \end{flalign*}
   \begin{itemize}
-  \item Problème \blue{d'optimisation convexe}
+  \item \blue{Convex optimization} problem
     \pause
-  \item \blue{Gradient} de $J$ : $\nabla J (\betavec) = - 2 X^\top (\yvec - X \betavec)$
-  \item En \blue{annulant} ce gradient, on obtient
+  \item \blue{Gradient} of $J$: $\nabla J (\betavec) = - 2 X^\top (\yvec - X \betavec)$
+  \item By \blue{setting the gradient to zero}, we obtain:
     \[
       X^\top X \betavec = X^\top \yvec
     \]
     \vspace{-2em}
     \pause
-  \item Solution :
+  \item Solution:
     \begin{itemize}
-    \item Si \blue{$X^\top X$ inversible}, alors $\betavec^* = \left(X^\top X\right)^{-1} X^\top \yvec$
-    \item Sinon, le système est indéterminé et on a une infinité de solutions.
+    \item If \blue{$X^\top X$ is invertible}, then $\betavec^* = \left(X^\top X\right)^{-1} X^\top \yvec$
+    \item Otherwise, the system is underdetermined and there are infinitely many solutions.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Inversibilité de $X^\top X$}
+  \frametitle{Invertibility of $X^\top X$}
   \begin{itemize}
-  \item $X^\top X$ est inversible ssi $X$ est de rang colonne plein.
+  \item $X^\top X$ is invertible if and only if $X$ has full column rank.
     \pause
     \begin{itemize}
-    \item Ce n'est pas le cas si $p+1 > n$ 
-    \item[] i.e. s'il y a \blue{plus de variables que d'observations}
+    \item This is not the case if $p+1 > n$
+    \item[] i.e., if there are \blue{more variables than observations}
     \vspace{1em}
-    \item Ce n'est pas le cas si des colonnes sont colinéaires
-    \item[] i.e. si des \blue{variables sont fortement corrélées}
+    \item This is not the case if some columns are collinear
+    \item[] i.e., if some \blue{variables are highly correlated}
     \end{itemize}
     \pause
-  \item L'inversion d'une matrice carrée de taille $p$ est une opération en $\mathcal{O}(p^3)$
-  \item[] On utilise généralement \blue{l'algorithme du gradient} même si $X^\top X$ est inversible. 
+  \item Inverting a square matrix of size $p$ is an operation of complexity $\mathcal{O}(p^3)$
+  \item[] The \blue{gradient descent algorithm} is generally used even when $X^\top X$ is invertible. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique}
+  \frametitle{2.3 Logistic Regression}
   \begin{itemize}
-  \item \blue{Données :} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$
+  \item \blue{Data:} $\dset = \{(\xvec_1, y_1), (\xvec_2, y_2), \dots, (\xvec_n, y_n)\}$
     \begin{itemize}
-    \item $n$ observations dans $\RR^p$ 
-    \item $n$ étiquettes : $y_i \in \{0, 1\}$ : \blue{classification binaire}
+    \item $n$ observations in $\RR^p$
+    \item $n$ labels: $y_i \in \{0, 1\}$ — \blue{binary classification}
     \end{itemize}
   \pause
-\item \blue{Espace des hypothèses :} Considérer des fonctions linéaires n'a pas
-  de sens pour prédire une valeur binaire.  \pause
-    \begin{itemize}
-    \item $f$ va modéliser \blue{la probabilité d'appartenir à la classe positive}
+  \item \blue{Hypothesis space:} Linear functions do not make sense to predict a binary value.
     \pause
-  \item la \red{fonction logistique} $\sigma$ transforme un réel en une ``probabilité''
+    \begin{itemize}
+    \item $f$ will model the \blue{probability of belonging to the positive class}
+    \pause
+    \item The \red{logistic function} $\sigma$ transforms a real value into a “probability”:
     \begin{center}
     \includegraphics[width=0.38\textwidth]{figures/logistic}
-  \end{center}
-  \item $\fcal = \left\{\xvec \mapsto \sigma\left(\beta_0 + \langle \betavec, \xvec \rangle\right) ;  \betavec \in \RR^{p+1}\right\}$
+    \end{center}
+    \item $\fcal = \left\{\xvec \mapsto \sigma\left(\beta_0 + \langle \betavec, \xvec \rangle\right) ;  \betavec \in \RR^{p+1}\right\}$
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique}
+  \frametitle{2.3 Logistic Regression}
   \begin{itemize}
-  \item Fonction de perte : \red{entropie croisée} \textcolor{gray!70}{(cross-entropy)}
+  \item Loss function: \red{cross-entropy}
     \begin{flalign*}
       L :  \{0, 1\} \times ]0, 1[ & \rightarrow \RR \\ \nonumber
-          (y, f(\xvec)) & \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec)) % = 
+          (y, f(\xvec)) & \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec)) 
         \end{flalign*}
         \begin{center}
           \includegraphics[width=0.8\textwidth]{figures/cross_entropy}
@@ -316,27 +311,27 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique}
+  \frametitle{2.3 Logistic Regression}
   \begin{itemize}
-  \item Fonction de perte : \red{entropie croisée} \textcolor{gray!70}{(cross-entropy)}
+  \item Loss function: \red{cross-entropy}
     \begin{flalign*}
       L :  \{0, 1\} \times ]0, 1[ & \rightarrow \RR \\ \nonumber
-          (y, f(\xvec)) & \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec)) % = 
+          (y, f(\xvec)) & \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec))
         \end{flalign*}
-  \item[] Si $y=1$, alors $L = -\log f(\xvec)$. La perte va donc être minimisée si $f(\xvec)\rightarrow1$. 
-  \item[] Si $y=0$, alors $L = -\log(1-f(\xvec))$. La perte va donc être minimisée si $f(\xvec)\rightarrow0$. 
+  \item[] If $y=1$, then $L = -\log f(\xvec)$, and the loss is minimized when $f(\xvec) \rightarrow 1$. 
+  \item[] If $y=0$, then $L = -\log(1-f(\xvec))$, and the loss is minimized when $f(\xvec) \rightarrow 0$. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique}
+  \frametitle{2.3 Logistic Regression}
   \begin{itemize}
-  \item \blue{Espace des hypothèses :}
+  \item \blue{Hypothesis space:}
     $\fcal = \{\xvec \mapsto \sigma\left(\beta_0 + \langle \betavec, \xvec
       \rangle\right) ; \betavec \in \RR^{p+1}\}$
-  \item \blue{Fonction de perte :}
+  \item \blue{Loss function:}
     $L : (y, f(\xvec))  \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec))$
-  \item \blue{Minimisation du risque empirique :}
+  \item \blue{Empirical risk minimization:}
     \footnotesize
     \[\argmin_{\betavec \in \RR^{p+1}} \frac1n \sum_{i=1}^n
       -y_i \log \sigma\left(\beta_0 + \langle \betavec, \xvec_i \rangle\right)
@@ -346,61 +341,60 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique - Solution}
+  \frametitle{2.3 Logistic Regression — Solution}
   \begin{itemize}
-  \item \blue{Minimiser}
+  \item \blue{Minimize}
     {\footnotesize \[J : \betavec \mapsto \sum_{i=1}^n -y_i \log \sigma\left(\beta_0 + \langle
       \betavec, \xvec_i \rangle\right) - (1-y_i) \log \left(1 -
       \sigma\left(\beta_0 + \langle \betavec, \xvec_i \rangle\right)\right)\]}
   \pause
-  \item $J$ est une fonction \blue{convexe} de $\betavec$
+  \item $J$ is a \blue{convex} function of $\betavec$
   \pause
-  \item En utilisant $\sigma^\prime (u) = \sigma(u) (1-\sigma(u)),$
+  \item Using $\sigma^\prime (u) = \sigma(u) (1-\sigma(u)),$
     \[
       \nabla J(\betavec) = \sum_{i=1}^n \left( y_i - \frac1{1 + \exp - \left(\beta_0 +
             \langle \betavec, \xvec_i \rangle \right)} \right)
     \]
-  \item[$\Rightarrow$] Pas de solution explicite.
+  \item[$\Rightarrow$] No closed-form solution.
     \pause
-  \item On utilise donc systématiquement \blue{l'algorithme du gradient.}
+  \item Therefore, we systematically use the \blue{gradient descent algorithm.}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique - Interprétation}
+  \frametitle{2.3 Logistic Regression — Interpretation}
   \begin{itemize}
-  \item Le \blue{coefficient de régression}
-    $\beta_j$ peut être interprété comme la contribution de la variable correspondante ($x_j$) au modèle
-  \item À condition que les variables soient \blue{centrées-réduites} pour être à la même échelle :
+  \item The \blue{regression coefficient}
+    $\beta_j$ can be interpreted as the contribution of the corresponding variable ($x_j$) to the model
+  \item Provided that the variables are \blue{standardized} to the same scale:
     \[
       x_j \leftarrow \frac{x_j - \overline{x_j}}{\sigma_j}
     \]
     \begin{itemize}
-    \item $\overline{x_j}$ : moyenne de $x_j$ sur les données
-    \item $\sigma_j$ : écart-type de $x_j$ sur les données
+    \item $\overline{x_j}$: mean of $x_j$ over the dataset
+    \item $\sigma_j$: standard deviation of $x_j$ over the dataset
     \end{itemize}
-  \item Attention à calculer $\overline{x_j}$ et $\sigma_j$ sur le jeu
-    d'entraînement uniquement, pour ne pas toucher au jeu de test.
+  \item Note: $\overline{x_j}$ and $\sigma_j$ must be computed on the \blue{training set only}, to avoid data leakage into the test set.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique - Entropie croisée et maximisation de vraisemblance}
+  \frametitle{2.3 Logistic Regression — Cross-Entropy and Maximum Likelihood}
   \begin{itemize}
-    \item On écrit $P(y_i\,|\,\xvec_i; \betavec)$ la probabilité de prédire la classe $y_i$ (donc de prédire la classe correcte). 
-  \item Probabilité que toutes les prédictions sont bonnes est la probabilité jointe de $N$ bonnes prédictions :  
+    \item Let $P(y_i\,|\,\xvec_i; \betavec)$ be the probability of predicting class $y_i$ (i.e., the correct class). 
+  \item The probability that all predictions are correct is the joint probability of $N$ correct predictions:  
   \begin{equation*}
-    \prod_{i=1}^NP(y_i | \xvec_i; \betavec)
+    \prod_{i=1}^N P(y_i | \xvec_i; \betavec)
   \end{equation*}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique - Entropie croisée et maximisation de vraisemblance}
+  \frametitle{2.3 Logistic Regression — Cross-Entropy and Maximum Likelihood}
   \begin{itemize}
-    \item Approche de maximisation de la vraisemblance : 
+    \item Maximum likelihood approach: 
     \begin{eqnarray*}
-    \betavec^{\ast} &=& \argmax_{\betavec} \prod_{i=1}^NP(y_i | \xvec_i; \betavec) \\
+    \betavec^{\ast} &=& \argmax_{\betavec} \prod_{i=1}^N P(y_i | \xvec_i; \betavec) \\
                   &=& \argmax _{\betavec} \sum_{i=1}^N\log P(y_i | \xvec_i; \betavec)\\
                   &=& \argmin_{\betavec} - \sum_{i=1}^N\log P(y_i | \xvec_i; \betavec)
     \end{eqnarray*}    
@@ -408,141 +402,115 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Régression logistique - Entropie croisée et maximisation de vraisemblance}
+  \frametitle{2.3 Logistic Regression — Cross-Entropy and Maximum Likelihood}
   \begin{itemize}
-    \item Si on suppose qu'on prédit la probabilité a posteriori, on peut écrire : 
+    \item Assuming we predict the posterior probability, we can write: 
     \begin{equation*}
-    \log P(y_i|(\xvec_i; \betavec) = y_i \log (f(\xvec_i; \betavec)) + (1-y_i)\log (1-f(\xvec_i; \betavec))
+    \log P(y_i|(\xvec_i; \betavec)) = y_i \log (f(\xvec_i; \betavec)) + (1-y_i)\log (1-f(\xvec_i; \betavec))
     \end{equation*}
-    et on obtient : 
+    and thus: 
     \begin{equation*}
     \betavec^{\ast} = \argmin_{\betavec} - \sum_{i=1}^N [y_i \log (f(\xvec_i; \betavec)) + (1-y_i)\log (1-f(\xvec_i; \betavec))]
     \end{equation*}
-    \item Nous voyons que minimiser l'entropie croisée est équivalent à maximiser la vraisemblance.
+    \item We see that minimizing cross-entropy is equivalent to maximizing likelihood.
   \end{itemize}
 \end{frame}
 
-
-
 % -------------------------------------------------
-% Linear Discriminant Analysisd
+% Linear Discriminant Analysis
 \begin{frame}
-\frametitle{2.4 Analyse discriminante linéaire - règle Bayesienne 1/4}
-%\begin{block}{Probabilité conditionnelle et probabilité jointe}
+\frametitle{2.4 Linear Discriminant Analysis — Bayesian Rule 1/4}
   \begin{itemize}
-  \item Soient $X$ et $Y$ deux variables aléatoires, $P(X)$ et $P(Y)$ leurs probabilités marginales, $P(X,Y)$ la probabilité jointe et $P(X\,|\,Y)$ la \red{probabilité conditionnelle} de $X$ sous condition de $Y$.
+  \item Let $X$ and $Y$ be two random variables, with marginal probabilities $P(X)$ and $P(Y)$, joint probability $P(X,Y)$, and conditional probability $P(X\,|\,Y)$ — the \red{probability of $X$ given $Y$}.
     \begin{itemize}
-    \item La \red{probabilité jointe} peut s'écrire alors:
+    \item The \red{joint probability} can be written as:
     \begin{equation}
       P(X,Y) = P(X\,|\,Y)P(Y)
     \end{equation}
-    \item et la \red{probabilité marginale} est la somme des probabilités jointes pour toutes les valeurs de $Y$:
+    \item The \red{marginal probability} is the sum of the joint probabilities over all values of $Y$:
     \begin{equation}
       P(X) = \sum_Y P(X,Y) = \sum_Y P(X|Y)P(Y)
     \end{equation}
   \end{itemize}
   \end{itemize}
-%\end{block}
 \end{frame}
 
 \begin{frame}
-\frametitle{2.4 Analyse discriminante linéaire - règle Bayesienne 2/4}
+\frametitle{2.4 Linear Discriminant Analysis — Bayesian Rule 2/4}
 \begin{itemize}
-\item Comme $P(X,Y)=P(Y,X)$ on obtient directement le théorème Bayésien:
+\item Since $P(X,Y)=P(Y,X)$, we directly obtain Bayes’ theorem:
 \begin{equation}
   P(Y \, | \, X) = \frac{P(X \, | \, Y)P(Y)}{P(X)}
 \end{equation}
-\item Ici $X$ et $Y$ sont des variables discrètes, mais une règle presque identique peut être définie pour des variables continues. Pour cela il faut remplacer les probabilités par des densités de probabilité. 
+\item Here $X$ and $Y$ are discrete variables, but a nearly identical rule can be defined for continuous variables by replacing probabilities with probability densities.
 \end{itemize}
-
-% Here, we assume that $Y$ is a discrete variable (classes) and $X$ is a continuous variable (measurements). We thus obtain: 
-% \begin{equation}
-%   P(Y \, | \, X) = \frac{p(X \, | \, Y)P(Y)}{p(X)}
-% \end{equation}
-
 \end{frame}
 
-\begin{frame}{2.4 Analyse discriminante linéaire - règle Bayesienne 3/4}
-
+\begin{frame}{2.4 Linear Discriminant Analysis — Bayesian Rule 3/4}
 \begin{itemize}
-%\begin{block}{Règle Bayesienne de classification}
-  \item \red{Probabilité postérieure}: Soit $\xvec \in \mathbb{R}^P$ avec une densité de probabilité $p(\xvec)$ et $y \in \{1 \ldots, K\}$ une variable discrète. La probabilité a posteriori $P(y=k\,|\,\xvec)$ est donc :
+  \item \red{Posterior probability:} Let $\xvec \in \mathbb{R}^P$ have a probability density $p(\xvec)$ and $y \in \{1, \ldots, K\}$ be a discrete variable. The posterior probability $P(y=k\,|\,\xvec)$ is:
   \begin{equation}
     P(y=k \, | \, \xvec) = \frac{p(\xvec \, | \, y=k) P(y=k)}{p(\xvec)}
   \end{equation}
-  \item \red{La règle Bayesienne de classification}: \emph{Choisis la classe qui maximise} $P(y=k|\xvec)$:
+  \item \red{Bayesian classification rule:} \emph{Choose the class that maximizes} $P(y=k|\xvec)$:
   \begin{equation}
     \hat{y}(\xvec) = \arg\max_k P(y=k \, | \, \xvec) = \arg\max_k p(\xvec\,|\,y=k)P(y=k)
   \end{equation}
-%\end{block}
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}{2.4 Analyse discriminante linéaire - règle Bayesienne 4/4}
-
+\begin{frame}{2.4 Linear Discriminant Analysis — Bayesian Rule 4/4}
 \begin{itemize}
-  \item La règle Bayesienne de classification simplement dit que la meilleure classe à choisir est celle avec la plus grande probabilité étant donné l'observation. 
-  \item Cette probabilité peut être estimée à partir de la distribution des observations pour la classe et de la probabilité \emph{a priori}. 
-  \item Cette règle est importante parce qu'elle donne le meilleur classifieur possible, si l'on connaît les distributions des observations $p(\xvec\,|\,y=k)$ et les probabilités \emph{a priori} $P(y=k)$.
-  \item Ces distributions n'étant pas connues, elles doivent être estimées à partir des données d'apprentissage. 
+  \item The Bayesian classification rule simply states that the best class to choose is the one with the highest probability given the observation. 
+  \item This probability can be estimated from the class-conditional distributions of the observations and the \emph{prior} probabilities. 
+  \item This rule is important because it defines the best possible classifier, provided the class-conditional distributions $p(\xvec\,|\,y=k)$ and the priors $P(y=k)$ are known.
+  \item Since these distributions are unknown, they must be estimated from the training data. 
 \end{itemize}
-
 \end{frame}
 
-\begin{frame}{2.4 Analyse discriminante linéaire - cas binaire}
-
+\begin{frame}{2.4 Linear Discriminant Analysis — Binary Case}
 \begin{itemize}
-\item On assume que l'on essaie de résoudre un problème binaire, cad $y \in \{1, 2\}$. La règle Bayésienne dit alors qu'il faut choisir la classe 1 si : 
-
+\item Assume we are solving a binary classification problem, i.e. $y \in \{1, 2\}$. The Bayesian rule then states that we should choose class 1 if: 
 \begin{equation*}
 \frac{p(\xvec|y=1)P(y=1)}{p(\xvec|y=2)P(y=2)} > 1
 \end{equation*}
-
-\item On peut appliquer le $log$ aux deux côté de cette équation. On obtient donc l'expression suivante : 
-
+\item Taking the $log$ of both sides yields:
 \begin{equation}\label{equ:lda:condition}
 \log{ \frac{p(\xvec|y=1)P(y=1)}{p(\xvec|y=2)P(y=2)} } > 0
 \end{equation}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{2.4 Analyse discriminante linéaire - Supposition de normalité}
+\begin{frame}{2.4 Linear Discriminant Analysis — Normality Assumption}
 \begin{figure}[htb]
 \includegraphics[width=0.5\textwidth]{figures/LDA.pdf}
 \end{figure}
 \begin{itemize}
-\item On suppose que les descripteurs sont distribués normalement pour chacune des classes : 
+\item We assume that the features are normally distributed within each class:
 \begin{equation}\label{equ:lda:normal}
 p(\xvec|y=k)=\frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma_k|^{\frac{1}{2}}}e^{-\frac{1}{2}(\xvec-\mu_k)^T\Sigma_k^{-1}(\xvec-\mu_k)}
 \end{equation}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{2.4 Analyse discriminante linéaire}
-\frametitle{Analyse discriminante linéaire}
+\begin{frame}{2.4 Linear Discriminant Analysis}
+\frametitle{Linear Discriminant Analysis}
 \begin{itemize}
-\item Avec les expressions (\ref{equ:lda:normal}) et (\ref{equ:lda:condition}) et l'hypothèse supplémentaire que les matrices de covariance sont identiques pour toutes les classes, cad
-$\Sigma_1 = \Sigma_2 = \Sigma$, on obtien l'analyse discrimnante linéaire ({\bf Linear Discriminant Analysis, LDA}):
+\item Using expressions (\ref{equ:lda:normal}) and (\ref{equ:lda:condition}) and assuming identical covariance matrices across classes, i.e.
+$\Sigma_1 = \Sigma_2 = \Sigma$, we obtain the \textbf{Linear Discriminant Analysis (LDA)}:
 \begin{equation*}
 K + \xvec^T\Sigma^{-1}(\mu_1-\mu_2) - \frac{1}{2}(\mu_1-\mu_2)^T\Sigma^{-1}(\mu_1+\mu_2) > 0
 \end{equation*}
-avec $K=\log{\frac{P(y=1)}{P(y=2)}} + \frac{1}{2}\log{\frac{|\Sigma_2|}{|\Sigma_1|}}$
-\item On observe : 
+where $K=\log{\frac{P(y=1)}{P(y=2)}} + \frac{1}{2}\log{\frac{|\Sigma_2|}{|\Sigma_1|}}$
+\item We observe that: 
 \begin{itemize}
-  \item Il s'agit d'un classifier linéarie. 
-  \item L'expression implique l'inversion d'une matrice de covariance (instable pour des descripteurs corrélés). 
-  %\item $LDA$ is an old technique, but it is still used in practice. 
+  \item It is a \blue{linear classifier.} 
+  \item The expression involves inverting a covariance matrix (which can be unstable when features are correlated). 
+  %\item LDA is an old technique, but still widely used in practice. 
 \end{itemize} 
 \end{itemize} 
 \end{frame}
 
-
-
-
-% \begin{frame}
-%   \frametitle{Régressions polynomiales}
-% \end{frame}
 
 %%% Local Variables:
 %%% mode: latex
