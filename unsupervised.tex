@@ -1,130 +1,129 @@
 % dimred
 
 \begin{frame}
-  \frametitle{Apprentissage non supervisé}
+  \frametitle{Unsupervised Learning}
   \begin{itemize}
-    \item Données sans étiquette : 
-    \item[] $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$ ; $\xvec_i \in \xcal = \RR^p$
-    \item L'objectifs : 
+    \item Unlabeled data: 
+    \item[] $n$ observations $\{\xvec_1, \xvec_2, \dots, \xvec_n\}$; $\xvec_i \in \xcal = \RR^p$
+    \item Objectives: 
     \begin{itemize}
-      \item Exploration de données
-      \item Identification de tendances et de groupes
+      \item Data exploration
+      \item Identification of trends and groups
     \end{itemize} 
-    \item Tâches de prédiction : 
+    \item Prediction tasks: 
     \begin{itemize}
-        \item \red{Réduction de dimension :} $f : \RR^p \rightarrow \RR^d$ avec
-          $d \ll p$ et de telle sorte à ce que $f(\xvec)$ soit une
-          \blue{représentation informative} de $\xvec$
-        \item \red{Clustering :} partition de $\{1, 2, \dots, n\}$ en ensembles
-        d'éléments semblables, appelés \red{clusters}
+        \item \red{Dimensionality reduction:} $f : \RR^p \rightarrow \RR^d$ with
+          $d \ll p$, such that $f(\xvec)$ is an
+          \blue{informative representation} of $\xvec$
+        \item \red{Clustering:} partitioning $\{1, 2, \dots, n\}$ into sets
+        of similar elements, called \red{clusters}
     \end{itemize}
-    \item Note : la réduction de dimensions peut être supervisée ou non supervisée. 
+    \item Note: dimensionality reduction can be either supervised or unsupervised. 
     \end{itemize}
 \end{frame}
 
 \begin{frame}
   \begin{center}
-    \red{\LARGE Réduction de dimension}
+    \red{\LARGE Dimensionality Reduction}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Réduction de dimensions - Problème}
+  \frametitle{Dimensionality Reduction — Problem}
   \begin{itemize}
-  \item Grand nombre $p$ de variables (centaines ou milliers de variables).
-  \item Si $n$ est grand, on parle de \red{big data}.   
-  \item Si $p$ est grand par rapport à $n$, on parle de \red{fat data}. 
-  \item Réduction de dimensions : trouver pour une matrice de données $X\in \RR^{n\times p}$ une représentation $X \in \RR^{n\times m}$, avec $p\gg m$. 
+  \item Large number $p$ of variables (hundreds or thousands of features).
+  \item If $n$ is large, we speak of \red{big data}.   
+  \item If $p$ is large compared to $n$, we speak of \red{fat data}. 
+  \item Dimensionality reduction: find, for a data matrix $X\in \RR^{n\times p}$, a representation $X' \in \RR^{n\times m}$ with $p \gg m$. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Réduction de dimensions - Motivation}
+  \frametitle{Dimensionality Reduction — Motivation}
   \begin{itemize}
-  \item Visualisation / exploration : une étape importante
-  \item Identifier des artefacts
-  \item Réduction du coût computationnel
-  \item Moins de descripteurs pour de meilleurs algorithmes de prédiction : 
+  \item Visualization / exploration: an essential step
+  \item Identify artifacts
+  \item Reduce computational cost
+  \item Fewer descriptors for better predictive algorithms: 
   \begin{itemize}
-  	\item moins de paramètres à estimer
-  	\item moins de bruit
-  	\item moins de dimensions peu informatives
-  	\item éviter le fléau de la dimensionalité
+    \item fewer parameters to estimate
+    \item less noise
+    \item fewer non-informative dimensions
+    \item avoid the curse of dimensionality
   \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Réduction de dimensions - deux stratégies}
+  \frametitle{Dimensionality Reduction — Two Strategies}
   \begin{itemize}
-  	\item \red{Sélection de variables} : éliminer les variables peu utiles
-  	\item \red{Extraction de variables} : créer $m$ nouvelles variables à partir des $p$ variables
+    \item \red{Feature selection:} eliminate variables that are not useful
+    \item \red{Feature extraction:} create $m$ new variables from the $p$ original ones
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode de filtrage}
+  \frametitle{Filter Methods}
   \begin{itemize}
-  	\item Filtrage non-supervisé (exemple : enlever des variables corrélées )
-  	\item Filtrage supervisé : enlever des variables qui ne sont pas statistiquement associées à la variable de sortie
+    \item Unsupervised filtering (e.g., removing correlated variables)
+    \item Supervised filtering: removing variables that are not statistically associated with the output variable
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode de filtrage - limitations}
-	\begin{figure}[htb]
-	  \centering
-	  \includegraphics[width=.6\textwidth]{guyon.pdf}
-	%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
-	\end{figure}
-  	Des variables corrélées et non-significatives peuvent tout de même être utiles (dans le contexte d'autres variables).
+  \frametitle{Filter Methods — Limitations}
+  \begin{figure}[htb]
+    \centering
+    \includegraphics[width=.6\textwidth]{guyon.pdf}
+  \end{figure}
+    Correlated and individually non-significant variables may still be useful (in the context of other variables).
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode de conteneur}
+  \frametitle{Wrapper Methods}
   \begin{itemize}
-  	\item Méthode \red{supervisée} de sélection de variables. 
-  	\item Liée à une méthode de \red{classification} : on juge la qualité de la variable par rapport à la performance de classification.
-  	\item 2 stratégies : 
-  	\begin{itemize}
-  		\item \red{Méthode ascendante (forward selection)}: successivement ajouter des variables
-  		\item \red{Méthode descendante (backward selection)}: successivement enlever des variables
-  	\end{itemize}
+    \item \red{Supervised} feature selection methods. 
+    \item Linked to a \red{classification} method: the quality of a variable is judged based on its effect on classification performance.
+    \item Two strategies: 
+    \begin{itemize}
+      \item \red{Forward selection:} successively add variables
+      \item \red{Backward elimination:} successively remove variables
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode ascendante}
+  \frametitle{Forward Selection}
   \begin{itemize}
-  	\item On commence avec un ensemble de variables vide $\fcal = \emptyset$
-  	\item A chaque étape, on ajoute la variable qui apporte le meilleur gain en performance de classification.
-  	\item On arrête, quand la performance ne s'améliore plus. 
+    \item Start with an empty set of variables $\fcal = \emptyset$
+    \item At each step, add the variable that yields the greatest improvement in classification performance.
+    \item Stop when performance no longer improves. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode descendante}
+  \frametitle{Backward Elimination}
   \begin{itemize}
-  	\item On commence avec l'ensemble de toutes les variables $\fcal$
-  	\item A chaque étape, on enlève la variable sans laquelle on obtient la meilleure performance de classification.
-  	\item On arrête, quand la performance ne s'améliore plus. 
+    \item Start with the full set of variables $\fcal$
+    \item At each step, remove the variable whose removal gives the best classification performance.
+    \item Stop when performance no longer improves. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthode de conteneur - limitations}
+  \frametitle{Wrapper Methods — Limitations}
   \begin{itemize}
-  	\item L'ensemble de variables identifiés dépend du classifieur utilisé (il ne s'agit pas d'un critère général). 
-  	\item Méthode gloutonne (greedy method): aucune garantie d'optimalité. 
+    \item The selected set of variables depends on the classifier used (it is not a general criterion). 
+    \item Greedy method: no guarantee of optimality. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Méthodes embarquées}
+  \frametitle{Embedded Methods}
   \begin{itemize}
-  	\item Méthodes de classification avec un mécanisme de sélection de variables
-  	\item Exemple : l'utilisation de la norme $L_1$ (valeur absolue).  
-  	\item Pour rappel : 
+    \item Classification methods that include an integrated variable selection mechanism.
+    \item Example: the use of the $L_1$ norm (absolute value).  
+    \item Reminder:
   \end{itemize}
   \begin{center}
     \includegraphics[width=.6\textwidth]{figures/l1reg_geom}  
@@ -132,155 +131,143 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Analyse en composantes principales}
+  \frametitle{Principal Component Analysis}
   \begin{itemize}
-  	\item Analyse en composantes principales (ACP) (principal component analysis, PCA)
-  	\item Méthode \red{non supervisée} (aucune étiquette est utilisée)
-  	\item Expression de $X\in \RR^{n\times p}$ dans une base orthonormée, par une transformation linéaire orthogonale.
-  	\item Maximisation de la variance.
-%  	\item Premier axe : projection de $X$ avec la plus grande variance
-%  	\item Deuxième axe : projection de $X$ avec la plus grande variance, orthogonale à la première. 
-%  	\item $\ldots$
+    \item Principal Component Analysis (PCA)
+    \item \red{Unsupervised} method (no labels are used)
+    \item Expresses $X\in \RR^{n\times p}$ in an orthonormal basis through an orthogonal linear transformation.
+    \item Maximizes variance.
+%   \item First axis: projection of $X$ with the largest variance
+%   \item Second axis: projection of $X$ with the largest variance, orthogonal to the first one.
+%   \item $\ldots$
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Extraction de variables - ACP}
-	\begin{figure}[htb]
-	  \centering
-	  \includegraphics[width=.8\textwidth]{pca.pdf}
-	%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
-	\end{figure}
+  \frametitle{Feature Extraction — PCA}
+  \begin{figure}[htb]
+    \centering
+    \includegraphics[width=.8\textwidth]{pca.pdf}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{ACP: Méthode 1/3}
+\frametitle{PCA: Method 1/3}
   \begin{itemize}
-  	\item Première étape : centrer les colonnes de $X \in \RR^{n \times p}$: 
+    \item First step: center the columns of $X \in \RR^{n \times p}$:
  \begin{equation*}
  x^i_j = \frac{x_j^i - \overline{x}_j}{\sqrt{\frac{1}{n}\sum_{l=1}^n(x_j^l - \overline{x}_j)^2}} 
  \end{equation*}
- 	\item La matrice de covariance (si $X$ est centré-réduit): $\Sigma = \frac1n X^TX$ 
- 	\item On cherche maintenant une direction $\wvec$, pour laquelle la projection de $X$ sur cette direction a une variance maximale. 
- 	\item On peut montrer que cette variance maximale est la plus grande valeur propre de $\Sigma$, et que la direction est le vecteur propre correspondant. 
+  \item Covariance matrix (if $X$ is standardized): $\Sigma = \frac1n X^TX$ 
+  \item We seek a direction $\wvec$ such that the projection of $X$ onto this direction has maximal variance. 
+  \item It can be shown that this maximum variance corresponds to the largest eigenvalue of $\Sigma$, and that the direction is the corresponding eigenvector. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{ACP: Méthode 2/3}
+\frametitle{PCA: Method 2/3}
   \begin{itemize}
-  	\item Si on ordonne les valeurs propres de $\Sigma$, on obtient les composantes principales $cp_2, cp_3, \ldots$ qui remplissent les critères suivants : 
-  	\begin{itemize}
-  		\item Chaque $cp_i$ est orthogonal à toutes les autres composantes.
-  		\item La variance de la projection de $X$ sur $cp_i$ est identique à la valeur propre $i$. 
-  	\end{itemize}
-  	\item Nous en déduisons : 
-  	\begin{itemize}
-  		\item Les projections de $X$ sur les composantes principales sont décorrélées. 
-  		\item Les composantes principales $cp_i$ contiennent de moins en moins d'information (avec $i$ croissant). 
-  	\end{itemize}
+    \item If we order the eigenvalues of $\Sigma$, we obtain the principal components $pc_1, pc_2, \ldots$ which satisfy the following criteria: 
+    \begin{itemize}
+      \item Each $pc_i$ is orthogonal to all other components.
+      \item The variance of the projection of $X$ on $pc_i$ equals the $i$-th eigenvalue. 
+    \end{itemize}
+    \item We can deduce that: 
+    \begin{itemize}
+      \item The projections of $X$ onto the principal components are uncorrelated. 
+      \item The principal components $pc_i$ contain decreasing amounts of information as $i$ increases. 
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{ACP: Méthode 3/3}
+\frametitle{PCA: Method 3/3}
   \begin{itemize}
-  	\item L'ACP nous donne donc une transformation avec : des variables décorrélées, et ordonnées selon leur variance, celle-ci étant supposée refléter le contenu en information. 
-  	\item Typiquement, on choisit un nombre $m$ de composantes principales. Le critère pour $m$ est la variance "expliquée" par le modèle: 
+    \item PCA thus provides a transformation yielding variables that are uncorrelated and ordered according to their variance, which is assumed to reflect their information content. 
+    \item Typically, we select a number $m$ of principal components. The criterion for $m$ is the “explained” variance of the model:
     \begin{equation}
       \frac{\sum_{j=1}^{m}var(X\wvec_j)}{\sum_{j=1}^pvar(X\wvec_j)}
     \end{equation}
-  	\item Alternativement, on peut choisir $m=2$ ou $m=3$ pour la visualisation par exemple.   
+    \item Alternatively, one may choose $m=2$ or $m=3$ for visualization purposes.   
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{ACP: avantages et inconvénients}
+\frametitle{PCA: Advantages and Limitations}
   \begin{itemize}
-  	\item Avantages : 
-  	\begin{itemize}
-  		\item non-supervisé
-  		\item projections décorrélées 
-  		\item simple, méthode linéaire
-  	\end{itemize}
-  	\item Inconvénients : 
-  	\begin{itemize}
-  		\item la variance maximale n'est pas identique avec le contenu d'information
-  		\item en pratique, les structures locales ne sont pas nécessairement bien préservées 
-  	\end{itemize}
+    \item Advantages: 
+    \begin{itemize}
+      \item Unsupervised
+      \item Uncorrelated projections 
+      \item Simple linear method
+    \end{itemize}
+    \item Limitations: 
+    \begin{itemize}
+      \item Maximal variance does not necessarily correspond to maximal information content
+      \item In practice, local structures are not always well preserved 
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{t-SNE 1/3}
 \begin{itemize}
-%	\item Many low dimensional representations: PCA, ICA, $\ldots$
-	\item Objectif : représentation des données en basse dimension en respectant les relations locales
-	\item Une technique relativement récente  \emph{t-Distributed Stochastic Neighbor Embedding (t-SNE)} (2008)
-	\item $\{\xvec_i\}_{0\leq i < N}$ sont les représentations, avec $\xvec \in \RR^p$. 
-	\item On définit la probabilité que $x_j$ est voisin de $x_i$, sous condition que la probabilité peut être modélisée par une Gaussienne, centrée dans $x_i$:  
-	\begin{equation}
-	p_{j|i} = \frac{\exp{\left(-\frac{\|\xvec_i - \xvec_j\|^2}{2 \sigma_i^2}\right)}}{\sum_{k\neq i} \exp{\left(-\frac{\|\xvec_i - \xvec_k\|^2}{2 \sigma_i^2}\right)} }
-	\end{equation}
-	Le paramètre $\sigma_i$ varie avec l'échantillon $x_i$. 
+% \item Many low-dimensional representations: PCA, ICA, $\ldots$
+  \item Objective: obtain a low-dimensional representation of the data while preserving local relationships.
+  \item A relatively recent technique — \emph{t-Distributed Stochastic Neighbor Embedding (t-SNE)} (2008)
+  \item $\{\xvec_i\}_{0\leq i < N}$ are the data points, with $\xvec_i \in \RR^p$. 
+  \item We define the probability that $x_j$ is a neighbor of $x_i$, assuming that this probability can be modeled by a Gaussian centered at $x_i$:  
+  \begin{equation}
+  p_{j|i} = \frac{\exp{\left(-\frac{\|\xvec_i - \xvec_j\|^2}{2 \sigma_i^2}\right)}}{\sum_{k\neq i} \exp{\left(-\frac{\|\xvec_i - \xvec_k\|^2}{2 \sigma_i^2}\right)} }
+  \end{equation}
+  The parameter $\sigma_i$ varies with each sample $x_i$. 
 \end{itemize}
 \end{frame}
-
 
 \begin{frame}
 \frametitle{t-SNE 2/3}
 \begin{itemize}
-	\item On souhaite assigner aux vecteurs $\{\xvec_i\}$ des représentations $\{\widetilde{\xvec_i}\}$ tout en préservant les probabilités de voisinages $q_{j|i}$: 
-	\begin{equation*}
-	q_{j|i} = \frac{\exp{\left(-\|\widetilde{\xvec_i} - \widetilde{\xvec_j}\|^2\right)}}{\sum_{k\neq i} \exp{\left(-\|\widetilde{\xvec_i} - \widetilde{\xvec_k}\|^2\right)} }
-	\end{equation*}
-	\item Cela peut être fait par la minimisation de la divergence Kulback-Leibler entre les distributions $P_i$ (distribution de $p_{j|i}$) et $Q_i$ (distribution de $q_{j|i}$): 
-	\begin{equation}
-		C = \sum_i KL(P_i\|Q_i) = \sum_i \sum_j p_{j|i}\log{\frac{p_{j|i}}{q_{j|i}}}
-	\end{equation}
-	\item Si $\xvec_i$ and $\xvec_j$ sont proches dans l'espace originale, l'algorithme va essayer de pousser $q_{j|i}$ vers $p_{j|i}$ (pour que le ratio soit 1). 
-	\item Si $\xvec_i$ et $\xvec_j$ sont loin dans l'espace d'origine, il n'est pas garanti qu'ils le soient dans l'espace à basse dimension. 
+  \item We aim to assign the vectors $\{\xvec_i\}$ new representations $\{\widetilde{\xvec_i}\}$ while preserving the neighborhood probabilities $q_{j|i}$: 
+  \begin{equation*}
+  q_{j|i} = \frac{\exp{\left(-\|\widetilde{\xvec_i} - \widetilde{\xvec_j}\|^2\right)}}{\sum_{k\neq i} \exp{\left(-\|\widetilde{\xvec_i} - \widetilde{\xvec_k}\|^2\right)} }
+  \end{equation*}
+  \item This is achieved by minimizing the Kullback–Leibler divergence between the distributions $P_i$ (distribution of $p_{j|i}$) and $Q_i$ (distribution of $q_{j|i}$): 
+  \begin{equation}
+    C = \sum_i KL(P_i\|Q_i) = \sum_i \sum_j p_{j|i}\log{\frac{p_{j|i}}{q_{j|i}}}
+  \end{equation}
+  \item If $\xvec_i$ and $\xvec_j$ are close in the original space, the algorithm tries to push $q_{j|i}$ toward $p_{j|i}$ (so that the ratio approaches 1). 
+  \item If $\xvec_i$ and $\xvec_j$ are far apart in the original space, this is not guaranteed in the low-dimensional space. 
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{t-SNE 3/3}
 \begin{itemize}
-	\item Les paramètres $\sigma_i$ sont déterminés par l'algorithme
-	\item Ils varient selon la densité de voisins, de façon à ce que pour chaque $\xvec_i$ nous avons à peu près le même nombre de voisins. 
-	\item L'utilisateur choisit le paramètre \textit{perplexity} qui mesure le nombre effectif de voisins. 
-	\item Le problème se réduit à la solution d'un problème d'optimisation $\min_{\widetilde{\xvec_i}} C$ avec la méthode du gradient.
+  \item The parameters $\sigma_i$ are determined automatically by the algorithm.
+  \item They vary depending on the local density of neighbors, such that each $\xvec_i$ has approximately the same number of neighbors. 
+  \item The user chooses the \textit{perplexity} parameter, which measures the effective number of neighbors. 
+  \item The problem is then reduced to solving an optimization problem $\min_{\widetilde{\xvec_i}} C$ using gradient descent.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{t-SNE: avantages et inconvénients}
+\frametitle{t-SNE: Advantages and Limitations}
   \begin{itemize}
-  	\item Avantages : 
-  	\begin{itemize}
-  		\item conserve les structures locales
-  		\item permet d'identifier des cluster potentiels. 
-  	\end{itemize}
-  	\item Inconvénients : 
-  	\begin{itemize}
-  		\item pas de transformation : la minimisation est faite pour une ensemble de données et ne peut s'appliquer à de nouvelles données. 
-  		\item Distorsion des longues distances. 
-  	\end{itemize}
+    \item Advantages: 
+    \begin{itemize}
+      \item Preserves local structures
+      \item Helps identify potential clusters 
+    \end{itemize}
+    \item Limitations: 
+    \begin{itemize}
+      \item No transformation: the minimization is performed on a given dataset and cannot be directly applied to new data 
+      \item Distortion of long-range distances 
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
-% \begin{frame}
-% \frametitle{t-SNE map: exemple}
-% \begin{figure}[htb]
-%   \centering
-%   \includegraphics[width=.8\textwidth]{Vis_tsne.png}
-%   \caption{patterns de localisation d'ARN dans la cellule}
-% \end{figure}
-% \end{frame}
-
-
 \begin{frame}
-\frametitle{t-SNE map: ImageNet}
+\frametitle{t-SNE Map: ImageNet}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\textwidth]{Vis_tsne_imagenet1.pdf}
@@ -289,7 +276,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{t-SNE map: ImageNet}
+\frametitle{t-SNE Map: ImageNet}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\textwidth]{Vis_tsne_imagenet2.pdf}
@@ -298,7 +285,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{t-SNE map: ImageNet}
+\frametitle{t-SNE Map: ImageNet}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\textwidth]{Vis_tsne_imagenet3.pdf}
@@ -309,11 +296,11 @@
 \begin{frame}
 \frametitle{Conclusion}
 \begin{itemize}
-	\item Méthodes de sélection par filtrage ad-hoc
-	\item Méthodes de conteneur : sélection de variables pour une classification spécifique
-	\item Méthodes embarquées (LASSO, ... )
-	\item APC : analyse en composante principale
-	\item t-SNE : méthode utilisée pour la visualisation. 
+  \item Ad-hoc filtering methods
+  \item Wrapper methods: variable selection for a specific classification task
+  \item Embedded methods (e.g. LASSO)
+  \item PCA: principal component analysis
+  \item t-SNE: a method used primarily for visualization
 \end{itemize}
 \end{frame}
 
@@ -324,50 +311,46 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Clustering ou partitionnement}
+  \frametitle{Clustering or Partitioning}
   \begin{itemize}
-  \item \red{Clustering :} partitionner les données en sous-ensembles (\red{clusters}) homogènes
-  \item Exemples :
+  \item \red{Clustering:} partitioning data into homogeneous subsets (\red{clusters})
+  \item Examples:
     \begin{itemize}
-    \item \blue{segmentation de marché}
-    \item \blue{communautés} sur un réseau social
-    \item \blue{topic modeling} (thématique de textes)
-    \item \blue{compression} ou \blue{segmentation d'images}
-    \item \blue{sous-types} d'une maladie
+    \item \blue{Market segmentation}
+    \item \blue{Communities} in a social network
+    \item \blue{Topic modeling} (text thematics)
+    \item \blue{Image compression} or \blue{image segmentation}
+    \item \blue{Subtypes} of a disease
   \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Clustering : Motivation}
+  \frametitle{Clustering — Motivation}
   \begin{itemize}
-  \item Étude de données \blue{non-étiquetées}
-  \item Analyse \blue{exploratoire}
-  \item \blue{Visualisation}
-  \item Peut précéder une phase d'\blue{inférence} (ex. topic modeling)
+  \item Study of \blue{unlabeled} data
+  \item \blue{Exploratory} data analysis
+  \item \blue{Visualization}
+  \item May precede an \blue{inference} phase (e.g., topic modeling)
   \end{itemize}
 \end{frame}
-
 
 \begin{frame}
   \begin{center}
-    \large{1. Évaluation d'un clustering}
+    \large{1. Evaluating a Clustering}
   \end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Geometric Criteria}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figures/homogeneity}%
   \end{center}
 \begin{itemize}  
-  \item Définition centroïde du cluster $\cset$: $\muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec$
-  \item Définition médoïde du cluster $\cset$: $\mvec_{\cset} = \argmin_{\xvec \in \cset}d(\xvec, \muvec_{\cset})$
-  \item \red{Homogénéité} d'un cluster $k$ : $T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)$
-  % \begin{equation*}
-  % T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
-  % \end{equation*}
-  \item Homogénéité d'un clustering : 
+  \item Centroid of cluster $\cset$: $\muvec_{\cset} = \frac{1}{|\cset|}\sum_{\xvec \in \cset}\xvec$
+  \item Medoid of cluster $\cset$: $\mvec_{\cset} = \argmin_{\xvec \in \cset} d(\xvec, \muvec_{\cset})$
+  \item \red{Homogeneity} of a cluster $k$: $T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)$
+  \item Homogeneity of a clustering:
   \begin{equation*}
   T = \frac1K\sum_{k=1}^{K}T_k
   \end{equation*}
@@ -375,186 +358,92 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Geometric Criteria}
   \begin{center}
     \includegraphics[width=0.5\textwidth]{figures/separability}%
   \end{center}
 \begin{itemize}
-  \item Séparabilité des clusters $k$ et $l$ : 
+  \item Separability of clusters $k$ and $l$:
   \begin{equation*}
   s_{kl} = d(\muvec_k, \muvec_l)
   \end{equation*}
-  \item Séparabilité d'un clustering : 
+  \item Separability of a clustering:
   \begin{equation*}
   S = \frac{2}{K(K-1)}\sum_{k=1}^{K-1}\sum_{l=k+1}^{K}s_{kl}
   \end{equation*}
 \end{itemize}
 \end{frame}
 
-% \begin{frame}
-% \frametitle{Critère de qualité 3/5}
-% \begin{itemize}
-%   \item Critère de Davis-Bouldin (homogénéité et séparabilité ensemble): 
-%   \begin{equation*}
-%   D_k = \max_{l\neq k} \frac{T_k + T_l}{S_{kl}}
-%   \end{equation*}
-%   \item Critère de Davis-Bouldin pour un clustering entier : 
-%   \begin{equation*}
-%   D = \frac1K \sum_{k=1}^{K}D_k
-%   \end{equation*}
-% \end{itemize}
-% \end{frame}
-
 \begin{frame}
-\frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Geometric Criteria}
 \begin{itemize}
-  \item  \textbf{Coefficient de silhouette.} On note d'abord $a(\xvec)$ la moyenne des distances entre $\xvec$ et les autres points du cluster $k(\xvec)$ auquel $\xvec$ est assigné :
-  %\item Coefficient de silhouette. On note d'abord $a(\xvec)$ comme la moyenne des distances de $\xvec$ et des autres points dans le cluster $k(\xvec)$ auquel $\xvec$ est assigné.   
+  \item \textbf{Silhouette coefficient.} First define $a(\xvec)$ as the mean distance between $\xvec$ and the other points in the cluster $k(\xvec)$ to which $\xvec$ is assigned:
   \begin{equation*}
-  a(\xvec) = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}}d(\xvec, \uvec)
+  a(\xvec) = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}} d(\xvec, \uvec)
   \end{equation*}
-  \item La quantité $b(\xvec)$ est définie comme la plus petite valeur moyenne des distances entre $\xvec$ et tous les points d’un autre cluster $l \neq k(\xvec)$ :
-%  \item La valeur $b(\xvec)$ correspond à la même expression, mais calculée pour le cluster autre que $k(\xvec)$, pour lequel la valeur est minimale:   
+  \item The quantity $b(\xvec)$ is defined as the smallest average distance between $\xvec$ and all points of another cluster $l \neq k(\xvec)$:
   \begin{equation*}
-  b(\xvec) = \min_{l\neq k(\xvec)}\frac{1}{|\cset_l|} \sum_{u \in \cset_l}d(\uvec, \xvec)
+  b(\xvec) = \min_{l\neq k(\xvec)} \frac{1}{|\cset_l|} \sum_{\uvec \in \cset_l} d(\uvec, \xvec)
   \end{equation*}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{1.1 Critères géométriques}
+\frametitle{1.1 Geometric Criteria}
 \begin{itemize}
-  \item Avec $a$ et $b$ définis ainsi, nous pouvons définir le coefficient de silhouette pour le point $\xvec$ : 
+  \item With $a$ and $b$ defined this way, we can define the silhouette coefficient for point $\xvec$:
   \begin{equation*}
-  s(\xvec) = \frac{b(\xvec)-a(\xvec) }{\max{(b(\xvec), a(\xvec))}  }
+  s(\xvec) = \frac{b(\xvec)-a(\xvec)}{\max{(b(\xvec), a(\xvec))}}
   \end{equation*}
-  \item Finalement, le \red{coefficient de silhouette} pour le clustering est :
+  \item Finally, the \red{silhouette coefficient} for the whole clustering is:
   \begin{equation*}
-  s = \frac1n \sum_{i=1}^{n}s(\xvec^i)
+  s = \frac1n \sum_{i=1}^{n} s(\xvec^i)
   \end{equation*}
-
 \end{itemize}
 \end{frame}
 
-
-% \begin{frame}
-%   \frametitle{1.1 Critères géométriques}
-%   \begin{center}
-%     \includegraphics[width=0.5\textwidth]{figures/homogeneity}%
-%   \end{center}
-%   \begin{minipage}[t]{0.5\linewidth}
-%     \begin{itemize}
-%     \item \red{Homogénéité} \textcolor{gray!70}{(tightness)}
-%       \begin{itemize}
-%       \item Pour le cluster $k$ :
-%         \begin{equation*}
-%           T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
-%         \end{equation*}
-%       \end{itemize}
-%     \end{itemize}
-%   \end{minipage}%
-%   \begin{minipage}[t]{0.5\linewidth}
-%     \begin{itemize}
-%     \item \red{Centroïde} du cluster $\cset$:
-%       \[ \muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec\]
-%     \item \red{Médoïde} : l'élément de $\cset$ le plus proche de $\muvec_{\cset}$
-%     \end{itemize}  
-%   \end{minipage}
-%   \begin{itemize}
-%   \item[]  
-%     \begin{itemize}
-%     \item Pour le clustering complet :  $T = \frac1K\sum_{k=1}^{K}T_k$
-%     \end{itemize}
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-%   \frametitle{1.1 Critères géométriques}
-%   \begin{center}
-%     \includegraphics[width=0.5\textwidth]{figures/separability}%
-%   \end{center}
-%   \begin{itemize}
-%   \item \red{Séparabilité}
-%     \begin{itemize}
-%     \item Pour les clusters $k$ et $l$ : 
-%       \begin{equation*}
-%         s_{kl} = d(\muvec_k, \muvec_l)
-%       \end{equation*}
-%     \item Pour le clustering :
-%       \begin{equation*}
-% 	S = \frac{2}{K(K-1)}\sum_{k=1}^{K-1}\sum_{l=k+1}^{K}s_{kl}
-%       \end{equation*}
-%     \end{itemize}
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}
-%   \frametitle{1.1 Critères géométriques}
-%   \begin{itemize}
-%   \item \red{Coefficient de silhouette}
-%     \begin{itemize}
-%     \item Pour un point $\xvec$ :
-%       {\footnotesize
-%       \begin{align*}
-% 	a(\xvec) & = \frac{1}{|\cset_{k(\xvec)}| - 1} \sum_{\uvec \in \cset_{k(\xvec)}}d(\xvec, \uvec) \\
-% 	b(\xvec) & = \min_{l\neq k(\xvec)}\frac{1}{|\cset_l|} \sum_{u \in \cset_l}d(\uvec, \xvec) \\
-%         s(\xvec) & = \frac{b(\xvec) - a(\xvec)}{\max(a(\xvec), b(\xvec))}
-%       \end{align*}}
-
-%   \item Pour le clustering :
-%       \begin{equation*}
-%         s = \frac1n \sum_{i=1}^n s(\xvec^i).
-%       \end{equation*}
-%     \end{itemize}
-%   \end{itemize}
-% \end{frame}
-
 \begin{frame}
-  \frametitle{1.2 Comparaison à des étiquettes connues}
+  \frametitle{1.2 Comparison to Known Labels}
   \begin{itemize}
-  \item Difficulté : les clusters sont numérotés arbitrairement. 
-  \item \red{Indice de Rand} : pourcentage de paires de points qui sont soit dans le même cluster dans les deux partitions, soit dans des clusters différents dans les deux partitions : 
+  \item Difficulty: cluster labels are arbitrary.
+  \item \red{Rand Index (RI):} percentage of pairs of points that are either in the same cluster in both partitions, or in different clusters in both partitions:
     \begin{equation*}
       \text{RI} = \frac2{n (n-1)} \sum_{i=1}^n \sum_{l=i+1}^n 
       \indic_{k(\xvec^i) = k(\xvec^l)} \, \indic_{y^i = y^l} + 
       \indic_{k(\xvec^i) \neq k(\xvec^l)} \, \indic_{y^i \neq y^l}.
     \end{equation*}
-
-  \item Problème du RI : deux partitions aléatoires peuvent avoir un RI élevé par hasard. 
-  \item Solution : ARI (adjusted Rand index) est le RI corrigé. 
-
+  \item Problem with RI: two random partitions can have a high RI by chance.
+  \item Solution: ARI (Adjusted Rand Index) is the corrected version of RI.
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
-  \frametitle{1.3 Stabilité des clusters}
+  \frametitle{1.3 Cluster Stability}
     \begin{center}
       \includegraphics[width=0.7\textwidth]{figures/three_clusters}%
     \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{1.3 Stabilité des clusters}
+  \frametitle{1.3 Cluster Stability}
   \begin{itemize}
-    \item Génération de plusieurs partitions avec le même algorithme de clustering en variant : 
+    \item Generate several partitions with the same clustering algorithm while varying:
     \begin{itemize}
-      \item les conditions initiales de l'algorithme
-      \item des sous-échantillonages dans $\dset$
-      \item des sous-ensembles de descripteurs (éventuellement)
+      \item the algorithm’s initialization
+      \item sub-samplings of $\dset$
+      \item (optionally) subsets of features
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
   \begin{center}
-    \large{2. Clustering hiérarchique}
+    \large{2. Hierarchical Clustering}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Dendrogramme}
+  \frametitle{Dendrogram}
   \begin{center}
     \includegraphics[width=0.7\textwidth]{figures/dendrogram}%
   \end{center}
@@ -563,36 +452,36 @@
 \begin{frame}
   \frametitle{Construction}
   \begin{itemize}
-  \item Construction \red{agglomérative} \textcolor{gray!70}{(bottom-up)}
+  \item \red{Agglomerative} construction \textcolor{gray!70}{(bottom-up)}
     \begin{itemize}
-    \item Initialement : chaque point est son propre cluster 
-    \item On fusionne itérativement les clusters les plus proches
+    \item Initially: each point is its own cluster
+    \item Iteratively merge the two closest clusters
     \end{itemize}
-  \item Construction \red{divisive} \textcolor{gray!70}{(top-down)}
+  \item \red{Divisive} construction \textcolor{gray!70}{(top-down)}
     \begin{itemize}
-    \item Intialement : tous les points sont dans le même cluster 
-    \item On sépare itérativement les clusters en deux
+    \item Initially: all points belong to the same cluster
+    \item Iteratively split clusters into two
     \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Fonctions de lien}
+  \frametitle{Linkage Functions}
   \begin{itemize}
-  \item \red{Fonction de lien} \textcolor{gray!70}{(linkage)} : distance entre deux clusters
+  \item \red{Linkage function:} distance between two clusters
     \begin{itemize}
-    \item \red{Lien simple} \textcolor{gray!70}{(single linkage)}
-      \[ d_{\text{simple}}(\cset_k, \cset_l) = \min_{(\uvec, \vvec) \in \cset_k \times \cset_l } d(\uvec, \vvec).
+    \item \red{Single linkage}
+      \[ d_{\text{single}}(\cset_k, \cset_l) = \min_{(\uvec, \vvec) \in \cset_k \times \cset_l } d(\uvec, \vvec).
       \]
       \pause
-    \item \red{Lien complet} \textcolor{gray!70}{(complete linkage)}
+    \item \red{Complete linkage}
       \[
-        d_{\text{complet}}(\cset_k, \cset_l) = \max_{(\uvec, \vvec) \in \cset_k \times \cset_l} d(\uvec, \vvec).
+        d_{\text{complete}}(\cset_k, \cset_l) = \max_{(\uvec, \vvec) \in \cset_k \times \cset_l} d(\uvec, \vvec).
       \]
       \pause
-    \item \red{Lien moyen} \textcolor{gray!70}{(average linkage)} ou UPGMA \textcolor{gray!70}{(Unweighted Paired Group Method with Arithmetic mean)}
+    \item \red{Average linkage} or UPGMA \textcolor{gray!70}{(Unweighted Pair Group Method with Arithmetic mean)}
       \[
-        d_{\text{moyen}}(\cset_k, \cset_l) = \frac1{\lvert \cset_k \rvert} 
+        d_{\text{average}}(\cset_k, \cset_l) = \frac1{\lvert \cset_k \rvert} 
         \frac1{\lvert \cset_l \rvert}
         \sum_{\uvec \in \cset_k}\sum_{\vvec \in \cset_l} d(\uvec, \vvec).
       \]
@@ -601,13 +490,13 @@
 \end{frame}
 
 \begin{frame}[t]
-  \frametitle{Fonctions de lien}
+  \frametitle{Linkage Functions}
   \begin{itemize}
-  \item \red{Fonction de lien} \textcolor{gray!70}{(linkage)} : distance entre deux clusters
+  \item \red{Linkage function:} distance between two clusters
     \begin{itemize}
-    \item \red{Lien centroïdal} \textcolor{gray!70}{(centroid linkage)}
+    \item \red{Centroid linkage}
       \[
-        d_{\text{centroidal}}(\cset_k, \cset_l) = d \left (\frac1{\lvert \cset_k \rvert} 
+        d_{\text{centroid}}(\cset_k, \cset_l) = d \left (\frac1{\lvert \cset_k \rvert} 
           \sum_{\uvec \in \cset_k} \uvec, 
           \frac1{\lvert \cset_l \rvert} \sum_{\vvec \in \cset_l} \vvec \right) = 
         d(\muvec_k, \muvec_l).
@@ -616,52 +505,51 @@
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}
   \begin{center}
-    \large{3. Algorithme des k-moyennes}
+    \large{3. k-Means Algorithm}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Variance intra-cluster}
+  \frametitle{Within-Cluster Variance}
   \begin{itemize}
-  \item \red{Variance intra-cluster}
+  \item \red{Within-cluster variance}
     \[
             \text{Var}_\text{in}(\cset) = \frac1{\lvert \cset \rvert} \sum_{\xvec \in \cset}
       \ltwonorm{\xvec - \muvec}^2.
     \]
-  \item Minimiser la variance intra-cluster : créer des clusters \blue{homogènes}
+  \item Minimizing the within-cluster variance ⇒ create \blue{homogeneous} clusters
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Algorithme de Lloyd}
+  \frametitle{Lloyd’s Algorithm}
   \begin{itemize}
-  \item \blue{Initialisation :} choisir les $\muvec_1, \muvec_2, \ldots, \muvec_K$ parmi les données. 
-  \item \blue{Affecter} chaque observation $\xvec \in \dset$ au centroïde dont elle est le plus proche :
+  \item \blue{Initialization:} choose $\muvec_1, \muvec_2, \ldots, \muvec_K$ among the data points. 
+  \item \blue{Assign} each observation $\xvec \in \dset$ to the nearest centroid:
     \begin{equation*}
       k(\xvec^i) = \argmin_{k=1, \ldots, K}\ltwonorm{\xvec^i - \muvec_k}^2
     \end{equation*}
-  \item \blue{Recalculer} les centroïdes $\muvec_k$. 
-  \item \blue{Répéter} jusqu'à ce que les affectations ne changent plus. 
+  \item \blue{Recompute} the centroids $\muvec_k$. 
+  \item \blue{Repeat} until the assignments no longer change. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Algorithme de Lloyd}
+  \frametitle{Lloyd’s Algorithm}
   \begin{itemize}
-  \item \blue{Avantages :}
+  \item \blue{Advantages:}
     \begin{itemize}
-    \item Converge rapidement en pratique
+    \item Converges quickly in practice
     \end{itemize}
     \pause
-  \item \blue{Inconvénients :}
+  \item \blue{Limitations:}
     \begin{itemize}
-    \item Nécessité de fixer $K$ 
-    \item Approche \blue{gloutonne} : pas de garantie de minimum global
-    \item \blue{Stochasticité} : dépend de l'initialisation 
-    \item Clusters nécessairement \blue{convexes} 
+    \item Requires the number of clusters $K$ to be specified in advance
+    \item \blue{Greedy} approach — no guarantee of reaching the global minimum
+    \item \blue{Stochasticity:} results depend on initialization
+    \item Clusters are necessarily \blue{convex}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -679,50 +567,27 @@
     \includegraphics[width=.3\textwidth]{figures/hierarchical_sol}% 
     \includegraphics[width=.3\textwidth]{figures/kmeans_sol}
     
-    {\small Nuage de points -- clustering hiérarchique -- clustering kmeans}
+    {\small Point cloud – hierarchical clustering – k-means clustering}
   \end{center}
   \begin{itemize}
-  \item Idée : utiliser la \blue{densité}
+  \item Idea: use \blue{density}
   \end{itemize}
 \end{frame}
-
-
-% \begin{frame}
-%   \frametitle{DBSCAN}
-%   \begin{itemize}
-%   \item Idée : itérer \blue{de proche en proche} par des \blue{voisinages} (boules) de rayon $\varepsilon$
-%   \item On définit deux paramètres : (1) un rayon $\varepsilon$ et (2) un number minimal de points $n_{min}$. On définit alors : 
-%   \begin{itemize}
-%     \item Point cœur (core point) : un point ayant au moins $n_{min}$ voisins dans un rayon $\varepsilon$.
-%     \item Point frontière (border point) : moins de $n_{min}$ dans son voisinage, mais il est proche d’un point coeur.
-%     \item Point bruit (noise / outlier) : les points isolés, considérés comme du bruit .
-%   \end{itemize}
-%   \item Etapes de l'algorithmes : 
-%   \begin{itemize}
-%     \item On trouve d'abord les points coeurs. 
-%     \item Ensuite, on construit les composantes connexes en reliant entre eux les points coeurs voisins : chaque composante constitue un cluster. 
-%     \item Ensuite on assigne chaque point frontière à une composante connexe. 
-%     \item On n'assigne pas les points bruit. 
-%   \end{itemize}
-%   % \begin{center}
-%   %   \includegraphics[width=.6\textwidth]{figures/dbscan}
-%   % \end{center}
-% \end{frame}
 
 \begin{frame}
   \frametitle{DBSCAN}
   \begin{itemize}
-  \item Idée : itérer \blue{de proche en proche} par des \blue{voisinages} (boules) de rayon $\varepsilon$
-  \item On définit deux paramètres : 
+  \item Idea: iterate \blue{from neighbor to neighbor} using \blue{neighborhoods} (balls) of radius $\varepsilon$.
+  \item Two parameters are defined:
   \begin{enumerate}
-    \item un rayon $\varepsilon$ 
-    \item un number minimal de points $n_{min}$. 
+    \item a radius $\varepsilon$
+    \item a minimum number of points $n_{min}$
   \end{enumerate}
-  \item On définit alors : 
+  \item Definitions:
   \begin{itemize}
-    \item Point cœur (core point) : un point ayant au moins $n_{min}$ voisins dans un rayon $\varepsilon$.
-    \item Point frontière (border point) : moins de $n_{min}$ dans son voisinage, mais il est proche d’un point coeur.
-    \item Point bruit (noise / outlier) : les points isolés, considérés comme du bruit .
+    \item \textbf{Core point:} a point having at least $n_{min}$ neighbors within a radius $\varepsilon$.
+    \item \textbf{Border point:} has fewer than $n_{min}$ neighbors, but lies close to a core point.
+    \item \textbf{Noise point (outlier):} isolated points, considered as noise.
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -730,12 +595,12 @@
 \begin{frame}
   \frametitle{DBSCAN}
   \begin{itemize}
-  \item Etapes de l'algorithmes : 
+  \item Steps of the algorithm:
   \begin{itemize}
-    \item On trouve d'abord les points coeurs. 
-    \item Ensuite, on construit les composantes connexes en reliant entre eux les points coeurs voisins : chaque composante constitue un cluster. 
-    \item Ensuite on assigne chaque point frontière à une composante connexe. 
-    \item On n'assigne pas les points bruit. 
+    \item Identify core points.
+    \item Build connected components by linking neighboring core points — each component forms a cluster.
+    \item Assign each border point to a connected component.
+    \item Noise points remain unassigned.
   \end{itemize}
   \end{itemize}
   \begin{center}
@@ -744,22 +609,33 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{DBSCAN : avantages et inconvénients}
+  \frametitle{DBSCAN: Advantages and Limitations}
   \begin{itemize}
-  \item \blue{Avantages :}
+  \item \blue{Advantages:}
     \begin{itemize}
-    \item n'impose pas de forme particulière
-    \item simple, pas de définition du nombre de clusters
-    \item robustesse aux données aberrantes
+    \item No assumption about cluster shape
+    \item Simple, no need to define the number of clusters
+    \item Robust to outliers
     \end{itemize}
   \pause
-  \item \blue{Inconvénients :}
+  \item \blue{Limitations:}
     \begin{itemize}
-    \item ne sait pas gérer des écarts
-    \item peu de résultats théoriques
-    \item pas applicable en très haute dimension 
+    \item Does not handle varying densities well
+    \item Few theoretical guarantees
+    \item Not applicable in very high-dimensional spaces
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+
+
+
+
+
+
+
+
+
+
 
 
