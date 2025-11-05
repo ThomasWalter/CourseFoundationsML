@@ -14,7 +14,7 @@
     \item[] Extreme example: learning ``by heart''
       \vspace{.5em}
     \pause
-    \item \red{Generalization :} a model's ability to à \blue{make good predictions on samples with unknown labels} 
+  \item \red{Generalization :} a model's ability to \blue{make good predictions on samples with unknown labels} 
       \vspace{.5em}
     \pause
     \item \red{Overfitting:} when the model performs better on training data than on other data
@@ -200,7 +200,7 @@
 
   \begin{itemize}
   \item Sensitivity = recall = true positive rates = $\frac{\text{TP}}{\color{Aubergine}{\text{TP + FN}}}$
-  \item Specificty = true negative rates = $\frac{\text{TN}}{\color{Aubergine}{\text{TN + FP}}}$
+  \item Specificity = true negative rates = $\frac{\text{TN}}{\color{Aubergine}{\text{TN + FP}}}$
   \item Precision = $\frac{\text{TP}}{\color{MyOrange}{\text{TP + FP}}}$
   \item Accuracy = $\frac{\text{TP + TN}}{\text{TP + FP + TN + FN}}$
   \item F-score = harmonic mean of precision and recall = $\frac{\text{2 TP}}{\color{MyOrange}{\text{TP + FP}} {\color{MyDarkGrey}{\text{ + }}} \color{Aubergine}{\text{TP + FN}}}$
@@ -344,7 +344,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Nestled cross-validation}
+  \frametitle{Nested cross-validation}
   \begin{itemize}
   \item Cross-validate
     \begin{itemize}
@@ -362,7 +362,7 @@
 \begin{frame}
   \frametitle{Several hyperparameters}
   \begin{itemize}
-  \item \blue{Grid search} (\textcolor{gray!70}{grid search})
+  \item \blue{Grid search}
   \item \blue{Greedy search:} explore each hyperparameter in turn
   \item \blue{Random search}
   \end{itemize}
@@ -458,16 +458,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.2 Ridge regularization}
-  \begin{itemize}
-  \item[] \blue{Geometric interpretation} 
-  \end{itemize}
-  \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/l2reg_en}  
-  \end{center}
-\end{frame}
-
-\begin{frame}
   \frametitle{2.3 Lasso }
   \begin{itemize}
   \item Example 2: \red{$\ell_1$ regularization} 
@@ -496,18 +486,15 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{2.3 Lasso }
-  \begin{itemize}
-  \item[] \blue{Geometric interpretation} 
-  \end{itemize}
+\begin{frame}[t]
+  \frametitle{Estimation by maximum a posteriori}
   \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/l1reg_en}  
+    \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss_en}  
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Elastic Net}
+  \frametitle{2.4 Elastic Net}
   \begin{itemize}
   \item If the features are \blue{correlated:} Lasso will select one of them at random
   \item[$\Rightarrow$] \blue{unstable}
@@ -518,18 +505,33 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Estimation by maximum a posteriori}
+  \frametitle{2.5 Geometric interpretation}
+  \begin{itemize}
+  \item[] \blue{ Ridge regularization} 
+  \end{itemize}
   \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss}  
+    \includegraphics[width=.7\textwidth]{figures/l2reg_en}  
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{2.5 Geometric interpretation}
+  \begin{itemize}
+  \item[] \blue{Lasso} 
+  \end{itemize}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{figures/l1reg_en}  
   \end{center}
 \end{frame}
 
 \begin{frame}[t]
-  \frametitle{Polynomial regression}
+  \frametitle{2.6 Polynomial regression}
   \begin{itemize}
   \item How can we use all this to learn a \blue{polynomial model?}
   \end{itemize}
 \end{frame}
+
+
 
 \begin{frame}
   \frametitle{References and complementary resources}
