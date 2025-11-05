@@ -228,44 +228,44 @@
 
 \begin{frame}
   \begin{center}
-    \large{2. Méthodes ensemblistes}
+    \large{2. Ensemble methods}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.1 Sagesse des foules}
+  \frametitle{2.1 Wisdom of crowds}
   \begin{center}
     \includegraphics[width=.5\textwidth]{figures/crowd_diagonal}
   \end{center}
   \begin{itemize}
-  \item Combiner des \blue{apprenants faibles}.
-  \item Exemple: fonction diagonale, approchée par des fonctions en esaclier. 
-  \item Principe démocratique. 
+  \item Combine \blue{weak learners}.
+  % \item Exemple: fonction diagonale, approchée par des fonctions en esaclier. 
+  % \item Principe démocratique. 
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{2.2 Bagging}
   \begin{itemize}
-    \item Construire plusieurs arbres entraînés sur des \blue{données différentes :} échantillonage \blue{bootstrap} de $\dset$ 
-    \item Prédiction finale :
+    \item Build several trees trained on \blue{different data:} \blue{bootstrap sampling} of $\dset$ 
+    \item Final prediction:
       \begin{itemize}
-      \item Classification : \blue{vote majoritaire} 
-      \item Régression : \blue{moyenne} 
+      \item Classification: \blue{majority vote} 
+      \item Regression: \blue{mean} 
       \end{itemize}   
-    \item Méthode \blue{parallèle}   
+    \item \blue{Parallel}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{2.3 Forêts aléatoires}
+  \frametitle{2.3 Random forests}
   \begin{itemize}
-  \item Construire plusieurs arbres entraînés :
+  \item How to train different trees?
     \begin{itemize}
-    \item sur des \blue{données différentes :} échantillonage \blue{bootstrap} de $\dset$ 
-    \item sur des \blue{variables différentes :} à chaque nœud, tirer aléatoirement $q < p$ variables
+    \item on \blue{different data:} \blue{bootstrap samples} of $\dset$ 
+    \item onf \blue{different features:} for each node, randomly draw $q < p$ features
     \end{itemize}
-    \item But : décorréler les arbres
+    \item Goal: decorrelate trees
     % \item En pratique : 
     % \begin{itemize}
     %   \item généralement bons résultats
@@ -279,19 +279,21 @@
 \begin{frame}
   \frametitle{2.4 Boosting}
   \begin{itemize}
-  \item Méthode \blue{séquentielle}    
-  \item À l'itération $m$
+  \item \blue{Sequential} method
+  \item At iteration $m$
     \begin{itemize}
-    \item Apprendre le modèle $f_m$ qui minimise l'erreur empirique de
+    \item Learn model $f_m$ so as to minimize empirical risk 
       \[
         F_m = \sum_{l=1}^m \alpha_l f_l = F_{m-1} + \alpha_m f_m 
       \]
-    \item L'erreur pour $(\xvec_i, y_i)$ est pondérée de sorte à donner plus
-      d'importances aux exemples pour lesquels $F_{m-1}$ se trompe.
+    \item Weight the error of $(\xvec_i, y_i)$ so as to give more importance on samples where $F_{m-1}$ is wrong.
     \end{itemize}
-  \item \red{AdaBoost} (Schapire \& Freund 1997) : erreur exponentielle, $f_m$ est un
-    arbre de décision de profondeur 1 (\red{decision stump})
-  \item \red{Gradient Boosting} (Friedman 2001) : forme générale
+  \item \red{AdaBoost} (Schapire \& Freund 1997):
+    \begin{itemize}
+    \item exponential error 
+    \item $f_m$ is a decision tree of depth 1 (\red{decision stump})
+  \end{itemize}
+  \item \red{Gradient Boosting} (Friedman 2001): general form 
   \end{itemize}
 \end{frame}
 
