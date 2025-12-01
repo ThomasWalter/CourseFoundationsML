@@ -26,9 +26,9 @@ Pour utiliser les même librairies, utilisez le fichier `package_list.yml` :
 ```
 
 ## Contenus
-* Cours 1 (mercredi 01/12 matin) : prise en main de `scikit-learn`
-* Cours 2 (mercredi 01/12 après-midi) : sélection de modèle, régularisation
-* Cours 3 (jeudi 02/12 après-midi) : arbres et modèles ensemblistes
-* Cours 4 (jeudi 02/12 après-midi) : méthodes à noyaux
-* Cours 5 (vendredi 03/12 après-midi) : réduction de dimension
-* Cours 6 (vendredi 03/12 après-midi) : clustering
+* Cours 1 (lundi 01/12 matin) : prise en main de `scikit-learn`
+* Cours 2 (lundi 01/12 après-midi) : sélection de modèle, régularisation
+* Cours 3 (mardi 02/12 après-midi) : arbres et modèles ensemblistes
+* Cours 4 (mardi 02/12 après-midi) : méthodes à noyaux
+* Cours 5 (mercredi 03/12 après-midi) : réduction de dimension
+* Cours 6 (mercredi 03/12 après-midi) : clustering
