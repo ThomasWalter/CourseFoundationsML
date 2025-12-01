@@ -1,0 +1,17 @@
+name: fondml_course
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - ipython
+  - jupyterlab
+  - pandas
+  - notebook
+  - numpy
+  - scipy
+  - spyder
+  - matplotlib
+  - scikit-learn
+  - seaborn
+
