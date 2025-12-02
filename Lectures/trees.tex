@@ -61,7 +61,7 @@
 \begin{frame}
   \frametitle{Split : critère de régression}
   \begin{itemize}
-    \item Un suppose qu'un split $(j,s)$ génère deux régions $R_1$ et $R_2$. 
+    \item On suppose qu'un split $(j,s)$ génère deux régions $R_1$ et $R_2$. 
     \item Dans le cas d'une regression, on calcule alors les moyennes $\overline{y_1}$ et $\overline{y_2}$ des étiquettes dans les régions $R_1(j,s)$ et $R_2(j,s)$. 
     \item Le critère à minimiser par $(j,s)$:
     \begin{equation*}
@@ -79,6 +79,7 @@
     Imp(R) = 1- \max_{c=1, \ldots C}p_c(R)
     \end{equation*}
     avec $p_c(R)$ la probabilité (proportion) de la classe $c$ dans $R$. 
+    \item Il s'agit de la proportion d'exemples qui n'apparait pas à la classe majoritaire. 
     \item Ce critère est:
     \begin{itemize}
       \item 0 si toutes les instances appartiennent à la même classe.
@@ -275,7 +276,10 @@
   \frametitle{Adaboost}
     \begin{enumerate}
       \item Initialisation: $w_i^1 = \frac{1}{n}$
-      \item Apprendre le classifieur $f_m$ à partir de $\dset_m$. Les poids influencent le calul du critère. 
+      \item Apprendre le classifieur $f_m$ à partir de $\dset_m$. Les poids influencent le calul du critère, en remplaçant $p_c(R)$ par :
+      \begin{equation}
+      \tilde{p}_c(R) = \frac{1}{\sum_iw_i}\sum_{i;y_i=c}w_i
+      \end{equation} 
       \item Calculer l'erreur du modèle : 
       \begin{equation*}
       \epsilon_m = \sum_{i=1}^n w_i^m \mathds{1}_{f_m(\xvec_i) \neq y_i}
@@ -305,7 +309,36 @@
     \end{enumerate}
 \end{frame}
 
+\begin{frame}{Gradient Boosting}
+\begin{itemize}
+  \item AdaBoost est en fait un cas particulier d'une famille de techniques appelees \textit{boosting du gradient (gradient boosting en anglais).}
+  \item On considere la fonction de perte exponentielle : 
+\begin{eqnarray*}
+\{-1, 1\} \times \RR &\rightarrow& \RR \\
+y,f(\xvec) \mapsto e^{-yf(\xvec)}
+\end{eqnarray*}
+\item et la fonction de décision cummulative : 
+\begin{equation*}
+      F_M(\xvec) = \sum_{m=1}^{M}\alpha_mf_m(\xvec)
+\end{equation*}
+\item On peut montrer alors que la règle de AdaBoost minimise cette fonction de coût. 
+\end{itemize}
+\end{frame}
 
+\begin{frame}{Conclusion}
+\begin{itemize}
+  \item Les forêts aggrègent des résultats de classifieurs faibles
+  \item Stratégies : 
+  \begin{itemize}
+    \item Forêt aléatoire repose sur la diversification et le vote
+    \item AdaBoost focalise sur les erreurs (approche collaborative)
+  \end{itemize}
+  \item AdaBoost est souvent sensible au bruit d'étiquette, mais meilleur pour les jeux de données "propres" 
+  \item Les Foréts aléatoires sont souvent plus robustes. 
+  \item Ajouter des arbres est habituellement avantageux pour les forêts aléatoires (jusqu'à 500), mais pas nécessairement pour AdaBoost. 
+\end{itemize}
+
+\end{frame}
 
 %%% Local Variables:
 %%% mode: latex
