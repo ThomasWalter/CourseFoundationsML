@@ -1,0 +1,220 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+
+\title{Machines à vecteurs de support (SVM)}
+\subtitle{Cas linéairement séparable -- marge rigide}
+\author{D'après le chapitre sur les SVM}
+\date{}
+
+\begin{document}
+
+%----------------- Titre -----------------%
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%----------------- Plan -----------------%
+\begin{frame}{Plan}
+  \tableofcontents
+\end{frame}
+
+\section{Problème de classification linéairement séparable}
+
+%----------------- Données et séparabilité -----------------%
+\begin{frame}{Problème de classification binaire}
+  On considère un problème de classification binaire avec un jeu de données :
+  \[
+    D = \{(\bm{x}_i, y_i)\}_{i=1}^n,
+  \]
+  où
+  \[
+    \bm{x}_i \in \mathbb{R}^p, \qquad y_i \in \{-1, +1\}.
+  \]
+
+  \vspace{0.5cm}
+  \textbf{Idée :} trouver un \textbf{classifieur linéaire}
+  \[
+    f(\bm{x}) = \langle \bm{w}, \bm{x} \rangle + b
+  \]
+  tel que la frontière de décision
+  \[
+    H = \{\bm{x} \in \mathbb{R}^p \mid \langle \bm{w}, \bm{x} \rangle + b = 0\}
+  \]
+  sépare les deux classes.
+\end{frame}
+
+\begin{frame}{Définition : séparabilité linéaire}
+  \textbf{Définition.} Le jeu de données $D$ est dit \emph{linéairement séparable} s'il existe un hyperplan
+  \[
+    H = \{\bm{x} \in \mathbb{R}^p \mid \langle \bm{w}, \bm{x} \rangle + b = 0\}
+  \]
+  tel que :
+  \[
+    \begin{cases}
+      \langle \bm{w}, \bm{x}_i \rangle + b > 0 & \text{si } y_i = +1,\\[0.2cm]
+      \langle \bm{w}, \bm{x}_i \rangle + b < 0 & \text{si } y_i = -1.
+    \end{cases}
+  \]
+
+  \vspace{0.3cm}
+  Cela revient à demander
+  \[
+    y_i \bigl( \langle \bm{w}, \bm{x}_i \rangle + b \bigr) > 0 \quad \text{pour tout } i.
+  \]
+
+  \vspace{0.3cm}
+  Dans ce cas, il existe \textbf{une infinité d'hyperplans séparateurs} qui ne font aucune erreur
+  de classification : il faut choisir le ``meilleur''.
+\end{frame}
+
+\section{Marge d'un hyperplan séparateur}
+
+\begin{frame}{Marge et hyperplans parallèles}
+  \textbf{Idée :} parmi tous les hyperplans séparateurs, on choisit celui qui maximise la \emph{marge}.
+
+  \vspace{0.3cm}
+  On considère :
+  \[
+    H : \langle \bm{w}, \bm{x} \rangle + b = 0,
+  \]
+  ainsi que deux hyperplans parallèles :
+  \[
+    H_+ : \langle \bm{w}, \bm{x} \rangle + b = 1, \qquad
+    H_- : \langle \bm{w}, \bm{x} \rangle + b = -1.
+  \]
+
+  \vspace{0.3cm}
+  Les contraintes de séparation deviennent alors :
+  \[
+    y_i \bigl( \langle \bm{w}, \bm{x}_i \rangle + b \bigr) \geq 1, \quad i=1,\dots,n.
+  \]
+
+  \vspace{0.3cm}
+  La \textbf{marge} $\gamma$ est la distance entre $H$ et $H_+$ (ou $H_-$) :
+  \[
+    \gamma = \frac{1}{\|\bm{w}\|_2}.
+  \]
+\end{frame}
+
+\begin{frame}{Vecteurs de support et zone d'indécision}
+  \begin{itemize}
+    \item Les observations qui vérifient
+      \[
+        y_i \bigl( \langle \bm{w}, \bm{x}_i \rangle + b \bigr) = 1
+      \]
+      sont situées exactement sur $H_+$ ou $H_-$.
+    \item Ces points s'appellent les \textbf{vecteurs de support} : ils ``soutiennent'' la solution.
+    \item La région comprise entre $H_-$ et $H_+$ s'appelle la \textbf{zone d'indécision} : elle ne contient
+          aucune observation dans le cas séparé.
+    \item Seuls les vecteurs de support déterminent la position optimale de l'hyperplan.
+  \end{itemize}
+\end{frame}
+
+\section{Formulation primale de la SVM à marge rigide}
+
+\begin{frame}{Problème d'optimisation primale}
+  L'objectif de la SVM à marge rigide est de \textbf{maximiser la marge} $\gamma = 1/\|\bm{w}\|_2$,
+  sous les contraintes de séparation.
+
+  \vspace{0.3cm}
+  Maximiser $1/\|\bm{w}\|_2$ revient à minimiser $\tfrac{1}{2}\|\bm{w}\|_2^2$.
+  
+  \vspace{0.3cm}
+  \textbf{Problème primal :}
+  \[
+    \begin{aligned}
+      \min_{\bm{w} \in \mathbb{R}^p,\; b \in \mathbb{R}} \quad & \frac{1}{2} \|\bm{w}\|_2^2 \\
+      \text{sous contraintes} \quad & y_i \bigl( \langle \bm{w}, \bm{x}_i \rangle + b \bigr) \geq 1,
+      \quad i = 1,\dots,n.
+    \end{aligned}
+  \]
+
+  \vspace{0.3cm}
+  Une solution optimale $(\bm{w}^\ast, b^\ast)$ définit la fonction de décision
+  \[
+    f(\bm{x}) = \langle \bm{w}^\ast, \bm{x} \rangle + b^\ast.
+  \]
+\end{frame}
+
+\section{Formulation duale et vecteurs de support}
+
+\begin{frame}{Formulation duale : idée générale}
+  Le problème primal est convexe avec des contraintes linéaires.  
+  On introduit les multiplicateurs de Lagrange $\alpha_i \geq 0$, un par contrainte.
+
+  \vspace{0.3cm}
+  Le lagrangien est :
+  \[
+    \mathcal{L}(\bm{w}, b, \bm{\alpha}) =
+      \frac{1}{2} \|\bm{w}\|_2^2
+      - \sum_{i=1}^n \alpha_i
+      \Bigl( y_i (\langle \bm{w}, \bm{x}_i \rangle + b) - 1 \Bigr).
+  \]
+
+  En minimisant $\mathcal{L}$ par rapport à $\bm{w}$ et $b$, puis en maximisant par rapport à $\bm{\alpha}$,
+  on obtient le \textbf{problème dual}.
+\end{frame}
+
+\begin{frame}{Formulation duale explicite}
+  La formulation duale de la SVM à marge rigide s'écrit :
+  \[
+    \begin{aligned}
+      \max_{\bm{\alpha} \in \mathbb{R}^n} \quad
+      & \sum_{i=1}^n \alpha_i - \frac{1}{2}
+        \sum_{i=1}^n \sum_{j=1}^n
+        \alpha_i \alpha_j y_i y_j \langle \bm{x}_i, \bm{x}_j \rangle \\
+      \text{sous contraintes} \quad
+      & \sum_{i=1}^n \alpha_i y_i = 0, \\
+      & \alpha_i \geq 0,\quad i=1,\dots,n.
+    \end{aligned}
+  \]
+
+  \vspace{0.4cm}
+  On en déduit ensuite :
+  \[
+    \bm{w}^\ast = \sum_{i=1}^n \alpha_i^\ast y_i \bm{x}_i,
+  \]
+  où $\bm{\alpha}^\ast$ est une solution optimale du dual.
+\end{frame}
+
+\begin{frame}{Fonction de décision et vecteurs de support}
+  La fonction de décision peut se réécrire uniquement en fonction des données d'entraînement :
+  \[
+    f(\bm{x}) = \sum_{i=1}^n \alpha_i^\ast y_i \langle \bm{x}_i, \bm{x} \rangle + b^\ast.
+  \]
+
+  \vspace{0.3cm}
+  \textbf{Vecteurs de support :}
+  \begin{itemize}
+    \item Les points tels que $\alpha_i^\ast > 0$ sont les vecteurs de support.
+    \item Ils sont situés sur les hyperplans $H_+$ ou $H_-$.
+    \item Les points avec $\alpha_i^\ast = 0$ n'interviennent pas dans la somme.
+  \end{itemize}
+
+  \vspace{0.3cm}
+  \textbf{Conclusion :} la solution ne dépend que d'un sous-ensemble des données, portant toute
+  l'information géométrique utile.
+\end{frame}
+
+\section{Résumé}
+
+\begin{frame}{Résumé}
+  \begin{itemize}
+    \item En cas de séparabilité linéaire, la SVM à marge rigide cherche l'hyperplan
+          maximisant la marge entre les deux classes.
+    \item Le problème s'écrit comme une minimisation de $\frac{1}{2}\|\bm{w}\|_2^2$ sous contraintes
+          linéaires $y_i(\langle \bm{w}, \bm{x}_i \rangle + b) \geq 1$.
+    \item La formulation duale fait intervenir uniquement des produits scalaires
+          $\langle \bm{x}_i, \bm{x}_j \rangle$ et les multiplicateurs de Lagrange $\alpha_i$.
+    \item La solution finale dépend uniquement des \textbf{vecteurs de support}
+          (les points pour lesquels $\alpha_i^\ast > 0$).
+  \end{itemize}
+\end{frame}
+
+\end{document}
