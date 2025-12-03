@@ -26,6 +26,36 @@
   \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+	\frametitle{Fléau de la dimensionalité}
+
+		
+			\begin{figure}[htb]
+			%\centering
+			\includegraphics[width=.55\textwidth]{CurseDimensionality.png}
+			%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
+		\end{figure}
+	
+	\blue{Conséquence}: Le nombre d'échantillons nécessaire pour couvrir l'espace des données grandit exponentiellement avec la dimension $p$ !
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Fléau de la dimensionalité: conséquences}
+	
+	\begin{itemize}
+		\item  Le nombre d'échantillons nécessaire pour couvrir l'espace des données grandit exponentiellement avec la dimension $p$ 
+		\item En grande dimension, tous les points sont loin les uns des autres
+		\item Les intuitions que l'on a en 2d ou 3d ne sont pas vrais en grande dimension
+	\end{itemize}
+	
+	
+	
+	
+\end{frame}
+
 \begin{frame}
   \frametitle{Réduction de dimensions - deux stratégies}
   \begin{itemize}
@@ -132,7 +162,7 @@
  \begin{equation*}
  x^i_j = \frac{x_j^i - \overline{x}_j}{\sqrt{\frac{1}{n}\sum_{l=1}^n(x_j^l - \overline{x}_j)^2}} 
  \end{equation*}
- 	\item La matrice de covariance est donc : $\Sigma = \frac1n X^TX$ 
+ 	\item La matrice de covariance est donc : $\Sigma = \frac1n X^TX$ , $\Sigma \in \mathbb{R}^{p \times p}$
  	\item On cherche maintenant une direction $\wvec$, pour laquelle la projection de $X$ sur cette direction a une variance maximale. 
  	\item On peut montrer que cette variance maximale est la plus grande valeur propre de $\Sigma$, et que la direction est le vecteur propre correspondant. 
   \end{itemize}
@@ -174,20 +204,38 @@
   	\end{itemize}
   	\item Inconvénients : 
   	\begin{itemize}
-  		\item la variance maximale n'est pas identique avec le contenu d'information
+  		\item maximiser la variance ne veut pas forcément dire maximiser la quantité d'information
   		\item en pratique, les structures locales ne sont pas nécessairement bien préservées 
   	\end{itemize}
   \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+	\frametitle{t-SNE: Motivation}
+	Les données ne sont pas toujours séparables linéairement
+	\begin{figure}[htb]
+	\includegraphics[width=.4\textwidth]{Tsne1.png}
+	\hspace{1em}
+\visible<2>{	\vrule}
+	\hspace{1em}
+	\visible<2>{\includegraphics[width=.4\textwidth]{Tsne2.png}}
+	
+	%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
+	
+\end{figure}
+\end{frame}
+
+
+
 \begin{frame}
 \frametitle{t-SNE 1/3}
 \begin{itemize}
 %	\item Many low dimensional representations: PCA, ICA, $\ldots$
-	\item Objectif : représentation des données en basse dimension en respectant les relations locales
+	\item Objectif : représentation des données en faible dimension en respectant les relations locales
 	\item Une technique relativement récente  \emph{t-Distributed Stochastic Neighbor Embedding (t-SNE)} (2008)
 	\item $\{\xvec_i\}_{0\leq i < N}$ sont les représentations, avec $\xvec \in \RR^p$. 
-	\item On définit la probabilité que $\_j$ est voisin de $x_i$, sous condition que la probabilité peut être modélisée par une Gaussienne, centrée dans $x_i$:  
+	\item On définit la probabilité que $x_j$ est voisin de $x_i$, sous condition que la probabilité peut être modélisée par une Gaussienne, centrée dans $x_i$:  
 	\begin{equation}
 	p_{j|i} = \frac{\exp{\left(-\frac{\|\xvec_i - \xvec_j\|^2}{2 \sigma_i^2}\right)}}{\sum_{k\neq i} \exp{\left(-\frac{\|\xvec_i - \xvec_k\|^2}{2 \sigma_i^2}\right)} }
 	\end{equation}
@@ -216,7 +264,7 @@
 \frametitle{t-SNE 3/3}
 \begin{itemize}
 	\item Les paramètres $\sigma_i$ sont déterminés par l'algorithme
-	\item Ils varient selon la densité de voisins, de façon à ce que pour chaque $\xvec_i$ nous avons à peu près le même nombre de voisins. 
+	\item Ils varient selon la densité de voisins, de façon à ce que pour chaque $\xvec_i$ nous ayons à peu près le même nombre de voisins. 
 	\item L'utilisateur choisit le paramètre \textit{perplexity} qui mesure le nombre effectif de voisins. 
 	\item Le problème se réduit à la solution d'un problème d'optimisation $\min_{\widetilde{\xvec_i}} C$ avec la méthode du gradient.
 \end{itemize}
@@ -238,14 +286,45 @@
   \end{itemize}
 \end{frame}
 
+%\begin{frame}
+%\frametitle{t-SNE map: exemple}
+%\begin{figure}[htb]
+  %\centering
+ % \includegraphics[width=.8\textwidth]{music_tsne.pdf}
+%  \caption{Exemple pour une visualisation de t-SNE appliquée aux descriptions vectorielles de morceaux de musique}
+%\end{figure}
+%\end{frame}
+
+
 \begin{frame}
-\frametitle{t-SNE map: exemple}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=.8\textwidth]{music_tsne.pdf}
-  \caption{Exemple pour une visualisation de t-SNE appliquée aux descriptions vectorielles de morceaux de musique}
+	\frametitle{t-SNE: Résultat}
+Application de t-SNE avec une perplexité de 2 sur l'exemple précédent
+	\begin{figure}[htb]
+		\includegraphics[width=.4\textwidth]{Tsne1.png}
+		\hspace{1em}
+\vrule
+		\hspace{1em}
+\includegraphics[width=.4\textwidth]{Tsne1-solved.png}
+				
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{t-SNE: Résultat}
+Application de t-SNE avec une perplexité de 2 sur l'exemple précédent
+	\begin{figure}[htb]
+		\includegraphics[width=.4\textwidth]{Tsne2.png}
+		\hspace{1em}
+		\vrule
+	\hspace{1em}
+	\includegraphics[width=.4\textwidth]{Tsne2-solved.png}		
+	\textit{\small{Source:\\ \url{https://distill.pub/2016/misread-tsne/}}}
 \end{figure}
 \end{frame}
+
+
+
 
 \begin{frame}
 \frametitle{t-SNE map: ImageNet}
@@ -280,7 +359,7 @@
 	\item Méthodes de sélection par filtrage ad-hoc
 	\item Méthodes de conteneur : sélection de variables pour une classification spécifique
 	\item Méthodes embarquées (LASSO, ... )
-	\item APC : analyse en composante principale
+	\item ACP : analyse en composante principale
 	\item t-SNE : méthode utilisée pour la visualisation. 
 \end{itemize}
 \end{frame}

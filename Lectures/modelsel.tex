@@ -36,7 +36,26 @@
 \begin{frame}
   \frametitle{Compromis biais-variance}
   
+ 
+  	\begin{itemize}
+  		\item[] \blue{Données :} $n$ observations réalisations de $X,Y$, couple de variable \textit{i.i.d.}
+  		\item[] \blue{Vérité} :  $ Y = \phi(X) + \epsilon$, $\epsilon$ est le bruit avec $\mathbb{E}(\epsilon) = 0 $, $ Var(\epsilon) = \sigma^2$ 
+  		\item \blue{But}: déterminer $\phi$
+  		\begin{itemize}
+  			\item<2-> Résultat du model de ML:  $F_i = f(\xvec_i)$
+  			\item<2-> Erreur quadratique moyenne de $F_i$ :
+  		  	\item[]<3-> $\mathbb{E} ((F_i - y_i)^2) =  \mathbb{E}(F_i - \phi(\xvec))^2 + \mathbb{E}\left[(F_i - \mathbb{E}(F_i))^2\right] + Var (\epsilon) $
+  		  	\item[]<3-> $\mathbb{E} ((F_i - y_i)^2) = $ \red{Biais} + \red{Variance} + \red{$\sigma^2 $} 
+  		\end{itemize}
+
+  		  	\item<4-> \red{$\sigma^2$} : Erreur irréductible
+  	  	\item<4->  \red{Biais} : Distance à la vraie valeur
+    	\item<4-> \red{Variance}: Variabilité de l'estimateur
+  \end{itemize}
 \end{frame}
+
+  
+
 
 \begin{frame}
   \frametitle{1.2 Jeux d'entraînement et de test}
