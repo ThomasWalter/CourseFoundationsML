@@ -1,3 +1,4 @@
+%-*- coding: utf-8 -*-
 \begin{frame}
   \begin{center}
     \large{1. Évaluation d'un modèle}
@@ -10,9 +11,9 @@
   \begin{itemize}
   \item[] \blue{Défi principal} de l'apprentissage supervisé :
     \begin{itemize}
-    \item Il est relativement facile d'entraîner un modèle qui « marche » bien
+    \item Il est relativement facile d'entraîner un modèle qui <<marche>> bien
       (faible erreur de prédiction) sur les données d'apprentissage
-    \item[] Exemple extrême : apprentissage « par c\oe{}ur »
+    \item[] Exemple extrême : apprentissage <<par c\oe{}ur>>
       \vspace{.5em}
     \pause
     \item \red{Généralisation :} capacité du modèle à \blue{faire de
@@ -41,8 +42,11 @@
     \item $\dset = (\xvec^1, y^1), \dots, (\xvec^n, y^n)$ \blue{échantillon aléatoire} de $(X, Y)$
     \item $Y = \Phi(X) + \varepsilon$ \hspace{2em} $\mathbb{E}[\varepsilon] = 0$ et $\text{Var}[\varepsilon] = \sigma^2$
     \end{itemize}
-  \item \blue{Modèle} $f$ appris $\Rightarrow$ prédiction $f(\xvec)$ = estimation de
-    $\Phi(\xvec)$, réalisation d'une v.a.r. $F_n$ fonction de $\dset$
+  \item \blue{Modèle} $f$ appris $\Rightarrow$ prédiction $f(\xvec)$
+    \begin{itemize}
+    \item estimation de $\Phi(\xvec)$
+    \item réalisation d'une v.a.r. $F_n$ (qui dépend de $\dset$)
+  \end{itemize}
   \item \blue{Erreur quadratique moyenne} de l'estimateur :
     \[       \mathbb{E}[(F_n - y)^2] = \mathbb{E}[(F_n - \Phi(\xvec^i) - \varepsilon)^2] = \dots = \text{Biais}(F_n)^2 + \text{Var}(F_n) + \sigma^2 
     \]    
@@ -142,7 +146,7 @@
     \begin{itemize}
     \item[] \black{Exemple :} détection de fraude
     \item 99\% des observations ne sont pas des fraudes
-    \item Un modèle qui prédit toujours « non » a un pourcentage d'erreur de 1\%.
+    \item Un modèle qui prédit toujours << non >> a un pourcentage d'erreur de 1\%.
     \end{itemize}
     \pause
   \item \red{Matrice de confusion} \textcolor{gray!70}{(confusion matrix)}
@@ -344,8 +348,7 @@
     \end{itemize}
   \item Peut devenir \blue{coûteux en calculs :}
     \begin{itemize}
-    \item \textbf{Exemple :} si K = 5 pour la boucle interne, K=10 pour la boucle externe, et on a
-      10 valeurs d'hyperparamètre à évaluer : 500 modèles à entraîner.
+    \item \textbf{Exemple :} si K=10 pour chaque boucle et 20 valeurs d'hyperparamètre à évaluer 
     \item Cependant, facile à paralléliser.
     \end{itemize}
   \end{itemize}
@@ -374,16 +377,17 @@
   \frametitle{2.1 Régularisation}
   \begin{itemize}
   \item Par principe, la \blue{minimisation du risque empirique} conduit facilement au \blue{surapprentissage}
+  \pause
   \item La \red{régularisation} consiste à \blue{contraindre} le problème pour
     \blue{limiter la complexité} du modèle
-    \begin{itemize}
-    \item \red{Complexité} : notion théorique, par ex. Vapnik--Chervonenkis
-    \item Intuitivement : « flexibilité » des modèles que l'on peut apprendre
-    \item Proxys  : nombre de paramètres ; amplitude possible de ces paramètres
-    \end{itemize}
     \[ \hat{f} = \argmin_{f \in \fcal} \frac1n \sum_{i=1}^n L(y_i, f(\xvec_i))
       {\color{MyOrange} \, + \, \lambda \, \Omega(f) } \hspace{1em} \lambda > 0
     \]
+    \begin{itemize}
+    \item \red{Complexité} : notion théorique, par ex. Vapnik--Chervonenkis
+    \item Intuitivement : << flexibilité >> des modèles que l'on peut apprendre
+    \item Proxys : nombre de paramètres ; amplitude possible de ces paramètres
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -394,8 +398,10 @@
     \]
     \begin{itemize}
     \item \red{Coefficient de régularisation} $\lambda > 0$ :
-    \blue{hyperparamètre} qui gouverne l'importance relative entre la
-    minimisation du risque empirique et la complexité $\Omega(f)$ du modèle.
+      \begin{itemize}
+      \item \blue{hyperparamètre} 
+      \item importance relative entre la minimisation du risque empirique et la complexité $\Omega(f)$ du modèle.
+  \end{itemize}
     \end{itemize}
 
     \begin{itemize}
@@ -434,13 +440,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Interprétation géométrique}
-  \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/l2reg}  
-  \end{center}
-\end{frame}
-
-\begin{frame}
   \frametitle{2.3 Lasso }
   \begin{itemize}
   \item Exemple 2 : \red{Régularisation $\ell_1$} 
@@ -468,8 +467,24 @@
 
 \begin{frame}
   \frametitle{Interprétation géométrique}
+  Régularisation $\ell_2$
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{figures/l2reg}  
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Interprétation géométrique}
+  Régularisation $\ell_1$
   \begin{center}
     \includegraphics[width=.7\textwidth]{figures/l1reg}  
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Estimation par maximum a posteriori}
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss}  
   \end{center}
 \end{frame}
 
@@ -484,13 +499,6 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Estimation par maximum a posteriori}
-  \begin{center}
-    \includegraphics[width=.7\textwidth]{figures/laplace_vs_gauss}  
-  \end{center}
-\end{frame}
-
 \begin{frame}[t]
   \frametitle{Régression polynomiale}
   \begin{itemize}
@@ -503,15 +511,8 @@
   \begin{itemize}
   \item \black{Introduction au Machine Learning}, Chloé-Agathe Azencott, Dunod InfoSup \\
     Version électronique (PDF) sans exercices disponible gratuitement sur  \textcolor{MyBlue}{\href{https://cazencott.info/index.php/pages/Introduction-au-Machine-Learning}{http://cazencott.info [lien cliquable]}}\\
-    (nouvelle édition en préparation)
   \item \black{Le Machine Learning avec scikit-learn}, Aurélien Géron, Dunod
     InfoSup
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Ressources complémentaires}
-  \begin{itemize}
   \item \blue{Sources de jeux de données}
     \begin{itemize}
     \item Kaggle \textcolor{MyBlue}{\href{https://www.kaggle.com/}{[lien cliquable]}}
