@@ -14,9 +14,9 @@
     level 1/.style={sibling distance=5cm},
     level 2/.style={sibling distance=2cm},
     edge from parent/.style={draw,MyDarkGrey,thick,->}]
-    \node {\color{MyBlue} color}
-    child {node {\color{MyBlue} size} 
-      child {node {\color{MyBlue} shape} 
+    \node {\color{MyBlue} couleur}
+    child {node {\color{MyBlue} taille} 
+      child {node {\color{MyBlue} forme} 
         child { node[rectangle,draw] {\bf cerise} edge from parent node[left] {\textit{rond}}}
         child { node[rectangle,draw] {\bf fraise} edge from parent node[right] {\textit{pointu}}}
         edge from parent node[left] {\textit{petit}}
@@ -24,7 +24,7 @@
       child{node[rectangle,draw] {\bf pomme} edge from parent node[right] {\textit{grand}}}
       edge from parent node[left] {\textit{rouge}}
     } % end branch that starts at {size}
-    child {node {\color{MyBlue} shape} 
+    child {node {\color{MyBlue} forme} 
       child {node[rectangle,draw] {\bf citron} edge from parent node[left] {\textit{ovale}}}
       child {node[rectangle,draw] {\bf pomme} edge from parent node {\textit{rond}}}
       child {node[rectangle,draw] {\bf banane} edge from parent node[right] {\textit{courbé}}}
