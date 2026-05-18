@@ -216,7 +216,7 @@
   \item Objective: obtain a low-dimensional representation of the data while preserving local relationships.
   \item A relatively recent technique — \emph{t-Distributed Stochastic Neighbor Embedding (t-SNE)} (2008)
   \item $\{\xvec_i\}_{0\leq i < N}$ are the data points, with $\xvec_i \in \RR^p$. 
-  \item We define the probability that $x_j$ is a neighbor of $x_i$, assuming that this probability can be modeled by a Gaussian centered at $x_i$:  
+  \item We define the probability that $\xvec_j$ is a neighbor of $\xvec_i$, assuming that this probability can be modeled by a Gaussian centered at $\xvec_i$:  
   \begin{equation}
   p_{j|i} = \frac{\exp{\left(-\frac{\|\xvec_i - \xvec_j\|^2}{2 \sigma_i^2}\right)}}{\sum_{k\neq i} \exp{\left(-\frac{\|\xvec_i - \xvec_k\|^2}{2 \sigma_i^2}\right)} }
   \end{equation}
@@ -265,6 +265,16 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Example of a t-SNE Map: ImageNet}
+\begin{itemize}
+  \item In modern Computer Vision, images are mapped to vectors $\xvec \in \RR^p$, with $p$ typically in the hundreds or thousands. 
+  \item These vectors are then further processed (for instance classification)
+  \item Here, we will investigate the vector representations $\{\xvec_i\}_{i = 1..N}$ of a subset of the ImageNet dataset (a large set of natural images). 
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{t-SNE Map: ImageNet}
@@ -360,7 +370,7 @@
 \begin{frame}
 \frametitle{1.1 Geometric Criteria}
   \begin{center}
-    \includegraphics[width=0.5\textwidth]{figures/separability}%
+    \includegraphics[width=0.5\textwidth]{figures/separability}
   \end{center}
 \begin{itemize}
   \item Separability of clusters $k$ and $l$:
@@ -402,9 +412,11 @@
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}
-  \frametitle{1.2 Comparison to Known Labels}
+  \frametitle{1.2 Comparison between two partitions}
   \begin{itemize}
+  \item We might want to compare a clustering $k$ to a ground truth. We assume that the $k(\xvec_i)$ is the cluster of sample $\xvec_i$ and $y_i$ the ground truth. 
   \item Difficulty: cluster labels are arbitrary.
   \item \red{Rand Index (RI):} percentage of pairs of points that are either in the same cluster in both partitions, or in different clusters in both partitions:
     \begin{equation*}
@@ -414,15 +426,16 @@
     \end{equation*}
   \item Problem with RI: two random partitions can have a high RI by chance.
   \item Solution: ARI (Adjusted Rand Index) is the corrected version of RI.
+  \item The same strategy can be applied to compare two clustering algorithms. 
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{1.3 Cluster Stability}
-    \begin{center}
-      \includegraphics[width=0.7\textwidth]{figures/three_clusters}%
-    \end{center}
-\end{frame}
+% \begin{frame}
+%   \frametitle{1.3 Cluster Stability}
+%     \begin{center}
+%       \includegraphics[width=0.7\textwidth]{figures/three_clusters}
+%     \end{center}
+% \end{frame}
 
 \begin{frame}
   \frametitle{1.3 Cluster Stability}
@@ -433,6 +446,8 @@
       \item sub-samplings of $\dset$
       \item (optionally) subsets of features
     \end{itemize}
+    \item Compare the agreement between the different runs.
+    \item A good clustering should reach a good agreement between different runs. 
   \end{itemize}
 \end{frame}
 
@@ -442,12 +457,12 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Dendrogram}
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{figures/dendrogram}%
-  \end{center}
-\end{frame} 
+% \begin{frame}
+%   \frametitle{Dendrogram}
+%   \begin{center}
+%     \includegraphics[width=0.7\textwidth]{figures/dendrogram}
+%   \end{center}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Construction}
@@ -464,6 +479,86 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch1}
+  \end{center}
+  Initialization: each point is its own cluster
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch2}
+  \end{center}
+  The two closest points are merged and form the first cluster.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch3}
+  \end{center}
+  Subsequently, the closest points (or clusters) are merged and form a new cluster.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch4}
+  \end{center}
+  A dendrogram is generated and keeps track of the fusion processes.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch5}
+  \end{center}
+  The height of each fusion corresponds to the distance at which the fusion takes place.
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - Principle}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch6}
+  \end{center}
+  The clustering stops when all points are in one global cluster. 
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Hierarchical Clustering - 2 ingredients}
+  \begin{itemize}
+    \item Distance between points: 
+    \begin{itemize}
+      \item Recall: Each sample $\xvec_i$ corresponds to a point in feature space
+      \item How do we calculate the distance between two points (samples)? 
+    \end{itemize}
+    \item Distance between clusters:
+    \begin{itemize}
+      \item Option 1 : represent each cluster by a prototype and calculate the point distance 
+      \item Option 2 : calculate an aggregation of inter-point distances. 
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical clustering: distances between points}
+\begin{itemize}
+  \item Here we assume two points $\xvec$ and $\yvec$; indices refer to the vector components
+    \item \textbf{Euclidean distance} $d(\xvec,\yvec) = \sqrt{\sum_i (\xvec_i-\yvec_i)^2}$
+    \item \textbf{Manhattan distance} $d(\xvec,\yvec) = \sum_i |\xvec_i-\yvec_i|$    
+    \item \textbf{Cosine distance} $d(\xvec,\yvec) = 1 - \frac{\xvec^\top \yvec}{\|\xvec\|\|\yvec\|}$
+    \item \textbf{Correlation distance} $d(\xvec,\yvec) = 1 - \mathrm{corr}(\xvec,\yvec)$
+%    \item \textbf{Mahalanobis distance} $d(\xvec,\yvec) = \sqrt{(x-y)^\top \Sigma^{-1}(x-y)}$
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}
   \frametitle{Linkage Functions}
@@ -519,7 +614,7 @@
             \text{Var}_\text{in}(\cset) = \frac1{\lvert \cset \rvert} \sum_{\xvec \in \cset}
       \ltwonorm{\xvec - \muvec}^2.
     \]
-  \item Minimizing the within-cluster variance ⇒ create \blue{homogeneous} clusters
+  \item Minimizing the within-cluster variance \(\Rightarrow\) create \blue{homogeneous} clusters
   \end{itemize}
 \end{frame}
 
@@ -627,6 +722,49 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Clustering: conclusion}
+  \begin{itemize}
+    \item Clustering refers to the partitioning of a dataset $\{\xvec_i\}_{i=1..N}$ into groups. 
+    \item There are many quality measures for clustering: 
+    \begin{itemize}
+      \item Geometric measurements and separability
+      \item Robustness
+      \item Comparison to partial ground truth. 
+    \end{itemize}
+    \item Algorithms: 
+    \begin{itemize}
+      \item Hierarchical clustering: good for exploration
+      \item k-means: most popular method (but we need to fix the number of clusters)
+      \item DBSCAN / HDBSCAN: widely used
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering: limitations}
+  \begin{itemize}
+    \item There is no general way to state whether a clustering "makes sense", other than some comparison (systematic or anecdotal) to ground truth.
+    \item Correlation structure:
+    \begin{itemize}
+      \item Strongly correlated data will dominate distances: $d(\xvec, \yvec) = \sqrt{\sum_i(x_i -  y_i)^2}$
+      \item Using PCA to decorrelate does not solve this issue, unless PCs are normalized with respect to their variance (whitening). But then, we also increase noise.
+    \end{itemize}
+    \item There is no real "unsupervised approach": 
+    \begin{itemize}
+      \item We choose features
+      \item We choose methods, distances, hyperparameters
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering: an ill-posed problem}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{figures/clustering_animals}
+  \end{center}
+  How to define two groups for these images? 
+\end{frame}
 
 
 
