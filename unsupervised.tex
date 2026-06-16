@@ -278,6 +278,14 @@
 % \end{figure}
 % \end{frame}
 
+\begin{frame}
+\frametitle{Exemple t-SNE : ImageNet}
+\begin{itemize}
+  \item En vision par ordinateur moderne, les images sont représentées par des vecteurs $\xvec \in \RR^p$, où $p$ est généralement de l'ordre de quelques centaines à quelques milliers.
+  \item Ces vecteurs sont ensuite traités pour différentes tâches, par exemple la classification.
+  \item Ici, nous allons étudier les représentations vectorielles $\{\xvec_i\}_{i = 1..N}$ d'un sous-ensemble de la base ImageNet, un grand ensemble d'images naturelles.
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \frametitle{t-SNE map: ImageNet}
@@ -363,11 +371,11 @@
 \begin{itemize}  
   \item Définition centroïde du cluster $\cset$: $\muvec_{\cset} = \frac{1}{\cset}\sum_{\xvec \in \cset}\xvec$
   \item Définition médoïde du cluster $\cset$: $\mvec_{\cset} = \argmin_{\xvec \in \cset}d(\xvec, \muvec_{\cset})$
-  \item \red{Homogénéité} d'un cluster $k$ : $T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)$
+  \item \red{Dispersion} d'un cluster $k$ : $T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)$
   % \begin{equation*}
   % T_k = \frac{1}{|\cset_k|} \sum_{\xvec \in \cset_k} d(\xvec, \muvec_k)
   % \end{equation*}
-  \item Homogénéité d'un clustering : 
+  \item Dispersion d'un clustering : 
   \begin{equation*}
   T = \frac1K\sum_{k=1}^{K}T_k
   \end{equation*}
@@ -527,12 +535,12 @@
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{1.3 Stabilité des clusters}
-    \begin{center}
-      \includegraphics[width=0.7\textwidth]{figures/three_clusters}%
-    \end{center}
-\end{frame}
+% \begin{frame}
+%   \frametitle{1.3 Stabilité des clusters}
+%     \begin{center}
+%       \includegraphics[width=0.7\textwidth]{figures/three_clusters}%
+%     \end{center}
+% \end{frame}
 
 \begin{frame}
   \frametitle{1.3 Stabilité des clusters}
@@ -543,6 +551,8 @@
       \item des sous-échantillonages dans $\dset$
       \item des sous-ensembles de descripteurs (éventuellement)
     \end{itemize}
+    \item On compare les résultats de clustering.
+    \item Dans un clustering robuste, les résultats ne devraient pas varier trop. 
   \end{itemize}
 \end{frame}
 
@@ -553,12 +563,12 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Dendrogramme}
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{figures/dendrogram}%
-  \end{center}
-\end{frame} 
+% \begin{frame}
+%   \frametitle{Dendrogramme}
+%   \begin{center}
+%     \includegraphics[width=0.7\textwidth]{figures/dendrogram}%
+%   \end{center}
+% \end{frame} 
 
 \begin{frame}
   \frametitle{Construction}
@@ -575,6 +585,83 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch1}
+  \end{center}
+  Initialisation : chaque point constitue son propre cluster.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch2}
+  \end{center}
+  Les deux points les plus proches sont fusionnés et forment le premier cluster.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch3}
+  \end{center}
+  Ensuite, les points ou clusters les plus proches sont fusionnés pour former un nouveau cluster.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch4}
+  \end{center}
+  Un dendrogramme est construit afin de garder la trace des fusions successives.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch5}
+  \end{center}
+  La hauteur de chaque fusion correspond à la distance à laquelle cette fusion a lieu.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Principe}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{figures/ch6}
+  \end{center}
+  Le clustering s'arrête lorsque tous les points appartiennent à un unique cluster global.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering hiérarchique -- Deux ingrédients}
+  \begin{itemize}
+    \item Distance entre les points :
+    \begin{itemize}
+      \item Rappel : chaque échantillon $\xvec_i$ correspond à un point dans l'espace des caractéristiques.
+      \item Comment calculer la distance entre deux points, c'est-à-dire entre deux échantillons ?
+    \end{itemize}
+    \item Distance entre les clusters :
+    \begin{itemize}
+      \item Option 1 : représenter chaque cluster par un prototype et calculer une distance entre points.
+      \item Option 2 : calculer une agrégation des distances entre points.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Clustering hiérarchique : distances entre points}
+\begin{itemize}
+  \item On considère ici deux points $\xvec$ et $\yvec$ ; les indices désignent les composantes des vecteurs.
+  \item \textbf{Distance euclidienne} $d(\xvec,\yvec) = \sqrt{\sum_i (\xvec_i-\yvec_i)^2}$
+  \item \textbf{Distance de Manhattan} $d(\xvec,\yvec) = \sum_i |\xvec_i-\yvec_i|$
+  \item \textbf{Distance cosinus} $d(\xvec,\yvec) = 1 - \frac{\xvec^\top \yvec}{\|\xvec\|\|\yvec\|}$
+  \item \textbf{Distance de corrélation} $d(\xvec,\yvec) = 1 - \mathrm{corr}(\xvec,\yvec)$
+%  \item \textbf{Distance de Mahalanobis} $d(\xvec,\yvec) = \sqrt{(\xvec-\yvec)^\top \Sigma^{-1}(\xvec-\yvec)}$
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}
   \frametitle{Fonctions de lien}
@@ -761,5 +848,50 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Clustering : conclusion}
+  \begin{itemize}
+    \item Le clustering désigne le partitionnement d'un jeu de données $\{\xvec_i\}_{i=1..N}$ en groupes.
+    \item Il existe de nombreuses mesures de qualité pour évaluer un clustering :
+    \begin{itemize}
+      \item Mesures géométriques et séparabilité
+      \item Robustesse
+      \item Comparaison à une vérité terrain partielle
+    \end{itemize}
+    \item Algorithmes :
+    \begin{itemize}
+      \item Clustering hiérarchique : utile pour l'exploration
+      \item k-means : méthode la plus populaire, mais il faut fixer le nombre de clusters
+      \item DBSCAN / HDBSCAN : méthodes largement utilisées
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering : limites}
+  \begin{itemize}
+    \item Il n'existe pas de méthode générale permettant d'affirmer qu'un clustering « a du sens », sauf par comparaison, systématique ou anecdotique, avec une vérité terrain.
+    \item Structure de corrélation :
+    \begin{itemize}
+      \item Des données fortement corrélées vont dominer les distances : $d(\xvec, \yvec) = \sqrt{\sum_i(x_i -  y_i)^2}$
+      \item Utiliser une ACP pour décorréler les données ne résout pas ce problème, sauf si les composantes principales sont normalisées par rapport à leur variance, c'est-à-dire par whitening. Mais dans ce cas, on augmente aussi le bruit.
+    \end{itemize}
+    \item Il n'existe pas vraiment d'approche « non supervisée » :
+    \begin{itemize}
+      \item Nous choisissons les caractéristiques
+      \item Nous choisissons les méthodes, les distances et les hyperparamètres
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Clustering : un problème mal posé}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{figures/clustering_animals}
+  \end{center}
+  Comment définir deux groupes pour ces images ?
+\end{frame}
+
 
 
