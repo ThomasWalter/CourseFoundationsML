@@ -296,7 +296,7 @@
     \begin{center}
     \includegraphics[width=0.38\textwidth]{figures/logistic}
   \end{center}
-  \item $\fcal = \left\{\xvec \mapsto \sigma\left(\beta_0 + \langle \betavec, \xvec \rangle\right) ;  \betavec \in \RR^{p+1}\right\}$
+  \item $\fcal = \left\{\xvec \mapsto \sigma\left(\langle \betavec, \xvec \rangle\right) ;  \betavec \in \RR^{p+1}\right\}$
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -332,15 +332,15 @@
   \frametitle{2.3 Régression logistique}
   \begin{itemize}
   \item \blue{Espace des hypothèses :}
-    $\fcal = \{\xvec \mapsto \sigma\left(\beta_0 + \langle \betavec, \xvec
+    $\fcal = \{\xvec \mapsto \sigma\left(\langle \betavec, \xvec
       \rangle\right) ; \betavec \in \RR^{p+1}\}$
   \item \blue{Fonction de perte :}
     $L : (y, f(\xvec))  \mapsto -y \log f(\xvec) - (1-y) \log (1 - f(\xvec))$
   \item \blue{Minimisation du risque empirique :}
     \footnotesize
     \[\argmin_{\betavec \in \RR^{p+1}} \frac1n \sum_{i=1}^n
-      -y_i \log \sigma\left(\beta_0 + \langle \betavec, \xvec_i \rangle\right)
-      - (1-y_i) \log \left(1 - \sigma\left(\beta_0 + \langle \betavec, \xvec_i \rangle\right)\right)
+      -y_i \log \sigma\left(\langle \betavec, \xvec_i \rangle\right)
+      - (1-y_i) \log \left(1 - \sigma\left(\langle \betavec, \xvec_i \rangle\right)\right)
     \]
   \end{itemize}
 \end{frame}
@@ -349,15 +349,15 @@
   \frametitle{2.3 Régression logistique - Solution}
   \begin{itemize}
   \item \blue{Minimiser}
-    {\footnotesize \[J : \betavec \mapsto \sum_{i=1}^n -y_i \log \sigma\left(\beta_0 + \langle
+    {\footnotesize \[J : \betavec \mapsto \sum_{i=1}^n -y_i \log \sigma\left(\langle
       \betavec, \xvec_i \rangle\right) - (1-y_i) \log \left(1 -
-      \sigma\left(\beta_0 + \langle \betavec, \xvec_i \rangle\right)\right)\]}
+      \sigma\left(\langle \betavec, \xvec_i \rangle\right)\right)\]}
   \pause
   \item $J$ est une fonction \blue{convexe} de $\betavec$
   \pause
   \item En utilisant $\sigma^\prime (u) = \sigma(u) (1-\sigma(u)),$
     \[
-      \nabla J(\betavec) = \sum_{i=1}^n \left( y_i - \frac1{1 + \exp - \left(\beta_0 +
+      \nabla J(\betavec) = \sum_{i=1}^n \left( y_i - \frac1{1 + \exp - \left(
             \langle \betavec, \xvec_i \rangle \right)} \right)
     \]
   \item[$\Rightarrow$] Pas de solution explicite.
