@@ -15,4 +15,4 @@
 *.cb
 *.cb2
 .*.lb
-
+.DS_store
