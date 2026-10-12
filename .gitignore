@@ -12,4 +12,7 @@
 *.cb
 *.cb2
 .*.lb
-
+*.nav
+*.xml
+.DS_store
+*.snm
