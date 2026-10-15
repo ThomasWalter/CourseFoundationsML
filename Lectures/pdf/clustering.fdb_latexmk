@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex pdf/clustering"] 0 "pdf/clustering.aux" "pdf/clustering.bbl" "pdf/clustering" 0 0
+["bibtex pdf/clustering"] 0 "pdf/clustering.aux" "pdf/clustering.bbl" "pdf/clustering" 1792081745.54575 0
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1711143581 65510 b1f696b0241395385f422f67543c37fd ""
-  "pdf/clustering-blx.bib" 1792078873.0028 344 edc72bbd418dbdcf29cbf844f28f46dd "pdflatex"
+  "pdf/clustering-blx.bib" 1792081745.02216 344 edc72bbd418dbdcf29cbf844f28f46dd "pdflatex"
   "pdf/clustering.aux" 0 -1 0 "pdflatex"
   "references.bib" 0 -1 0 ""
   (generated)
   "pdf/clustering.bbl"
   "pdf/clustering.blg"
   (rewritten before read)
-["pdflatex"] 1792078876.48886 "FoundationsML_complete.tex" "pdf/clustering.pdf" "clustering" 1792078879.38758 0
+["pdflatex"] 1792081742.72859 "FoundationsML_complete.tex" "pdf/clustering.pdf" "clustering" 1792081745.54638 0
   "/Users/twalter/Library/texlive/2025/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk" 1762115022.16982 8424 eee0c3bdf77e891610914612991564e5 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/paratype/ptsans_t1.enc" 1391470736 2581 aa32af98902e3c55fcf7bccadd42cf8a ""
@@ -335,7 +335,7 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1751442471 3345733 b705cdc5a91c4612c287572fa6097415 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "FoundationsML_complete.tex" 1792070272.90853 11447 94b2fd0d0ac1c828ba47c96c3eb227c2 ""
-  "clustering.tex" 1792078618.18996 22854 635de0dc1fd9e46c88a6b0abe839fd4b ""
+  "clustering.tex" 1792081734.60167 22192 963e4b8f5090cc72c5c481d32270fe72 ""
   "figures/ch1.pdf" 1792078720.74725 19596 0f318f722115a8b44a547f465a237287 ""
   "figures/ch2.pdf" 1792078720.74853 20169 4263013a7bb7b61985e80167d7957b02 ""
   "figures/ch3.pdf" 1792078720.74942 20586 93459463255a3981c622d900b02261d8 ""
@@ -350,11 +350,11 @@
   "figures/kmeans_sol.pdf" 1791801513.86982 32789 9c1bf46c4db447d2c64cd6476ff9e31a ""
   "figures/separability.pdf" 1791801513.88423 6675 948cd5a35aa241eed3fb5e7abbc62a62 ""
   "figures/sillhouette_score.pdf" 1792072523.56249 20179 eaa7904c111144557b727d8f04c58cb6 ""
-  "pdf/clustering.aux" 1792078878.86654 6321 177c33a5c0f58e8e0e1b5960c117c639 "pdflatex"
+  "pdf/clustering.aux" 1792081745.01965 6192 901b5be7e182aba8df6c3139c0657877 "pdflatex"
   "pdf/clustering.bbl" 0 -1 0 "bibtex pdf/clustering"
-  "pdf/clustering.nav" 1792078878.87052 4271 aea54d93c76c9a9e0a45a2a47ac4f48b "pdflatex"
-  "pdf/clustering.out" 1792078877.90564 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "pdf/clustering.run.xml" 1792078878.87034 2578 18b1c9ec3520b71e11a07d69f9f0cf92 "pdflatex"
+  "pdf/clustering.nav" 1792081745.02328 4178 22dbbb063ee50337ebdb5b0f3a3b3389 "pdflatex"
+  "pdf/clustering.out" 1792081744.09575 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "pdf/clustering.run.xml" 1792081745.02318 2578 18b1c9ec3520b71e11a07d69f9f0cf92 "pdflatex"
   (generated)
   "pdf/clustering-blx.bib"
   "pdf/clustering.aux"
