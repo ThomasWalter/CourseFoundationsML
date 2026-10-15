@@ -186,15 +186,13 @@
   \item \blue{Par annulation des dérivées partielles :} système de deux équations à deux inconnues
   \item[] Solution explicite : 
     \begin{itemize}
-    \item Si $\sum_{i=1}^n x_i^2 \neq \left(\sum_{i=1}^n x_i\right)^2,$ une \blue{unique solution}
+    \item Si $\sum_{i=1}^n x_i^2 \neq \frac{1}{n}\left(\sum_{i=1}^n x_i\right)^2,$ une \blue{unique solution}
       \[ a = \frac{\sum_{i=1}^n x_i y_i - \frac1n \sum_{i=1}^n x_i \sum_{i=1}^n y_i}{
           \sum_{i=1}^n x_i^2 - \frac1n \left(\sum_{i=1}^n x_i\right)^2}  \hspace{2em}
         b = \frac1n \sum_{i=1}^n y_i - \frac{a}{n} \sum_{i=1}^n x_i\]
       \pause
     \item Sinon, le système est \blue{indéterminé} et on a une infinité de solutions.
     \end{itemize}
-  \pause
-  \item \blue{Par algorithme du gradient}
   \end{itemize}
 \end{frame}
 
@@ -276,7 +274,7 @@
     \end{itemize}
     \pause
   \item L'inversion d'une matrice carrée de taille $p$ est une opération en $\mathcal{O}(p^3)$
-  \item[] On utilise généralement \blue{l'algorithme du gradient} même si $X^\top X$ est inversible. 
+  \item[] On utilise généralement \blue{l'algorithme du gradient} (algorithme d'optimisation numérique) même si $X^\top X$ est inversible. 
   \end{itemize}
 \end{frame}
 
@@ -364,7 +362,7 @@
     \]
   \item[$\Rightarrow$] Pas de solution explicite.
     \pause
-  \item On utilise donc systématiquement \blue{l'algorithme du gradient.}
+  \item On utilise donc systématiquement \blue{l'algorithme du gradient.} (algorithme d'optimisation numérique).
   \end{itemize}
 \end{frame}
 

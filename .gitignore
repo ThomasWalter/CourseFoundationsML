@@ -1,5 +1,6 @@
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
+./Lectures/pdf/
 *.aux
 *.lof
 *.log

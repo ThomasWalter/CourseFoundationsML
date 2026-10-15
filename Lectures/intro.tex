@@ -1,4 +1,29 @@
 \begin{frame}
+  \frametitle{Centre de Bioinformatique (CBIO)}
+  \centerline{\includegraphics[width=0.75\textwidth]{figures/cbio}}
+  \begin{itemize}
+    \item Centre de recherche de l'\'Ecole des Mines
+    \item 20 personnes, 6 chercheurs permanents (dont 3 chaires PR[AI]RIE - PSAI)
+    \item Thématique : IA pour les sciences de la vie
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Objectifs}
+  \begin{itemize}
+  \item Présenter les concepts et outils fondamentaux pour développer et
+    analyser des algorithmes d'apprentissage automatique :
+    \begin{itemize}
+    \item Fondements théoriques
+    \item Panorama d'algorithmes
+    \item Choisir et évaluer un algorithme / un modèle d'apprentissage
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Qu'est-ce que l'intelligence artificielle ?}
   \pause
   \begin{itemize}
@@ -48,31 +73,65 @@
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Quelques sous-domaines de l'IA}
-  \begin{itemize}
-  \item \blue{Robotique}
-    \begin{itemize}
-    \item mécanique, électronique, contrôle
-    \end{itemize}
-  \item \blue{Systèmes experts}
-    \begin{itemize}
-    \item utilisent des règles 
-    \item logique des propositions, logique des prédicats
-    \end{itemize}
-  \item \blue{Traitement du langage naturel}
-  \item \blue{Vision par ordinateur}
-  \item \blue{Informatique affective} 
-    \begin{itemize}
-    \item reconnaître, modéliser, exprimer les émotions humaines
-    \item sciences cognitives, psychologie
-    \end{itemize}
-  %\item \tikzmark{ml}{\blue{Apprentissage automatique}}
-  \item Apprentissage automatique
-  \end{itemize}
-%  \pause \tikz[overlay,remember picture]{\draw[draw=MyOrange,thick]
-%    ($(ml)+(-0.6,0.5)$) rectangle ($(ml)+(10,-0.3)$);}
-\end{frame}
+% \begin{frame}
+%   \frametitle{Quelques sous-domaines de l'IA}
+%   \begin{columns}[T]
+%     \begin{column}{0.48\textwidth}
+%       \textbf{Problèmes / capacités}
+%       \begin{itemize}
+%       \item \blue{Vision par ordinateur}
+%       \item \blue{Traitement du langage naturel}
+%       \item \blue{Raisonnement, planification}
+%       \item \blue{Robotique} : perception, décision, contrôle
+%       \item \blue{Informatique affective}
+%       \end{itemize}
+%     \end{column}
+%     \begin{column}{0.48\textwidth}
+%       \textbf{Approches}
+%       \begin{itemize}
+%       \item \blue{IA symbolique}
+%         \begin{itemize}
+%         \item règles, logique (propositions, prédicats)
+%         \item systèmes experts
+%         \end{itemize}
+%       \item \blue{Recherche, optimisation}
+%       \item \blue{Apprentissage automatique}
+%         \begin{itemize}
+%         \item supervisé, non supervisé, par renforcement
+%         \end{itemize}
+%       \end{itemize}
+%     \end{column}
+%   \end{columns}
+%   \vspace{0.5em}
+%   \centering
+%   \small L'apprentissage automatique est devenu l'approche dominante pour presque toutes ces capacités.
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Quelques sous-domaines de l'IA}
+%   \begin{itemize}
+%   \item \blue{Robotique}
+%     \begin{itemize}
+%     \item mécanique, électronique, contrôle
+%     \end{itemize}
+%   \item \blue{Systèmes experts}
+%     \begin{itemize}
+%     \item utilisent des règles 
+%     \item logique des propositions, logique des prédicats
+%     \end{itemize}
+%   \item \blue{Traitement du langage naturel}
+%   \item \blue{Vision par ordinateur}
+%   \item \blue{Informatique affective} 
+%     \begin{itemize}
+%     \item reconnaître, modéliser, exprimer les émotions humaines
+%     \item sciences cognitives, psychologie
+%     \end{itemize}
+%   %\item \tikzmark{ml}{\blue{Apprentissage automatique}}
+%   \item Apprentissage automatique
+%   \end{itemize}
+% %  \pause \tikz[overlay,remember picture]{\draw[draw=MyOrange,thick]
+% %    ($(ml)+(-0.6,0.5)$) rectangle ($(ml)+(10,-0.3)$);}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Apprentissage automatique}
@@ -171,44 +230,72 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Autres exemples d'application du ML}
-  \begin{itemize}
-  \item Détection de fraude 
-  \item Segmentation de marché
-  \item Contrôle qualité
-  \item Maintenance prédictive 
-  \item Systèmes de recommendation 
-  \item Trading algorithmique
-  \item Assistance au diagnostic
-  \item Médecine prédictive 
-  \item Et beaucoup, beaucoup d'autres.
-  \end{itemize}
-\end{frame}
+% \begin{frame}
+%   \frametitle{Autres exemples d'application du ML}
+%   \begin{itemize}
+%   \item Détection de fraude 
+%   \item Segmentation de marché
+%   \item Contrôle qualité
+%   \item Maintenance prédictive 
+%   \item Systèmes de recommendation 
+%   \item Trading algorithmique
+%   \item Assistance au diagnostic
+%   \item Médecine prédictive 
+%   \item Et beaucoup, beaucoup d'autres.
+%   \end{itemize}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Défis actuels du ML}
   \begin{itemize}
-  \item Apprendre à partir de \blue{peu d'exemples}
+  \item \blue{Efficacité et généralisation}
     \begin{itemize}
-    \item[] Un enfant ou un animal n'a pas besoins de milliers/millions
-      d'exemples pour apprendre
+    \item[] Un enfant apprend avec peu d'exemples ; les grands modèles
+      exigent d'énormes quantités de données et de calcul
     \end{itemize}
-  \item Résoudre des problèmes \blue{que l'humain ne sait pas résoudre}
+  \item \blue{Raisonnement}
     \begin{itemize}
-    \item[] Utilisation dans la recherche scientifique (biologie, santé,
-      chimie, science des matériaux, astrophysique, etc.)
+    \item[] Généraliser au-delà des données d'entraînement plutôt que mémoriser
+    \end{itemize}
+  \item \blue{Découverte scientifique}
+    \begin{itemize}
+    \item[] Succès réels (AlphaFold, ) ; défi : des résultats fiables et vérifiables
     \end{itemize}
   \item \blue{Confiance}
     \begin{itemize}
-    \item[] validation formelle, explicabilité, robustesse aux attaques
-  \end{itemize}
-  \item \blue{Questions éthiques}
+    \item[] hallucinations, incertitude, explicabilité, robustesse, évaluation
+    \end{itemize}
+  \item \blue{Questions éthiques et sociétales}
     \begin{itemize}
-    \item[] biais algorithmiques ; coûts environementaux ; équité et moralité
+    \item[] biais ; coût environnemental ; données et droits d'auteur ;
+      concentration des moyens
     \end{itemize}
   \end{itemize}
 \end{frame}
+
+% \begin{frame}
+%   \frametitle{Défis actuels du ML}
+%   \begin{itemize}
+%   \item Apprendre à partir de \blue{peu d'exemples}
+%     \begin{itemize}
+%     \item[] Un enfant ou un animal n'a pas besoins de milliers/millions
+%       d'exemples pour apprendre
+%     \end{itemize}
+%   \item Résoudre des problèmes \blue{que l'humain ne sait pas résoudre}
+%     \begin{itemize}
+%     \item[] Utilisation dans la recherche scientifique (biologie, santé,
+%       chimie, science des matériaux, astrophysique, etc.)
+%     \end{itemize}
+%   \item \blue{Confiance}
+%     \begin{itemize}
+%     \item[] validation formelle, explicabilité, robustesse aux attaques
+%   \end{itemize}
+%   \item \blue{Questions éthiques}
+%     \begin{itemize}
+%     \item[] biais algorithmiques ; coûts environementaux ; équité et moralité
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
 \begin{frame}
   \begin{center}
