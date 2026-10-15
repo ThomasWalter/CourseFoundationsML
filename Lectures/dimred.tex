@@ -212,21 +212,17 @@
 
 
 \begin{frame}
-	\frametitle{t-SNE: Motivation}
-	Les données ne sont pas toujours séparables linéairement
+  \frametitle{t-SNE : motivation}
 	\begin{figure}[htb]
-	\includegraphics[width=.4\textwidth]{Tsne1.png}
-	\hspace{1em}
-\visible<2>{	\vrule}
-	\hspace{1em}
-	\visible<2>{\includegraphics[width=.4\textwidth]{Tsne2.png}}
-	
-	%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
-	
-\end{figure}
+	  \centering
+	  \includegraphics[width=.8\textwidth]{PCA_limitation.png}
+	\end{figure}
+
+  \begin{itemize}
+  \item L'ACP est une \blue{projection linéaire} qui maximise la variance : elle est dominée par les \blue{grandes distances}
+  \item Il peut être intéressant de plutôt préserver les relations de voisinage local plutôt que les distances globales.  
+  \end{itemize}
 \end{frame}
-
-
 
 \begin{frame}
 \frametitle{t-SNE 1/3}
@@ -280,7 +276,7 @@
   	\end{itemize}
   	\item Inconvénients : 
   	\begin{itemize}
-  		\item pas de transformation : la minimisation est faite pour une ensemble de données et ne peut s'appliquer à de nouvelles données. 
+  		\item pas de transformation : la minimisation est faite pour une ensemble de données et ne peut s'appliquer à de nouvelles données (solution: UMAP). 
   		\item Distorsion dans les longues distances. 
   	\end{itemize}
   \end{itemize}
@@ -296,18 +292,18 @@
 %\end{frame}
 
 
-\begin{frame}
-	\frametitle{t-SNE: Résultat}
-Application de t-SNE avec une perplexité de 2 sur l'exemple précédent
-	\begin{figure}[htb]
-		\includegraphics[width=.4\textwidth]{Tsne1.png}
-		\hspace{1em}
-\vrule
-		\hspace{1em}
-\includegraphics[width=.4\textwidth]{Tsne1-solved.png}
+% \begin{frame}
+% 	\frametitle{t-SNE: Résultat}
+% Application de t-SNE avec une perplexité de 2 sur l'exemple précédent
+% 	\begin{figure}[htb]
+% 		\includegraphics[width=.4\textwidth]{Tsne1.png}
+% 		\hspace{1em}
+% \vrule
+% 		\hspace{1em}
+% \includegraphics[width=.4\textwidth]{Tsne1-solved.png}
 				
-	\end{figure}
-\end{frame}
+% 	\end{figure}
+% \end{frame}
 
 
 % \begin{frame}
@@ -323,6 +319,19 @@ Application de t-SNE avec une perplexité de 2 sur l'exemple précédent
 % \end{figure}
 % \end{frame}
 
+\begin{frame}
+\frametitle{Exemple t-SNE : ImageNet}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.7\textwidth]{ImageNet.pdf}
+%  \source{adapted from \url{https://cs.stanford.edu/people/karpathy/cnnembed/}}
+\end{figure}
+\begin{itemize}
+  \item En vision par ordinateur moderne, les images sont représentées par des vecteurs $\xvec \in \RR^p$, où $p$ est généralement de l'ordre de quelques centaines à quelques milliers.
+  \item Ces vecteurs sont ensuite traités pour différentes tâches, par exemple la classification.
+  \item Ici, nous allons étudier les représentations vectorielles $\{\xvec_i\}_{i = 1..N}$ d'un sous-ensemble de la base ImageNet, un grand ensemble d'images naturelles.
+\end{itemize}
+\end{frame}
 
 
 

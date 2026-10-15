@@ -9,7 +9,7 @@
 #   make clean / make distclean
 
 MASTER   := FoundationsML_complete
-CHAPTERS := intro erm modelsel trees dimred
+CHAPTERS := intro erm modelsel trees dimred clustering
 OUTDIR   := pdf
 LATEXMK  := latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=$(OUTDIR)
 
