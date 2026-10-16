@@ -2,9 +2,11 @@
 ## Core latex/pdflatex auxiliary files:
 ./Lectures/pdf/
 *.aux
+*-blx.bib 
 *.lof
 *.log
 *.lot
+*.fdb_latexmk 
 *.fls
 *.out
 *.toc
